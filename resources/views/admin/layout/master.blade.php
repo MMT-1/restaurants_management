@@ -12,7 +12,7 @@
     <!-- heder start -->
     @include('admin.include.header')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    
+
     <!-- heder end -->
 </head>
 
@@ -30,8 +30,8 @@
 
         <div class="content-page">
             <!-- Start content -->
-            <div class="content">  
-                
+            <div class="content">
+
                @yield('content')
 
             </div>
@@ -78,8 +78,8 @@
     <script>
         $(document).on('ready', function() {
             // data-tables
-            
-   
+
+
 
             // counter-up
             $('.counter').counterUp({
@@ -113,7 +113,7 @@ function initAutocomplete() {
 
     var input = document.getElementById('location');
     var searchBox = new google.maps.places.SearchBox(input);
-    
+
     // Bias the search box results towards current map's viewport.
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
@@ -131,7 +131,7 @@ function initAutocomplete() {
 
 
 
-        
+
         // Clear out the old markers.
         markers.forEach(function(marker) {
             marker.setMap(null);
@@ -170,11 +170,13 @@ function initAutocomplete() {
             }
         });
         map.fitBounds(bounds);
+
+        console.log("test")
     });
 }
 
 
-        
+
 </script>
 </body>
 
