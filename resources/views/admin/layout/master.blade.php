@@ -171,7 +171,7 @@ function initAutocomplete() {
         });
         map.fitBounds(bounds);
 
-        console.log("test")
+        console.log("test11")
     });
 }
 
