@@ -11,7 +11,7 @@
 @section('title') Create Vendor @endsection
 
 @section('content')
- 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-12">
@@ -30,7 +30,7 @@
             <div class="card mb-3">
                   <div class="card-body">
                     <form action="{{route('vendors.store')}}" method="post" enctype="multipart/form-data">
-                        @csrf 
+                        @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
                                 <div class="card mb-3">
@@ -59,7 +59,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -81,7 +81,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -89,10 +89,24 @@
                                                         <select class="form-control" name="country_id">
                                                              @foreach($country as $countrys)
                                                                 <option value="{{$countrys->id}}">{{$countrys->country_name}}</option>
-                                                              @endforeach   
+                                                              @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
+<<<<<<< HEAD
+=======
+
+                                                <!-- <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Select city:</label>
+                                                        <select class="form-control" name="city">
+                                                                <option value="1">Argentina</option>
+                                                                <option value="2">Australia</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+
+>>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>Gender:</label>
@@ -103,7 +117,34 @@
                                                         </select>
                                                     </div>
                                                 </div>
+<<<<<<< HEAD
                                             </div>   
+=======
+                                            </div>
+
+                                            <!-- <div class="row">
+                                                 <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Zip:</label>
+                                                        <div class="form-group">
+                                                            <input class="form-control" name="zip_code" type="text" value="{{old('zip_code')}}"  placeholder="Zip Code" />
+                                                        </div>
+                                                   </div>
+                                                </div> -->
+
+                                                <!-- <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Gender:</label>
+                                                        <select class="form-control" name="gender">
+                                                                <option value="1">Male</option>
+                                                                <option value="2">Female</option>
+                                                                <option value="3">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>  -->
+
+>>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -124,14 +165,14 @@
                                                             <option value="0">Inactive</option>
                                                     </select>
                                                 </div>
-    
+
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
                                                         <label>Address</label>
                                                         <textarea class="form-control" name="address" placeholder="Enter Address" value="{{old('address')}}"></textarea>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                        </div>
                                   </div>
                                 <!-- end card -->
@@ -140,7 +181,7 @@
                                     <div class="card-header">
                                         <h3><i class="far fa-user"></i> Shop details</h3>
                                     </div>
-    
+
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-6">
@@ -168,10 +209,11 @@
 
                                                 <div class="form-group">
                                                     <label>Address</label>
-                                                    
+
                                                     <textarea class="form-control" name="shop_address" placeholder="Enter Shop Address" value="{{old('shop_address')}}"></textarea>
                                                 </div>
                                             </div>
+<<<<<<< HEAD
                                             <div class="col-lg-12">
                                                 
 
@@ -185,6 +227,9 @@
 "></div>       
 
                                         </div>  
+=======
+                                        </div>
+>>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
                                     </div>
                                 </div>
                             </div>
@@ -192,8 +237,8 @@
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
 
                                 <div class="card mb-3">
-                                    <div class="card-body text-center">    
-                                        <div class="row">    
+                                    <div class="card-body text-center">
+                                        <div class="row">
                                             <div class="col-lg-12">
                                                 <button type="submit" class="btn btn-info btn-block mt-3"> <i class="fa fa-check"></i> Create</button>
                                             </div>
@@ -226,7 +271,7 @@
                                                 <input type="file" name="logo" class="form-control" accept="image/*">
                                             </div>
                                         </div>
-                                    </div>                                
+                                    </div>
                                 </div>
                             </div>
                          </div>
@@ -237,4 +282,12 @@
      </div>
  </div>
 
+<<<<<<< HEAD
 @endsection 
+=======
+<script>
+    console.log("11111111");
+</script>
+
+@endsection
+>>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
