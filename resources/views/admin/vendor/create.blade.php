@@ -3,7 +3,7 @@
 @section('title') Create Vendor @endsection
 
 @section('content')
- 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-12">
@@ -22,7 +22,7 @@
             <div class="card mb-3">
                   <div class="card-body">
                     <form action="{{route('vendors.store')}}" method="post" enctype="multipart/form-data">
-                        @csrf 
+                        @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
                                 <div class="card mb-3">
@@ -51,7 +51,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -73,7 +73,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -81,11 +81,11 @@
                                                         <select class="form-control" name="country_id">
                                                              @foreach($country as $countrys)
                                                                 <option value="{{$countrys->id}}">{{$countrys->country_name}}</option>
-                                                              @endforeach   
+                                                              @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-    
+
                                                 <!-- <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>Select city:</label>
@@ -129,7 +129,7 @@
                                                     </div>
                                                 </div>
                                             </div>  -->
-    
+
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -150,14 +150,14 @@
                                                             <option value="0">Inactive</option>
                                                     </select>
                                                 </div>
-    
+
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
                                                         <label>Address</label>
                                                         <textarea class="form-control" name="address" placeholder="Enter Address" value="{{old('address')}}"></textarea>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                        </div>
                                   </div>
                                 <!-- end card -->
@@ -166,7 +166,7 @@
                                     <div class="card-header">
                                         <h3><i class="far fa-user"></i> Shop details</h3>
                                     </div>
-    
+
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-6">
@@ -196,11 +196,11 @@
 
                                                 <div class="form-group">
                                                     <label>Address</label>
-                                                    
+
                                                     <textarea class="form-control" name="shop_address" placeholder="Enter Shop Address" value="{{old('shop_address')}}"></textarea>
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -208,8 +208,8 @@
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
 
                                 <div class="card mb-3">
-                                    <div class="card-body text-center">    
-                                        <div class="row">    
+                                    <div class="card-body text-center">
+                                        <div class="row">
                                             <div class="col-lg-12">
                                                 <button type="submit" class="btn btn-info btn-block mt-3"> <i class="fa fa-check"></i> Create</button>
                                             </div>
@@ -242,7 +242,7 @@
                                                 <input type="file" name="logo" class="form-control" accept="image/*">
                                             </div>
                                         </div>
-                                    </div>                                
+                                    </div>
                                 </div>
                             </div>
                          </div>
@@ -252,4 +252,9 @@
          </div>
      </div>
  </div>
-@endsection 
+
+<script>
+    console.log("11111111");
+</script>
+
+@endsection

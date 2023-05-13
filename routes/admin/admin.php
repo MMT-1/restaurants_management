@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
