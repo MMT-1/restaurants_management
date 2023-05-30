@@ -106,10 +106,13 @@ class VendorController extends Controller
             $store->mobile=$request->mobile;
 
             $store->image=$image_name;
+          
+
+            
 
             $store->address=$request->address;
 
-            $store->country_id=$request->country_id;
+            $store->country_id=0;
 
             $store->role=2;
 
@@ -142,7 +145,11 @@ class VendorController extends Controller
 
             $shop->shop_slug=Str::slug($request->shop_name);
 
-            $shop->shop_address=$request->shop_address;
+            $shop->shop_address=$request->location;
+            
+            $shop->latitude=$request->latitude;
+
+            $shop->longitude=$request->longitude;
 
             $shop->vendor_id=$store->id;
 
@@ -206,9 +213,10 @@ class VendorController extends Controller
 
               $vendor->image=$image_name;
 
+              
               $vendor->address=$request->address;
 
-              $vendor->country_id=$request->country_id;
+              $vendor->country_id=0;
 
               $vendor->role=2;
 
@@ -240,11 +248,15 @@ class VendorController extends Controller
 
               $shop->logo=$logo_name;
 
+              $shop->latitude=$request->latitude;
+              $shop->longitude=$request->longitude;
+
               $shop->shop_slug=Str::slug($request->shop_name);
 
-              $shop->shop_address=$request->shop_address;
+              $shop->shop_address=$request->location;
 
               $shop->vendor_id=$vendor->id;
+              
 
               $shop->created_by=auth()->user()->id;
 

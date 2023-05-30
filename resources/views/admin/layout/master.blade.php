@@ -90,94 +90,96 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6vplU0Ty7M1OQTJ3yhZBroOJ59i7bMpg&libraries=places&callback=initAutocomplete" async defer></script>
 
-
-<script>
-
-$("#pac-input").focusin(function() {
+    <script>
+  $("#pac-input").focusin(function() {
     $(this).val('');
-});
-$('#latitude').val('');
-$('#longitude').val('');
-// This example adds a search box to a map, using the Google Place Autocomplete
-// feature. People can enter geographical searches. The search box will return a
-// pick list containing a mix of places and predicted search terms.
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-function initAutocomplete() {
+  });
+  $('#latitude').val('');
+  $('#longitude').val('');
+
+  function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 24.740691, lng: 46.6528521 },
-        zoom: 13,
-        mapTypeId: 'roadmap'
+      center: { lat: 24.740691, lng: 46.6528521 },
+      zoom: 13,
+      mapTypeId: 'roadmap'
     });
 
     var input = document.getElementById('location');
     var searchBox = new google.maps.places.SearchBox(input);
 
-    // Bias the search box results towards current map's viewport.
     map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
+      searchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+    var marker;
 
-        if (places.length == 0) {
-            return;
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // Clear existing marker, if any
+      if (marker) {
+        marker.setMap(null);
+      }
+
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
         }
 
-
-
-
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
-            marker.setMap(null);
+        marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          draggable: true
         });
-        markers = [];
 
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
+        google.maps.event.addListener(marker, 'dragend', function() {
+          var latLng = marker.getPosition();
+          $('#latitude').val(latLng.lat());
+          $('#longitude').val(latLng.lng());
+          geocodeLatLng(latLng);
         });
-        map.fitBounds(bounds);
 
-        console.log("test11")
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+
+        // Set initial latitude and longitude values
+        var initialLatLng = marker.getPosition();
+        $('#latitude').val(initialLatLng.lat());
+        $('#longitude').val(initialLatLng.lng());
+      });
+
+      map.fitBounds(bounds);
     });
-}
 
-
-
+    // Reverse geocode to get address based on coordinates
+    function geocodeLatLng(latLng) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ 'location': latLng }, function(results, status) {
+        if (status === 'OK') {
+          if (results[0]) {
+            var address = results[0].formatted_address;
+            document.getElementById('location').value = address;
+          } else {
+            console.log('No results found');
+          }
+        } else {
+          console.log('Geocoder failed due to: ' + status);
+        }
+      });
+    }
+  }
 </script>
+
+
 </body>
 
 </html>

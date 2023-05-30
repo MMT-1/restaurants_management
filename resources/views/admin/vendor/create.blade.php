@@ -93,20 +93,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-<<<<<<< HEAD
-=======
 
-                                                <!-- <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Select city:</label>
-                                                        <select class="form-control" name="city">
-                                                                <option value="1">Argentina</option>
-                                                                <option value="2">Australia</option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
-
->>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>Gender:</label>
@@ -117,34 +104,10 @@
                                                         </select>
                                                     </div>
                                                 </div>
-<<<<<<< HEAD
                                             </div>   
-=======
                                             </div>
 
-                                            <!-- <div class="row">
-                                                 <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Zip:</label>
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="zip_code" type="text" value="{{old('zip_code')}}"  placeholder="Zip Code" />
-                                                        </div>
-                                                   </div>
-                                                </div> -->
-
-                                                <!-- <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Gender:</label>
-                                                        <select class="form-control" name="gender">
-                                                                <option value="1">Male</option>
-                                                                <option value="2">Female</option>
-                                                                <option value="3">Other</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>  -->
-
->>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
+                                            
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -213,23 +176,21 @@
                                                     <textarea class="form-control" name="shop_address" placeholder="Enter Shop Address" value="{{old('shop_address')}}"></textarea>
                                                 </div>
                                             </div>
-<<<<<<< HEAD
                                             <div class="col-lg-12">
                                                 
-
+                                            <input type="text" id="latitude" name="latitude">
+                                                <input type="text" id="longitude" name="longitude">
                                                 <div class="form-group">
+                                              
                                                 <input type="text" class="form-control" style="position:relative" name="location" id="location"/>
 
                                              
                                                 </div>
                                             </div>
-                                            <div id="map" style="width:100%;height:300px;position:relative  padding-top: 20px;
-"></div>       
+                                            <div id="map" style="width:100%;height:300px;position:relative  padding-top: 20px;"></div>       
 
                                         </div>  
-=======
                                         </div>
->>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
                                     </div>
                                 </div>
                             </div>
@@ -282,12 +243,4 @@
      </div>
  </div>
 
-<<<<<<< HEAD
 @endsection 
-=======
-<script>
-    console.log("11111111");
-</script>
-
-@endsection
->>>>>>> c93b118df8b4f11e3333cab85717ec5acb38574b
