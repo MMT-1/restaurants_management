@@ -51,6 +51,7 @@ use App\Http\Controllers\front\FrontController;
 Route::post('/reservation', [FrontController::class, 'reservation']);
 
 
+Route::post('/restaurants/nearby',[FrontController::class, 'getNearbyShops'] )->name('restaurants.nearby');
 
 
-Route::post('/restaurants/nearby',[FrontController::class, 'getNearby'] )->name('restaurants.nearby');
+// Route::post('/restaurants/nearby',[FrontController::class, 'getNearby'] )->name('restaurants.nearby');

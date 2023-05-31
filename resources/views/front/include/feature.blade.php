@@ -67,6 +67,16 @@
                         </div>
                         <div data-test="homepage-tagline" class="styles_heroForm__uSl_W">
                             <h1 class="css-f0b5kp e1fq6wxe0">Discover and book the best restaurant</h1>
+                            <form method="POST" action="/restaurants/nearby" id="locationForm">
+                                @csrf
+                                <input type="text" name="location" id="locationInput" placeholder="Enter your location">
+                                <input type="text" name="latitude" id="latitudeInput">
+                                <input type="text" name="longitude" id="longitudeInput">
+                                <button type="button" id="locationButton" class="btn btn-primary">Get My Location</button>
+
+                                <button type="submit">Submit</button>
+                              </form>
+
                             <div data-test="search-component" class="styles_form__k_OCj">
                                 <div class="css-1sn0ou2 elkhwc30">
                                     <div class="styles_inputContainer__oP8eT">
@@ -113,12 +123,8 @@
                                                     <label class="styles_labelWrapper__Ce7TK">
                                                         <span class="styles_inputWrapper__eMJ2o styles_search__tjTV0">
                                                             <input type="search" class="styles_input__vCYji"
-                                                                name="search" placeholder="Cuisine, restaurant name..."
-                                                                id="whatinput" autoComplete="off" value=""
-                                                                aria-owns="autocomplete" aria-autocomplete="both"
-                                                                aria-activedescendant="option1" data-hj-whitelist="true"
-                                                                data-test="search-what-input" label=""
-                                                                inputPlacement="default" notice="" />
+                                                                 placeholder="Cuisine, restaurant name..."
+                                                                id="whatinput" />
                                                         </span>
                                                     </label>
                                                 </span>
@@ -167,13 +173,9 @@
                                                     <label class="styles_labelWrapper__Ce7TK">
                                                         <span class="styles_inputWrapper__eMJ2o styles_search__tjTV0">
                                                             <input type="search" class="styles_input__vCYji"
-                                                                name="search"
+                                                                name="location"
                                                                 placeholder="Near me, exact address, station..."
-                                                                id="whereinput" autoComplete="off" value=""
-                                                                aria-owns="autocomplete" aria-autocomplete="both"
-                                                                aria-activedescendant="option1" data-hj-whitelist="true"
-                                                                data-test="search-where-input" label=""
-                                                                inputPlacement="default" notice="" />
+                                                                 />
                                                         </span>
                                                     </label>
                                                 </span>
@@ -186,8 +188,8 @@
 
                                 
                            
-                                    <button width="100%" type="submit" data-test="search-form-submit-button"
-                                        data-testid="search-form-submit-button" display="block"
+                                    <button width="100%" type="submit" 
+                                         display="block"
                                         class="css-m080s5 ektx8jp0">Search</button>
                                 </div>
                             </div>
@@ -196,3 +198,118 @@
                 </div>
             </div>
         </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6vplU0Ty7M1OQTJ3yhZBroOJ59i7bMpg&libraries=places&callback=initAutocomplete" async defer></script>
+        
+{{-- <script>
+    // JavaScript code
+    function initAutocomplete() {
+      var locationForm = document.getElementById('locationForm');
+      var locationInput = document.getElementById('locationInput');
+      var latitudeInput = document.getElementById('latitudeInput');
+      var longitudeInput = document.getElementById('longitudeInput');
+  
+      // Initialize the autocomplete input field
+      var autocomplete = new google.maps.places.Autocomplete(locationInput);
+  
+      // Limit autocomplete results to geocode type (address)
+      autocomplete.setTypes(['geocode']);
+  
+      // Trigger form submission when a place is selected from autocomplete
+      autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (place && place.geometry && place.geometry.location) {
+          var latitude = place.geometry.location.lat();
+          var longitude = place.geometry.location.lng();
+  
+          // Update the hidden input fields with the latitude and longitude
+          latitudeInput.value = latitude;
+          longitudeInput.value = longitude;
+        }
+        locationForm.submit();
+      });
+  
+      locationForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        locationForm.submit();
+      });
+    
+    }
+</script> --}}
+
+<script>
+    function initAutocomplete() {
+        var locationForm = document.getElementById('locationForm');
+        var locationInput = document.getElementById('locationInput');
+        var latitudeInput = document.getElementById('latitudeInput');
+        var longitudeInput = document.getElementById('longitudeInput');
+        var locationButton = document.getElementById('locationButton');
+        var autocomplete;
+
+        // Initialize the autocomplete input field
+        autocomplete = new google.maps.places.Autocomplete(locationInput);
+
+        // Limit autocomplete results to geocode type (address)
+        autocomplete.setTypes(['geocode']);
+
+        // Trigger form submission when a place is selected from autocomplete
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (place && place.geometry && place.geometry.location) {
+                var latitude = place.geometry.location.lat();
+                var longitude = place.geometry.location.lng();
+
+                // Update the hidden input fields with the latitude and longitude
+                latitudeInput.value = latitude;
+                longitudeInput.value = longitude;
+            }
+        });
+
+        // Handle location button click event
+        locationButton.addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+
+                    // Update the hidden input fields with the latitude and longitude
+                    latitudeInput.value = latitude;
+                    longitudeInput.value = longitude;
+
+                    // Set the value of the location input field
+                    locationInput.value = '';
+
+                    // Manually trigger the place_changed event
+                    google.maps.event.trigger(autocomplete, 'place_changed');
+
+                    // Print location information in the console
+                    console.log('Selected Location:', locationInput.value);
+                    console.log('Latitude:', latitude);
+                    console.log('Longitude:', longitude);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        });
+
+        // Handle form submission
+        locationForm.addEventListener('submit', function(event) {
+
+            // Use the latitude and longitude values for form submission
+            var latitude = latitudeInput.value;
+            var longitude = longitudeInput.value;
+
+            // Submit the form or perform any additional actions
+            // Here, you can add your code to submit the form
+            // or perform any other required actions with the latitude and longitude values
+            console.log('Latitude (Form Submission):', latitude);
+            console.log('Longitude (Form Submission):', longitude);
+
+            // Uncomment the following line to submit the form
+            // locationForm.submit();
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initAutocomplete);
+</script>
+

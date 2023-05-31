@@ -690,7 +690,7 @@ input[type="radio"]:checked::before {
     <script src="{{asset('front/assets/plugins/packery.pkgd.min.js')}}"></script>
 
     <!--=== Google map ===-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjkssBA3hMeFtClgslO2clWFR6bRraGz0"></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjkssBA3hMeFtClgslO2clWFR6bRraGz0"></script> --}}
 
     <!--==== script js ====-->
     <script src="{{asset('front/assets/js/script.js')}}"></script>

@@ -8,10 +8,11 @@ use App\Traits\CommonTrait;
 use App\Models\admin\Slider;
 use Illuminate\Http\Request;
 use App\Models\vendor\Product;
-use App\Models\vendor\ProductBrand;
-use App\Http\Controllers\Controller;
 use App\Models\vendor\Reservation;
+use Illuminate\Support\Facades\DB;
+use App\Models\vendor\ProductBrand;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\vendor\ProductCategory;
 
@@ -123,35 +124,51 @@ class FrontController extends Controller
 
 
 
-public function getNearby(Request $request)
+
+
+
+public function getNearbyShops(Request $request)
 {
-    // Get the location entered by the user
     $location = $request->input('location');
 
-    // Use the OpenStreetMap Nominatim API to convert the location to latitude and longitude coordinates
-    $geocode_url = "https://nominatim.openstreetmap.org/search?q=" . urlencode($location) . "&format=json&limit=1";
-    $geocode_response = file_get_contents($geocode_url);
-    $geocode_data = json_decode($geocode_response);
+    // Make a request to Google Maps Geocoding API to obtain the latitude and longitude
+    $geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($location) . '&key=AIzaSyA6vplU0Ty7M1OQTJ3yhZBroOJ59i7bMpg';
+    $geocodeResponse = json_decode(file_get_contents($geocodeUrl));
 
-    if (!empty($geocode_data)) {
-        $latitude = $geocode_data[0]->lat;
-        $longitude = $geocode_data[0]->lon;
+    if ($geocodeResponse->status === 'OK') {
+        $latitude = $geocodeResponse->results[0]->geometry->location->lat;
+        $longitude = $geocodeResponse->results[0]->geometry->location->lng;
 
-        // Use the OpenStreetMap Overpass API to search for nearby restaurants
-        $places_url = "https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];node[\"amenity\"=\"restaurant\"](" . $latitude . "," . $longitude . ",1500);out;";
-        $places_response = file_get_contents($places_url);
-        $places_data = json_decode($places_response);
+        // Retrieve nearby shops based on the latitude and longitude
+        $nearbyShops = Shop::select('shops.*', DB::raw('
+            ( 6371 * acos( cos( radians(' . $latitude . ') ) *
+            cos( radians( shops.latitude ) ) *
+            cos( radians( shops.longitude ) - radians(' . $longitude . ') ) +
+            sin( radians(' . $latitude . ') ) *
+            sin( radians( shops.latitude ) ) ) ) AS distance
+        '))
+        ->having('distance', '<', 10) // 10 represents the distance in kilometers
+        ->orderBy('distance', 'asc')
+        ->get();
 
-        // Render the results in a view
-        return view('restaurants.nearby', [
-            'location' => $location,
-            'restaurants' => $places_data->elements
-        ]);
-    } else {
-        // Render an error message in the same view
-        return view('home')->with('error', 'Could not find location.');
+
+
+        $restaurantLocations = $nearbyShops->map(function ($shop) {
+            return [
+                'name' => $shop->name,
+                'lat' => $shop->latitude,
+                'lng' => $shop->longitude,
+            ];
+        });
+
+
+
+
+      return view('front.nearby', compact('nearbyShops','restaurantLocations'));
     }
-}
 
+    // Handle error case when geocoding fails
+    return redirect()->back()->with('error', 'Location not found');
+}
 
 }

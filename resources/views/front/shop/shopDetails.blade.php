@@ -17,7 +17,7 @@
             </div>
         </div>
      <section class="inner-page banner" data-img="{{asset('vendor/shop/'.$shop->logo)}}" style="height:400px">
-        <!-- <div class="container">
+         <div class="container">
             
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -29,7 +29,7 @@
                     </nav>
                 </div>
             </div>
-        </div> -->
+        </div> 
     </section>
     <!-- end banner area -->
 
