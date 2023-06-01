@@ -147,7 +147,7 @@ public function getNearbyShops(Request $request)
             sin( radians(' . $latitude . ') ) *
             sin( radians( shops.latitude ) ) ) ) AS distance
         '))
-        ->having('distance', '<', 10) // 10 represents the distance in kilometers
+        ->having('distance', '<', 100) // 10 represents the distance in kilometers
         ->orderBy('distance', 'asc')
         ->get();
 

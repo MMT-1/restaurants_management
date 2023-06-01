@@ -20,6 +20,8 @@
     
     <!-- Custom CSS -->
     <link href="{{asset('vendor/assets/dist/css/style.min.css')}}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 
 </head>
 <body>
@@ -99,6 +101,107 @@
     <script src="{{asset('vendor/assets/libs/flot/jquery.flot.crosshair.js')}}"></script>
     <script src="{{asset('vendor/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
     <script src="{{asset('vendor/assets/dist/js/pages/chart/chart-page-init.js')}}"></script>
+
+    <script src="{{asset('admin/assets/plugins/datatables/datatables.min.js')}}"></script>
+    <script src="{{asset('admin/assets/data/data_datatables.js')}}"></script>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6vplU0Ty7M1OQTJ3yhZBroOJ59i7bMpg&libraries=places&callback=initAutocomplete" async defer></script>
+
+    <script>
+  $("#pac-input").focusin(function() {
+    $(this).val('');
+  });
+  $('#latitude').val('');
+  $('#longitude').val('');
+
+  function initAutocomplete() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 24.740691, lng: 46.6528521 },
+      zoom: 13,
+      mapTypeId: 'roadmap'
+    });
+
+    var input = document.getElementById('location');
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    var marker;
+
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // Clear existing marker, if any
+      if (marker) {
+        marker.setMap(null);
+      }
+
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+
+        marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          draggable: true
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function() {
+          var latLng = marker.getPosition();
+          $('#latitude').val(latLng.lat());
+          $('#longitude').val(latLng.lng());
+          geocodeLatLng(latLng);
+        });
+
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+
+        // Set initial latitude and longitude values
+        var initialLatLng = marker.getPosition();
+        $('#latitude').val(initialLatLng.lat());
+        $('#longitude').val(initialLatLng.lng());
+      });
+
+      map.fitBounds(bounds);
+    });
+
+    // Reverse geocode to get address based on coordinates
+    function geocodeLatLng(latLng) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ 'location': latLng }, function(results, status) {
+        if (status === 'OK') {
+          if (results[0]) {
+            var address = results[0].formatted_address;
+            document.getElementById('location').value = address;
+          } else {
+            console.log('No results found');
+          }
+        } else {
+          console.log('Geocoder failed due to: ' + status);
+        }
+      });
+    }
+  }
+</script>
+
+
+
+
+
 
 </body>
 

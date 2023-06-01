@@ -162,18 +162,7 @@
                                                    </div>
                                                 </div>
 
-                                                <!-- <div class="col-lg-6">
-                                                    <label>Status:</label>
-                                                    <select class="form-control" name="status">
-                                                           @if($vendor->status==1)
-                                                            <option value="1" selected>Active</option>
-                                                            <option value="0">Inactive</option>
-                                                            @else 
-                                                            <option value="1">Active</option>
-                                                            <option value="0" selected>Inactive</option>
-                                                           @endif  
-                                                    </select>
-                                                </div> -->
+                                                <input type="hidden" name="status" value="{{$vendor->status}}">
     
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
@@ -206,25 +195,28 @@
                                                </div>
                                             </div>
 
-                                            <!-- <div class="col-lg-6">
-                                                <label>Status:</label>
-                                                <select class="form-control" name="shop_status">
-                                                       @if(optional($vendor->shops)->status==1)
-                                                        <option value="1" selected>Active</option>
-                                                        <option value="0">Inactive</option>
-                                                        @else 
-                                                        <option value="1">Active</option>
-                                                        <option value="0" selected>Inactive</option>
-                                                       @endif  
-                                                </select>
-                                            </div> -->
-
+                                            
+                                            <input type="hidden" name="shop_status" value="{{optional($vendor->shops)->status}}">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label>Address</label>
                                                     <textarea class="form-control" name="shop_address" placeholder="Enter Shop Address">{{optional($vendor->shops)->shop_address}}</textarea>
                                                 </div>
                                             </div>
+
+                                            <div class="col-lg-12">
+                                                
+    
+                                                <input type="text" id="latitude" name="latitude" value="{{optional($vendor->shops)->latitude}}">
+                                                    <input type="text" id="longitude" name="longitude" value="{{optional($vendor->shops)->longitude}}">
+                                                    <div class="form-group">
+                                                  
+                                                    <input type="text" class="form-control" style="position:relative" name="location" id="location" value="{{optional($vendor->shops)->shop_address}}"/>
+    
+                                                 
+                                                    </div>
+                                                <div id="map" style="width:100%;height:300px;position:relative  padding-top: 20px;"></div>       
+                                        </div>  
                                         </div>  
                                     </div>
                                 </div>

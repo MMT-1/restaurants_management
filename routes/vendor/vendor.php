@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\vendor\ProductController;
 use App\Http\Controllers\vendor\ProfileController;
 use App\Http\Controllers\vendor\DashboardController;
+use App\Http\Controllers\vendor\ShopProductController;
 use App\Http\Controllers\vendor\ReservationsController;
 
 //registration route start
@@ -31,3 +33,9 @@ use App\Http\Controllers\vendor\ReservationsController;
   // Route::post('vendor/profile', [ProfileController::class,'update'])->name('vendor.update-profile');
   // Route::get('vendor/profile', [DashboardController::class,'index'])->name('vendor.profile');
 //dashboard route end
+
+
+Route::get('shop/products',[ShopProductController::class,'index'])->name('shop.products');
+Route::post('shop/products',[ShopProductController::class,'store'])->name('shop.products');
+Route::get('shop/products/create',[ShopProductController::class,'create'])->name('shop.products.create');
+// Route::get('att/value/{id}',[ProductController::class,'attributeValue'])->name('att.values');

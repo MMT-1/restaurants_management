@@ -99,4 +99,18 @@ class AccountController extends Controller
             ->with('success','Registration has completed successfully.Please wait for admin approval');
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 }

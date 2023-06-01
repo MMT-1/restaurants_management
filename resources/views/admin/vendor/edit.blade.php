@@ -228,11 +228,28 @@
                                                     <textarea class="form-control" name="shop_address" placeholder="Enter Shop Address">{{optional($vendor->shops)->shop_address}}</textarea>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12">
+                                                
+                                                
+                                                <input type="text" id="latitude" name="latitude" value="{{optional($vendor->shops)->latitude}}">
+                                                    <input type="text" id="longitude" name="longitude" value="{{optional($vendor->shops)->longitude}}">
+                                                    <div class="form-group">
+                                                  
+                                                    <input type="text" class="form-control" style="position:relative" name="location" id="location" value="{{optional($vendor->shops)->shop_address}}"/>
+    
+                                                 
+                                                </div>
+                                                <div id="map" style="width:100%;height:300px;position:relative  padding-top: 20px;"></div>       
                                         </div>  
                                     </div>
                                 </div>
                             </div>
                             <!-- end col -->
+
+
+
+
+
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
 
                                 <div class="card mb-3">

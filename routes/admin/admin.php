@@ -41,6 +41,6 @@ use App\Http\Controllers\admin\ProductController;
 //vendor route end
 
 //product route start
-  Route::resource('products',ProductController::class);
+  Route::resource('vendor/products',ProductController::class);
   Route::get('att/value/{id}',[ProductController::class,'attributeValue'])->name('att.values');
 //product route end
