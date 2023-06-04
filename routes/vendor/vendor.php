@@ -39,3 +39,8 @@ Route::get('shop/products',[ShopProductController::class,'index'])->name('shop.p
 Route::post('shop/products',[ShopProductController::class,'store'])->name('shop.products');
 Route::get('shop/products/create',[ShopProductController::class,'create'])->name('shop.products.create');
 // Route::get('att/value/{id}',[ProductController::class,'attributeValue'])->name('att.values');
+
+
+
+Route::get('products/{product}/edit', [ShopProductController::class, 'edit'])->name('shop.products.edit');
+Route::put('products/{product}', [ShopProductController::class, 'update'])->name('shop.products.update');

@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\vendor\ProductCategory;
 use App\Models\vendor\ProductAttribute;
+use App\Http\Requests\admin\ProductValidate;
 
 class ShopProductController extends Controller
 {
@@ -45,7 +46,7 @@ class ShopProductController extends Controller
                 return $status;
             })
             ->addColumn('action', function ($row) {
-                $btn = '<a class="btn btn-primary btn-sm" title="Edit Product" href="' . route('products.edit', $row->id) . '"> <i class="fa fa-edit"></i></a>';
+                $btn = '<a class="btn btn-primary btn-sm" title="Edit Product" href="' . route('shop.products.edit', $row->id) . '"> <i class="fa fa-edit"></i></a>';
                 return $btn;
             })
             ->rawColumns(['image', 'status', 'action'])
@@ -62,14 +63,21 @@ class ShopProductController extends Controller
     
    
 
+public function ActiveShop()
+{
+    $vendor = Auth::guard('vendor')->user();
+    $shops = Shop::where('vendor_id', $vendor->id)->where('status', 1)->get();
+    return $shops;
+}
+
 
 public function create()
 {
-    $attributeType=$this->activeType();
-    $shop=$this->allActiveShop();
-    $brand=$this->activeBrand();
-    $category=$this->allParentCategory();
-    return view('vendor.product.create',compact('attributeType','shop','brand','category'));
+    $attributeType = $this->activeType();
+    $shops = $this->ActiveShop();
+    $brand = $this->activeBrand();
+    $category = $this->allParentCategory();
+    return view('vendor.product.create', compact('attributeType', 'shops', 'brand', 'category'));
 }
 
 
@@ -77,76 +85,125 @@ public function create()
 
 public function store(ProductValidate $request)
 {
-     //check if file is upload
-     $image_name='';
-     if($request->hasFile('image')){
-       $image_name = time().'.'.$request->image->getClientOriginalExtension();
-       $request->image->move(('vendor/product/'), $image_name);
-     } 
-
-     //shop wise vendor
-     $vendor=Shop::where('id',$request->shop_id)->first();
-
-    //product information
-    $store = new Product;
-    $store->product_name=$request->product_name;
-    $store->product_slug=Str::slug($request->product_name);
-    $store->quantity=$request->quantity;
-    $store->alert_quantity=$request->alert_quantity;
-    $store->regular_price=$request->regular_price;
-    $store->sale_price=$request->sale_price;
-    $store->cost_price=$request->cost_price;
-    $store->image=$image_name;
-    $store->is_featured=$request->is_featured;
-    $store->stock_status=$request->stock_status;
-    $store->brand_id=$request->brand_id;
-    $store->vendor_id=$vendor->vendor_id;
-    $store->shop_id=$request->shop_id;
-    $store->short_description=$request->short_description;
-    $store->long_description=$request->long_description;
-    $store->tag=$request->tag;
-    $store->save();
-
-    //category information
-    for($i=0;$i<count($request->category_id);$i++){
-      $category = new ProductCategory;
-      $category->product_id = $store->id;
-      $category->category_id = $request->category_id[$i];
-      $category->created_by = auth()->user()->id;
-      $category->status = 1;
-      $category->save();
+    // Check if file is uploaded
+    $image_name = '';
+    if ($request->hasFile('image')) {
+        $image_name = time() . '.' . $request->image->getClientOriginalExtension();
+        $request->image->move(('vendor/product/'), $image_name);
     }
 
-    //attribute information
-    if($request->type_id!=''){
-    for($i=0;$i<count($request->type_id);$i++){
-      $att_image_name='';
-      if($request->hasFile('att_image')){
-        $att_image_name = time().'.'.$request->att_image[$i]->getClientOriginalExtension();
-        $request->att_image[$i]->move(('vendor/product/attribute/'), $att_image_name);
-      } 
-      $attribute = new ProductAttribute;
-      $attribute->product_id = $store->id;
-      $attribute->type_id = $request->type_id[$i];
-      $attribute->value_id = $request->value_id[$i];
-      $attribute->quantity = $request->att_qty[$i];
-      $attribute->alert_quantity = $request->att_alert_qty[$i];
-      $attribute->regular_price = 0;
-      $attribute->sale_price = $request->att_sale_price[$i];
-      $attribute->cost_price = 0;
-      $attribute->image = $att_image_name;
-      $attribute->created_id = 0;
-      $attribute->status = 1;
-      $attribute->save();
-    }
-  }
+    // Get the vendor
+    $vendor = Auth::guard('vendor')->user();
+
+    // Create the product
+    $product = new Product;
+    $product->product_name = $request->product_name;
+    $product->product_slug = Str::slug($request->product_name);
+    $product->quantity = $request->quantity;
+    $product->alert_quantity = $request->alert_quantity;
+    $product->regular_price = $request->regular_price;
+    $product->sale_price = $request->sale_price;
+    $product->cost_price = $request->cost_price;
+    $product->image = $image_name;
+    $product->is_featured = $request->is_featured;
+    $product->stock_status = $request->stock_status;
+    $product->brand_id = $request->brand_id;
+    $product->vendor_id = $vendor->id;
+    $product->shop_id = $request->shop_id;
+    $product->short_description = $request->short_description;
+    $product->long_description = $request->long_description;
+    $product->tag = $request->tag;
+    $product->save();
 
 
-
-    return redirect()->route('products.index')->with('success','Product has been successfully store');
+    return redirect()->route('shop.products')->with('success', 'Product has been successfully stored');
 }
 
 
 
 
+public function allActiveShopByVendor($vendorId)
+{
+    return Shop::where('vendor_id', $vendorId)->get();
 }
+
+public function edit($id)
+{
+  $vendorId = auth()->user()->id;
+  $product = Product::where('vendor_id', $vendorId)->findOrFail($id);    
+  $attributeType = $this->activeType();
+  $shop = $this->allActiveShopByVendor(auth()->user()->id); // Get shops belonging to the authenticated vendor
+  $brand = $this->activeBrand();
+    $category = $this->allParentCategory();
+
+    return view('vendor.product.edit', compact('product', 'attributeType', 'shop', 'brand', 'category'));
+}
+
+
+
+public function update(Request $request, $id)
+{
+    // Find the product to be updated
+    $vendorId = auth()->user()->id;
+    $product = Product::where('vendor_id', $vendorId)->findOrFail($id);   
+    // Update the product fields
+    $product->product_name = $request->input('product_name');
+    $product->product_slug = Str::slug($request->input('product_name'));
+    $product->quantity = $request->input('quantity');
+    $product->alert_quantity = $request->input('alert_quantity');
+    $product->regular_price = $request->input('regular_price');
+    $product->sale_price = $request->input('sale_price');
+    $product->cost_price = $request->input('cost_price');
+    $product->is_featured = $request->input('is_featured');
+    $product->stock_status = $request->input('stock_status');
+    $product->brand_id = $request->input('brand_id');
+    $product->shop_id = $request->input('shop_id');
+    $product->short_description = $request->input('short_description');
+    $product->long_description = $request->input('long_description');
+    $product->tag = $request->input('tag');
+
+    // Handle image upload if provided
+    if ($request->hasFile('image')) {
+        // Delete the old image file
+        if ($product->image) {
+            $oldImagePath = public_path('vendor/product/'.$product->image);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+
+        // Upload and save the new image file
+        $image_name = time().'.'.$request->image->getClientOriginalExtension();
+        $request->image->move(public_path('vendor/product/'), $image_name);
+        $product->image = $image_name;
+    }
+
+    // Save the updated product
+    $product->save();
+
+    // Update the categories for the product
+    if ($request->has('category_id')) {
+        $categories = [];
+        foreach ($request->input('category_id') as $categoryId) {
+            $categories[] = new ProductCategory([
+                'category_id' => $categoryId,
+                'created_by' => auth()->user()->id,
+                'status' => 1
+            ]);
+        }
+
+        $product->category()->delete();
+        $product->category()->saveMany($categories);
+    } else {
+        $product->category()->delete();
+    }
+
+    return redirect()->route('shop.products')->with('success', 'Product has been successfully updated.');
+}
+
+
+
+}
+
+
+

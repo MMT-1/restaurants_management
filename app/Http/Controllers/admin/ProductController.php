@@ -11,7 +11,9 @@ use App\Models\vendor\Product;
 use App\Models\vendor\Shop;
 use App\Models\vendor\ProductCategory;
 use App\Models\vendor\ProductAttribute;
+
 use App\Http\Requests\admin\ProductValidate;
+
 use DataTables;
 
 class ProductController extends Controller
@@ -21,13 +23,8 @@ class ProductController extends Controller
         $this->middleware('auth:admin');
     }
 
-     //import trait
      use CommonTrait;  
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index(Request $request)
     {
         $list = Product::orderBy('id','DESC')->get();
@@ -64,11 +61,7 @@ class ProductController extends Controller
             return view('admin.product.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         $attributeType=$this->activeType();
@@ -172,9 +165,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $attributeType = $this->activeType();
+        $shop = $this->allActiveShop();
+        $brand = $this->activeBrand();
+        $category = $this->allParentCategory();
+    
+        return view('admin.product.edit', compact('product', 'attributeType', 'shop', 'brand', 'category'));
     }
 
     /**
@@ -186,8 +187,64 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Find the product to be updated
+        $product = Product::findOrFail($id);
+    
+        // Update the product fields
+        $product->product_name = $request->input('product_name');
+        $product->product_slug = Str::slug($request->input('product_name'));
+        $product->quantity = $request->input('quantity');
+        $product->alert_quantity = $request->input('alert_quantity');
+        $product->regular_price = $request->input('regular_price');
+        $product->sale_price = $request->input('sale_price');
+        $product->cost_price = $request->input('cost_price');
+        $product->is_featured = $request->input('is_featured');
+        $product->stock_status = $request->input('stock_status');
+        $product->brand_id = $request->input('brand_id');
+        $product->shop_id = $request->input('shop_id');
+        $product->short_description = $request->input('short_description');
+        $product->long_description = $request->input('long_description');
+        $product->tag = $request->input('tag');
+    
+        // Handle image upload if provided
+        if ($request->hasFile('image')) {
+            // Delete the old image file
+            if ($product->image) {
+                $oldImagePath = public_path('vendor/product/'.$product->image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+    
+            // Upload and save the new image file
+            $image_name = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('vendor/product/'), $image_name);
+            $product->image = $image_name;
+        }
+    
+        // Save the updated product
+        $product->save();
+    
+        // Update the categories for the product
+        if ($request->has('category_id')) {
+            $categories = [];
+            foreach ($request->input('category_id') as $categoryId) {
+                $categories[] = new ProductCategory([
+                    'category_id' => $categoryId,
+                    'created_by' => auth()->user()->id,
+                    'status' => 1
+                ]);
+            }
+    
+            $product->category()->delete();
+            $product->category()->saveMany($categories);
+        } else {
+            $product->category()->delete();
+        }
+    
+        return redirect()->route('products.index')->with('success', 'Product has been successfully updated.');
     }
+    
 
     /**
      * Remove the specified resource from storage.

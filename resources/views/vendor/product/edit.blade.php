@@ -21,14 +21,15 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card mb-3">
                 <div class="card-body">
-                       <form method="post" action="{{route('shop.products')}}" enctype="multipart/form-data">
+                       <form method="post" action="{{route('shop.products.update', $product->id)}}" enctype="multipart/form-data">
                          @csrf 
+                         @method('PUT')
                          <div class="row">
                            <div class="col-md-9">
                              
                              <div class="form-group">
                               <label>Product Name <span class="text-danger">*</span></label>
-                               <input type="text" name="product_name" class="form-control" placeholder="Product Name"/>
+                               <input type="text" name="product_name" class="form-control" placeholder="Product Name" value="{{ $product->product_name }}"/>
                                @if($errors->has('product_name'))
                                <span class="text-danger"> {{$errors->first('product_name')}}</span>
                                @endif
@@ -36,7 +37,7 @@
 
                              <div class="form-group">
                               <label>Product Description <span class="text-danger">*</span></label>
-                               <textarea class="form-control" cols="5" rows="5" name="long_description" placeholder="Product Description"></textarea>
+                               <textarea class="form-control" cols="5" rows="5" name="long_description" placeholder="Product Description">{{ $product->long_description }}</textarea>
                                @if($errors->has('long_description'))
                                <span class="text-danger"> {{$errors->first('long_description')}}</span>
                                @endif
@@ -59,39 +60,41 @@
 
                                        <div class="form-group">
                                         <label>Regular Price</label>
-                                        <input type="text" name="regular_price" value="0" class="form-control" placeholder="Regular Price"/>
+                                        <input type="text" name="regular_price" class="form-control" placeholder="Regular Price" value="{{ $product->regular_price }}"/>
                                        </div>
 
                                        <div class="form-group">
                                         <label>Sell Price</label>
-                                        <input type="text" name="sale_price" value="0" class="form-control" placeholder="Sell Price"/>
+                                        <input type="text" name="sale_price"  class="form-control" placeholder="Sell Price" value="{{ $product->sale_price }}"/>
                                        </div>
 
                                        <div class="form-group">
                                         <label>Cost Price</label>
-                                        <input type="text" name="cost_price" value="0" class="form-control" placeholder="Cost Price"/>
+                                        <input type="text" name="cost_price"  class="form-control" placeholder="Cost Price" value="{{ $product->cost_price }}"/>
                                        </div>
 
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                      <h4>Stock Information</h4>
-                                      <div class="form-group">
-                                        <label>Stock Status</label>
-                                        <select class="form-control" name="stock_status">
-                                          <option value="1">In Stock</option>
-                                          <option value="0">Out Of Stock</option>
-                                        </select>
-                                       </div>
+                                        <h4>Stock Information</h4>
+                                        <div class="form-group">
+                                            <label for="stock_status">Stock Status</label>
+                                            <select class="form-control" id="stock_status" name="stock_status">
+                                                <option value="1" {{ $product->stock_status == 1 ? 'selected' : '' }}>In Stock</option>
+                                                <option value="0" {{ $product->stock_status == 0 ? 'selected' : '' }}>Out of Stock</option>
+                                            </select>
+                                        </div>
+                                        
 
-                                       <div class="form-group">
-                                        <label>Stock Quantity</label>
-                                        <input type="text" name="quantity" value="0" class="form-control" placeholder="Stock Quantity"/>
-                                       </div>
-
-                                       <div class="form-group">
-                                        <label>Alert Quantity</label>
-                                        <input type="text" name="alert_quantity" value="0" class="form-control" placeholder="Alert Quantity"/>
-                                       </div>
+                                        <div class="form-group">
+                                            <label for="quantity">Stock Quantity</label>
+                                            <input type="text" name="quantity" value="{{ $product->quantity }}" class="form-control" placeholder="Stock Quantity">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="alert_quantity">Alert Quantity</label>
+                                            <input type="text" name="alert_quantity" value="{{ $product->alert_quantity }}" class="form-control" placeholder="Alert Quantity">
+                                        </div>
+                                        
                                     
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
@@ -156,7 +159,7 @@
                              </div>
                              <div class="form-group mt-3">
                               <label>Short Description <span class="text-danger">*</span></label>
-                               <textarea class="form-control" cols="5" rows="5" name="short_description" placeholder="Product Short Description"></textarea>
+                               <textarea class="form-control" cols="5" rows="5" name="short_description" placeholder="Product Short Description">{{ $product->short_description }}</textarea>
                                @if($errors->has('short_description'))
                                <span class="text-danger"> {{$errors->first('short_description')}}</span>
                                @endif
@@ -168,86 +171,90 @@
                                 <div class="card-body text-center">    
                                     <div class="row">    
                                         <div class="col-lg-12">
-                                            <button type="submit" class="btn btn-info btn-block mt-3"> <i class="fa fa-check"></i> Create</button>
+                                            <button type="submit" class="btn btn-info btn-block mt-3"> <i class="fa fa-check"></i> Update</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                                 <!-- end card-body -->
                                 <div class="card mb-3">
-                                  <div class="card-header">
-                                      <h3><i class="fas fa-star"></i>Featured product?</h3>
-                                  </div>
-                                  <div class="card-body text-center">
-                                      <div class="row">
-                                          <div class="col-lg-12">
-                                            <input type="radio" id="f1" name="is_featured" value="1">
-                                            <label for="f1"> Yes</label><br>
-                                            <input type="radio" id="f2" name="is_featured" value="0" checked>
-                                            <label for="f2"> No</label><br>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div> 
+                                    <div class="card-header">
+                                        <h3><i class="fas fa-star"></i> Featured product?</h3>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <input type="radio" id="f1" name="is_featured" value="1" {{ $product->is_featured == 1 ? 'checked' : '' }}>
+                                                <label for="f1"> Yes</label><br>
+                                                <input type="radio" id="f2" name="is_featured" value="0" {{ $product->is_featured == 0 ? 'checked' : '' }}>
+                                                <label for="f2"> No</label><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
 
                                 <div class="card mb-3">
-                                  <div class="card-header">
-                                      <h3><i class="fas fa-certificate"></i> Select Category <span class="text-danger">*</span></h3>
-                                  </div>
-                                  <div class="card-body text-center">
-                                      <div class="row">
-                                          @if($errors->has('category_id'))
-                                          <span class="text-danger"> {{$errors->first('category_id')}}</span>
-                                          @endif
-                                          <div class="col-lg-12" style="height: 200px;  overflow-y: scroll;">
-                                            @foreach($category as $categorys)
-                                              <input type="checkbox" id="{{$categorys->id}}" name="category_id[]" value="{{$categorys->id}}">
-                                              <label for="{{$categorys->id}}"> {{$categorys->category_name}}</label><br>
-                                                @foreach($categorys->subCategory as $child)
-                                                  <input class="ml-4" type="checkbox" id="{{$child->id}}" name="category_id[]" value="{{$child->id}}">
-                                                  <label for="{{$child->id}}"> {{$child->category_name}}</label><br>
+                                    <div class="card-header">
+                                        <h3><i class="fas fa-certificate"></i> Select Category <span class="text-danger">*</span></h3>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="row">
+                                            @if($errors->has('category_id'))
+                                                <span class="text-danger"> {{$errors->first('category_id')}}</span>
+                                            @endif
+                                            <div class="col-lg-12" style="height: 200px; overflow-y: scroll;">
+                                                @foreach($category as $categorys)
+                                                    <input type="checkbox" id="{{$categorys->id}}" name="category_id[]" value="{{$categorys->id}}" {{ $product->categories && in_array($categorys->id, $product->categories->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                                    <label for="{{$categorys->id}}"> {{$categorys->category_name}}</label><br>
+                                                    @foreach($categorys->subCategory as $child)
+                                                        <input class="ml-4" type="checkbox" id="{{$child->id}}" name="category_id[]" value="{{$child->id}}" {{ $product->categories && in_array($child->id, $product->categories->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                                        <label for="{{$child->id}}"> {{$child->category_name}}</label><br>
+                                                    @endforeach 
                                                 @endforeach 
-                                            @endforeach 
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h3><i class="fab fa-bandcamp"></i> Select Brand <span class="text-danger">*</span></h3>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <select class="form-control" name="brand_id">
+                                                    @foreach($brand as $brands)
+                                                        <option value="{{$brands->id}}" {{ $brands->id == $product->brand_id ? 'selected' : '' }}>
+                                                            {{$brands->brand_name}}
+                                                        </option>
+                                                    @endforeach 
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
 
                               <div class="card mb-3">
-                                  <div class="card-header">
-                                      <h3><i class="fab fa-bandcamp"></i> Select Brand <span class="text-danger">*</span></h3>
-                                  </div>
-                                  <div class="card-body text-center">
-                                      <div class="row">
-                                          <div class="col-lg-12">
-                                           <select class="form-control" name="brand_id">
-                                             @foreach($brand as $brands)
-                                              <option value="{{$brands->id}}">{{$brands->brand_name}} </option>
-                                             @endforeach 
-                                           </select>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-
-                            <div class="card mb-3">
-                              <div class="card-header">
-                                  <h3><i class="fab fa-bandcamp"></i> Select Shop <span class="text-danger">*</span></h3>
-                              </div>
-                              <div class="card-body text-center">
-                                  <div class="row">
-
-
-                                    <div class="col-lg-12">
-                                       <select class="form-control" name="shop_id">
-                                         @foreach($shops as $shop)
-                                           <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
-                                          @endforeach 
-                                       </select>
-                                      </div>
-                                  </div>
-                               </div>
+                                <div class="card-header">
+                                    <h3><i class="fab fa-bandcamp"></i> Select Shop <span class="text-danger">*</span></h3>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <select class="form-control" name="shop_id">
+                                                @foreach($shop as $shops)
+                                                    <option value="{{$shops->id}}" {{ $shops->id == $product->shop_id ? 'selected' : '' }}>{{$shops->shop_name}}</option>
+                                                @endforeach 
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            
+                            
 
                               <div class="card mb-3">
                                 <div class="card-header">
@@ -256,6 +263,7 @@
                                 <div class="card-body text-center">
                                     <div class="row">
                                         <div class="col-lg-12">
+                                            <img src="{{ asset('vendor/product/' . $product->image) }}" alt="Current Image" style="width: 200px;">
                                           <input type="file" name="image" class="form-control" accept="image/*">
                                           @if($errors->has('image'))
                                           <span class="text-danger"> {{$errors->first('image')}}</span>
@@ -282,6 +290,7 @@
                                     </div>
                                 </div>                                
                              </div>
+                             
                            </div>
                          </div>
                       </div>

@@ -10,6 +10,10 @@ use App\Models\admin\Category;
 
 class ProductCategory extends Model
 {
+    protected $fillable = [
+        'category_id',
+    ];
+
     //this function show all product from category wise
     public function product(){
         return $this->belongsTo(Product::class,'product_id');
