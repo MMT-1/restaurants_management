@@ -16,7 +16,7 @@ class CreateSystemStatusesTable extends Migration
         Schema::create('system_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('status_name',100);
-            $table->tinyInteger('vendor_found')->default(0);
+            $table->tinyInteger('owner_found')->default(0);
             $table->tinyInteger('user_found')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->tinyInteger('status')->default(0);

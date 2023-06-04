@@ -15,7 +15,7 @@ class CreateCustomerQueriesTable extends Migration
     {
         Schema::create('customer_queries', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('vendor_id');
+            $table->unsignedBigInteger('owner_id');
             $table->text('query');
             $table->string('attachment',255);
             $table->unsignedBigInteger('created_by');

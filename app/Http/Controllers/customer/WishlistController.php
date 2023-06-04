@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\customer;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\customer\ProductWishlist;
 use App\Traits\WishlistTrait;
+use App\Http\Controllers\Controller;
+use App\Models\customer\FoodWishlist;
+use App\Models\customer\ProductWishlist;
 
 class WishlistController extends Controller
 {
@@ -45,33 +46,33 @@ class WishlistController extends Controller
      */
     public function store(Request $request)
     {
-        $id = $request->product_id;
+        $id = $request->food_id;
 
-        $count=ProductWishlist::where(['user_id'=>auth()->user()->id,'product_id'=>$id])->count();
+        $count=FoodWishlist::where(['user_id'=>auth()->user()->id,'food_id'=>$id])->count();
         if($count>0){
-            ProductWishlist::where(['user_id'=>auth()->user()->id,'product_id'=>$id])->delete();
+            FoodWishlist::where(['user_id'=>auth()->user()->id,'food_id'=>$id])->delete();
         }
-        $store = new ProductWishlist;
+        $store = new FoodWishlist;
         $store->user_id=auth()->user()->id;
-        $store->product_id=$id;
+        $store->food_id=$id;
         $store->status=1;
         $store->save();
-        return back()->with('success','Product has been added to wishlist');
+        return back()->with('success','food has been added to wishlist');
 
     }
 
     //add to wishlist
     public function addWishlist($id){
-        $count=ProductWishlist::where(['user_id'=>auth()->user()->id,'product_id'=>$id])->count();
+        $count=FoodWishlist::where(['user_id'=>auth()->user()->id,'food_id'=>$id])->count();
         if($count>0){
-            ProductWishlist::where(['user_id'=>auth()->user()->id,'product_id'=>$id])->delete();
+            FoodWishlist::where(['user_id'=>auth()->user()->id,'food_id'=>$id])->delete();
         }
-        $store = new ProductWishlist;
+        $store = new FoodWishlist;
         $store->user_id=auth()->user()->id;
-        $store->product_id=$id;
+        $store->food_id=$id;
         $store->status=1;
         $store->save();
-        return back()->with('success','Product has been added to wishlist');
+        return back()->with('success','food has been added to wishlist');
     }
 
     /**
@@ -116,7 +117,7 @@ class WishlistController extends Controller
      */
     public function destroy($id)
     {
-        $delete=ProductWishlist::findOrFail($id);
+        $delete=FoodWishlist::findOrFail($id);
         $delete->delete();
         return back()->with('success','Item has been delete from wishlist');
     }

@@ -33,7 +33,7 @@
          
          
          
-                                 @forelse ($shop as $shops)
+                                 @forelse ($restaurant as $restaurants)
                                  <div class=" " style="outline:none;">
                                             
                                              <div class="" 
@@ -43,7 +43,7 @@
                                                      <div class="css-1fh8qjj e1xxesyf0">
                                                          <div data-test="restaurant-card-image" class="css-1e38alf eytdi1r2 ">
                                                              <img  alt=""
-                                                                 src="{{asset('vendor/shop/'.$shops->logo)}}"
+                                                                 src="{{asset('owner/restaurant/'.$restaurants->logo)}}"
                                                                   class="eb34jsh0 css-1qrxtxt eb34jsh1 img-fluid" />
          
                                                          <p data-testid="tags-layout" class="css-zmb4ti eulusyj0">
@@ -51,7 +51,7 @@
                                                          </p>                                                </div>
                                                          <div class="css-4sye6w elkhwc30">
                                                              <h3 color="special.black" class="css-bue2rm eytdi1r1">
-                                                                 <a href="{{route('shop.single',array('id'=>$shops->id,'slug'=>$shops->shop_slug))}} ">{{$shops->shop_name}}</a>
+                                                                 <a href="{{route('restaurant.single',array('id'=>$restaurants->id,'slug'=>$restaurants->restaurant_slug))}} ">{{$restaurants->restaurant_name}}</a>
                                                              </h3>
                                                              <div data-test="restaurant-card-rating"
                                                                  class="css-1hw2w72 eytdi1r0">
@@ -98,7 +98,7 @@
          
                                      </div>
                                          @empty
-                                             <p>No Shop Found</p>
+                                             <p>No restaurant Found</p>
                                          @endforelse
          
          

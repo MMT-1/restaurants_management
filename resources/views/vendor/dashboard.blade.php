@@ -1,4 +1,4 @@
-@extends('vendor.layout.master')
+@extends('owner.layout.master')
 
 @section('title') Dashboard @endsection
 
@@ -137,7 +137,7 @@
                                     <div class="bg-dark p-10 text-white text-center">
                                         <i class="fa fa-cart-plus mb-1 font-16"></i>
                                         <h5 class="mb-0 mt-1">656</h5>
-                                        <small class="font-light">Total Shop</small>
+                                        <small class="font-light">Total restaurant</small>
                                     </div>
                                 </div>
                                 <div class="col-6 mt-3">
@@ -180,7 +180,7 @@
                 <div class="comment-widgets scrollable">
                     <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row mt-0">
-                        <div class="p-2"><img src="{{asset('vendor/assets/images/users/1.jpg')}}" alt="user" width="50"
+                        <div class="p-2"><img src="{{asset('owner/assets/images/users/1.jpg')}}" alt="user" width="50"
                                 class="rounded-circle"></div>
                         <div class="comment-text w-100">
                             <h6 class="font-medium">James Anderson</h6>
@@ -196,7 +196,7 @@
                     </div>
                     <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
-                        <div class="p-2"><img src="{{asset('vendor/assets/images/users/4.jpg')}}" alt="user" width="50"
+                        <div class="p-2"><img src="{{asset('owner/assets/images/users/4.jpg')}}" alt="user" width="50"
                                 class="rounded-circle"></div>
                         <div class="comment-text active w-100">
                             <h6 class="font-medium">Michael Jorden</h6>
@@ -212,7 +212,7 @@
                     </div>
                     <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
-                        <div class="p-2"><img src="{{asset('vendor/assets/images/users/5.jpg')}}" alt="user" width="50"
+                        <div class="p-2"><img src="{{asset('owner/assets/images/users/5.jpg')}}" alt="user" width="50"
                                 class="rounded-circle"></div>
                         <div class="comment-text w-100">
                             <h6 class="font-medium">Johnathan Doeting</h6>
@@ -245,19 +245,19 @@
                                 </div>
                                 <ul class="list-style-none assignedto">
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/1.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/1.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Steave"></li>
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/2.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/2.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Jessica"></li>
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/3.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/3.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Priyanka"></li>
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/4.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/4.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Selina"></li>
                                 </ul>
@@ -284,11 +284,11 @@
                                 </div>
                                 <ul class="list-style-none assignedto">
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/3.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/3.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Priyanka"></li>
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/4.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/4.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Selina"></li>
                                 </ul>
@@ -315,11 +315,11 @@
                                 </div>
                                 <ul class="list-style-none assignedto">
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/3.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/3.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Priyanka"></li>
                                     <li class="assignee"><img class="rounded-circle" width="40"
-                                            src="{{asset('vendor/assets/images/users/4.jpg')}}" alt="user"
+                                            src="{{asset('owner/assets/images/users/4.jpg')}}" alt="user"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="Selina"></li>
                                 </ul>
@@ -476,7 +476,7 @@
                         <ul class="chat-list">
                             <!--chat Row -->
                             <li class="chat-item">
-                                <div class="chat-img"><img src="{{asset('vendor/assets/images/users/1.jpg')}}" alt="user">
+                                <div class="chat-img"><img src="{{asset('owner/assets/images/users/1.jpg')}}" alt="user">
                                 </div>
                                 <div class="chat-content">
                                     <h6 class="font-medium">James Anderson</h6>
@@ -487,7 +487,7 @@
                             </li>
                             <!--chat Row -->
                             <li class="chat-item">
-                                <div class="chat-img"><img src="{{asset('vendor/assets/images/users/2.jpg')}}" alt="user">
+                                <div class="chat-img"><img src="{{asset('owner/assets/images/users/2.jpg')}}" alt="user">
                                 </div>
                                 <div class="chat-content">
                                     <h6 class="font-medium">Bianca Doe</h6>
@@ -512,7 +512,7 @@
                             </li>
                             <!--chat Row -->
                             <li class="chat-item">
-                                <div class="chat-img"><img src="{{asset('vendor/assets/images/users/3.jpg')}}" alt="user">
+                                <div class="chat-img"><img src="{{asset('owner/assets/images/users/3.jpg')}}" alt="user">
                                 </div>
                                 <div class="chat-content">
                                     <h6 class="font-medium">Angelina Rhodes</h6>
@@ -548,7 +548,7 @@
                 <div class="comment-widgets scrollable" style="max-height: 130px;">
                     <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row mt-0">
-                        <div class="p-2"><img src="{{asset('vendor/assets/images/users/1.jpg')}}" alt="user" width="50"
+                        <div class="p-2"><img src="{{asset('owner/assets/images/users/1.jpg')}}" alt="user" width="50"
                                 class="rounded-circle"></div>
                         <div class="comment-text w-100">
                             <h6 class="font-medium">James Anderson</h6>
@@ -564,7 +564,7 @@
                     </div>
                     <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
-                        <div class="p-2"><img src="{{asset('vendor/assets/images/users/4.jpg')}}" alt="user" width="50"
+                        <div class="p-2"><img src="{{asset('owner/assets/images/users/4.jpg')}}" alt="user" width="50"
                                 class="rounded-circle"></div>
                         <div class="comment-text active w-100">
                             <h6 class="font-medium">Michael Jorden</h6>
@@ -580,7 +580,7 @@
                     </div>
                     <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
-                        <div class="p-2"><img src="{{asset('vendor/assets/images/users/5.jpg')}}" alt="user" width="50"
+                        <div class="p-2"><img src="{{asset('owner/assets/images/users/5.jpg')}}" alt="user" width="50"
                                 class="rounded-circle"></div>
                         <div class="comment-text w-100">
                             <h6 class="font-medium">Johnathan Doeting</h6>
@@ -730,12 +730,12 @@
                                 pad out the comment. Usually, you just wish these sorts of comments would
                                 come to an end.multiple paragraphs and is full of waffle to pad out the
                                 comment..</p>
-                            <img src="{{asset('vendor/assets/images/background/img4.jpg')}}" class="img-fluid">
+                            <img src="{{asset('owner/assets/images/background/img4.jpg')}}" class="img-fluid">
                         </div>
                     </div>
                     <div class="tab-pane  p-20" id="profile" role="tabpanel">
                         <div class="p-20">
-                            <img src="{{asset('vendor/assets/images/background/img4.jpg')}}" class="img-fluid">
+                            <img src="{{asset('owner/assets/images/background/img4.jpg')}}" class="img-fluid">
                             <p class="mt-2">And is full of waffle to It has multiple paragraphs and is
                                 full of waffle to pad out the comment. Usually, you just wish these sorts of
                                 comments would come to an end.multiple paragraphs and is full of waffle to
@@ -748,7 +748,7 @@
                                 pad out the comment. Usually, you just wish these sorts of comments would
                                 come to an end.multiple paragraphs and is full of waffle to pad out the
                                 comment..</p>
-                            <img src="{{asset('vendor/assets/images/background/img4.jpg')}}" class="img-fluid">
+                            <img src="{{asset('owner/assets/images/background/img4.jpg')}}" class="img-fluid">
                         </div>
                     </div>
                 </div>

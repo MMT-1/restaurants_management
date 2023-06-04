@@ -33,7 +33,7 @@
                                     <div class="single-category">
                                         <img src="{{asset('admin/category/'.$item->image)}}" alt="Category">
                                         <div class="cat-btn">
-                                            <a href="{{route('category.product',array('id'=>$item->id,'slug'=>$item->slug))}}">{{$item->category_name}}</a>
+                                            <a href="{{route('category.food',array('id'=>$item->id,'slug'=>$item->slug))}}">{{$item->category_name}}</a>
                                         </div>
                                     </div>
                                 </div>

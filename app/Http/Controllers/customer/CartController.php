@@ -5,6 +5,7 @@ namespace App\Http\Controllers\customer;
 use App\Traits\CartTrait;
 use Illuminate\Http\Request;
 use App\Models\vendor\Product;
+use App\Models\customer\FoodCart;
 use App\Http\Controllers\Controller;
 use App\Models\customer\ProductCart;
 use App\Models\vendor\ProductAttribute;
@@ -66,13 +67,13 @@ class CartController extends Controller
             return back()->with('error', 'Quantity must be greater than 0');
         }
     
-        $product_id = $request->product_id;
+        $food_id = $request->food_id;
         $attribute_id = $request->attribute;
         $quantity = $request->quantity;
     
-        // check if the product already exists in the cart
-        $cartItem = ProductCart::where('user_id', auth()->user()->id)
-                                ->where('product_id', $product_id)
+        // check if the food already exists in the cart
+        $cartItem = FoodCart::where('user_id', auth()->user()->id)
+                                ->where('food_id', $food_id)
                                 ->first();
     
         if ($cartItem) {
@@ -81,24 +82,24 @@ class CartController extends Controller
             $cartItem->sub_total = $cartItem->price * $cartItem->quantity; // update the sub_total attribute
 
             $cartItem->save();
-            return back()->with('success', 'Product quantity has been updated in cart');
+            return back()->with('success', 'food quantity has been updated in cart');
         }
     
-        // check product has attribute or not
-        $product = Product::findOrFail($product_id);
+        // check food has attribute or not
+        $food = Food::findOrFail($food_id);
 
-        $price = $product->sale_price;
-        $image = $product->image;
+        $price = $food->sale_price;
+        $image = $food->image;
 
 
-        // create a new product cart model and set its attributes
-        $cartItem = new ProductCart;
+        // create a new food cart model and set its attributes
+        $cartItem = new FoodCart;
         $cartItem->user_id = auth()->user()->id;
-        $cartItem->product_id = $product_id;
+        $cartItem->food_id = $food_id;
         // $cartItem->attribute_id = $attribute_id;
         $cartItem->quantity = $quantity;
-        $cartItem->vendor_id = $product->vendor_id;
-        $cartItem->shop_id = $product->shop_id;
+        $cartItem->owner_id = $food->owner_id;
+        $cartItem->restaurant_id = $food->restaurant_id;
         $cartItem->price = $price;
         $cartItem->sub_total = $price * $quantity;
         $cartItem->image = $image;
@@ -106,7 +107,7 @@ class CartController extends Controller
         // save the model to the database
         $cartItem->save();
     
-        return back()->with('success', 'Product has been added to cart');
+        return back()->with('success', 'food has been added to cart');
     }
     
 
@@ -152,7 +153,7 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function delete($id){
-        $delete=ProductCart::findOrFail($id);
+        $delete=FoodCart::findOrFail($id);
         $delete->delete();
         return back()->with('error','Item has been removed');
     } 
@@ -162,7 +163,7 @@ class CartController extends Controller
 
     public function addCart(Request $request, $id)
     {
-        $cartItem = ProductCart::where(['user_id' => auth()->user()->id, 'product_id' => $id])->first();
+        $cartItem = FoodCart::where(['user_id' => auth()->user()->id, 'food_id' => $id])->first();
     
         if ($cartItem) {
             // increment the quantity and update the sub_total
@@ -170,24 +171,24 @@ class CartController extends Controller
             $cartItem->sub_total = $cartItem->quantity * $cartItem->price;
             $cartItem->save();
         } else {
-            // fetch the Product model based on the $id parameter
-            $product = Product::findOrFail($id);
+            // fetch the food model based on the $id parameter
+            $food = Food::findOrFail($id);
     
-            $store = new ProductCart;
+            $store = new FoodCart;
             $store->user_id = auth()->user()->id;
-            $store->product_id = $id;
+            $store->food_id = $id;
             $store->quantity = 1;
-            $store->vendor_id = $product->vendor_id;
-            $store->shop_id = $product->shop_id;
-            $store->price = $product->sale_price;
+            $store->owner_id = $food->owner_id;
+            $store->restaurant_id = $food->restaurant_id;
+            $store->price = $food->sale_price;
 
             $store->sub_total = $store->price * $store->quantity;
-            $store->image = $product->image;
+            $store->image = $food->image;
     
             $store->save();
         }
     
-        return back()->with('success', 'Product has been added to Cart');
+        return back()->with('success', 'food has been added to Cart');
     }
     
     

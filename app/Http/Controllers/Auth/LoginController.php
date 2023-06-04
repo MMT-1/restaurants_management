@@ -41,7 +41,7 @@ class LoginController extends Controller
     {
             $this->middleware('guest')->except('logout');
             $this->middleware('guest:admin')->except('logout');
-            $this->middleware('guest:vendor')->except('logout');
+            $this->middleware('guest:owner')->except('logout');
     }
 
      public function showAdminLoginForm()
@@ -64,23 +64,23 @@ class LoginController extends Controller
         ->with('message','These credentials do not match our records');
     }
 
-    public function showVendorLoginForm()
+    public function showOwnerLoginForm()
     {
-        return view('vendor.auth.login', ['url' => 'vendor']);
+        return view('owner.auth.login', ['url' => 'owner']);
     }
 
-    public function vendorLogin(Request $request)
+    public function ownerLogin(Request $request)
     {
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required'
         ]);
 
-        if (Auth::guard('vendor')->attempt(['email' => $request->email, 'password' => $request->password,'status'=>1], $request->get('remember'))) {
+        if (Auth::guard('owner')->attempt(['email' => $request->email, 'password' => $request->password,'status'=>1], $request->get('remember'))) {
 
-            return redirect()->intended('/vendor/dashboard');
+            return redirect()->intended('/owner/dashboard');
         }
-        return redirect()->route('vendor.login')
+        return redirect()->route('owner.login')
         ->with('message','These credentials do not match our records');
     }
 

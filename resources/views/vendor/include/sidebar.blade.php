@@ -10,20 +10,20 @@
                         href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{route('vendor.vendorProfile')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
+                        href="{{route('owner.ownerProfile')}}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                             class="hide-menu">Profile</span></a></li>
                          
                             
 
 
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route('shop.products') }}"><i class="mdi mdi-border-inside"></i><span
-                            class="hide-menu">Products List</span></a></li>
+                        href="{{ route('restaurant.foods') }}"><i class="mdi mdi-border-inside"></i><span
+                            class="hide-menu">foods List</span></a></li>
 
 
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ route('shop.products.create') }}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span
-                            class="hide-menu">Add New Product</span></a></li>
+                        href="{{ route('restaurant.foods.create') }}" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span
+                            class="hide-menu">Add New food</span></a></li>
 
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                         href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span

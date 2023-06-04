@@ -11,7 +11,7 @@
 
     <title>@yield('title')</title>
 
-    <!-- vendor css files -->
+    <!-- owner css files -->
     
     <!--==== bootstrap css ====-->
     
@@ -553,30 +553,30 @@ input[type="radio"]:checked::before {
                             <div class="image-area">
                                 <div class="modal-gallery">
                                     <div class="item">
-                                        <img id="zoom_01" src="{{asset('front/assets/images/shop/shop1.jpg')}}" alt="Product" data-zoom-image="{{asset('front/assets/images/shop/shop1.jpg')}}">
+                                        <img id="zoom_01" src="{{asset('front/assets/images/restaurant/shop1.jpg')}}" alt="food" data-zoom-image="{{asset('front/assets/images/shop/shop1.jpg')}}">
                                     </div>
                                     <div class="item">
-                                        <img id="zoom_02" src="{{asset('front/assets/images/shop/shop2.jpg')}}" alt="Product" data-zoom-image="{{asset('front/assets/images/shop/shop2.jpg')}}">
+                                        <img id="zoom_02" src="{{asset('front/assets/images/shop/shop2.jpg')}}" alt="food" data-zoom-image="{{asset('front/assets/images/restaurant/shop2.jpg')}}">
                                     </div>
                                     <div class="item">
-                                        <img id="zoom_03" src="{{asset('front/assets/images/shop/shop3.jpg')}}" alt="Product" data-zoom-image="{{asset('front/assets/images/shop/shop3.jpg')}}">
+                                        <img id="zoom_03" src="{{asset('front/assets/images/restaurant/shop3.jpg')}}" alt="food" data-zoom-image="{{asset('front/assets/images/restaurant/shop3.jpg')}}">
                                     </div>
                                     <div class="item">
-                                        <img id="zoom_04" src="{{asset('front/assets/images/shop/shop4.jpg')}}" alt="Product" data-zoom-image="{{asset('front/assets/images/shop/shop4.jpg')}}">
+                                        <img id="zoom_04" src="{{asset('front/assets/images/restaurant/shop4.jpg')}}" alt="food" data-zoom-image="{{asset('front/assets/images/restaurant/shop4.jpg')}}">
                                     </div>
                                 </div>
                                 <div class="modal-thumb">
                                     <div class="item">
-                                        <img src="{{asset('front/assets/images/shop/shop-sm1.jpg')}}" alt="Product">
+                                        <img src="{{asset('front/assets/images/restaurant/shop-sm1.jpg')}}" alt="food">
                                     </div>
                                     <div class="item">
-                                        <img src="{{asset('front/assets/images/shop/shop-sm2.jpg')}}" alt="Product">
+                                        <img src="{{asset('front/assets/images/restaurant/shop-sm2.jpg')}}" alt="food">
                                     </div>
                                     <div class="item">
-                                        <img src="{{asset('front/assets/images/shop/shop-sm3.jpg')}}" alt="Product">
+                                        <img src="{{asset('front/assets/images/restaurant/shop-sm3.jpg')}}" alt="food">
                                     </div>
                                     <div class="item">
-                                        <img src="{{asset('front/assets/images/shop/shop-sm4.jpg')}}" alt="Product">
+                                        <img src="{{asset('front/assets/images/restaurant/shop-sm4.jpg')}}" alt="food">
                                     </div>
                                 </div>
                             </div>
@@ -651,7 +651,7 @@ input[type="radio"]:checked::before {
     </div>
     <!-- end modal area -->
     
-    <!-- vendor js files -->
+    <!-- owner js files -->
 
     <!--==== jquery min js ====-->
     <script src="{{asset('front/assets/plugins/jquery-3.5.1.min.js')}}"></script>

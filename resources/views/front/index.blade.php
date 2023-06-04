@@ -60,25 +60,25 @@
                                 <img src="{{asset('front/assets/images/home1/category/image1.jpg')}}" alt="Category Image"/>
                                 <div class="content">
                                     <h5>Latest Shop</h5>
-                                    <a href="{{route('shop.all')}}">View All</a>
+                                    <a href="{{route('restaurant.all')}}">View All</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-7">
                             <div class="row">
-                                @forelse ($shop as $shops)
+                                @forelse ($restaurant as $restaurants)
                                     <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                         <div class="single-category item-animation">
-                                            <img src="{{asset('vendor/shop/'.$shops->logo)}}" alt="Category Image"/>
+                                            <img src="{{asset('owner/restaurant/'.$restaurants->logo)}}" alt="Category Image"/>
                                             <div class="content">
-                                                <h5>{{$shops->shop_name}}</h5>
-                                                <p>4 products</p>
-                                                <a href="{{route('shop.single',array('id'=>$shops->id,'slug'=>$shops->shop_slug))}}">view more</a>
+                                                <h5>{{$restaurants->restaurant_name}}</h5>
+                                                <p>4 foods</p>
+                                                <a href="{{route('restaurant.single',array('id'=>$restaurants->id,'slug'=>$restaurants->restaurant_slug))}}">view more</a>
                                             </div>
                                         </div>
                                     </div>
                                 @empty
-                                    <p>No Shop Found</p>
+                                    <p>No restaurant Found</p>
                                 @endforelse
                             </div>
                         </div>
@@ -93,7 +93,7 @@
 
 
       
-     <!-- end shop area -->
+     <!-- end restaurant area -->
 
      <!-- start category area -->
         <!-- <section class="home1 category">
@@ -101,7 +101,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h3>product brands</h3>
+                        <h3>food brands</h3>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -123,8 +123,8 @@
                                         <img src="{{asset('admin/brand/'.$brands->image)}}" alt="Category Image"/>
                                         <div class="content">
                                             <h5>{{$brands->brand_name}}</h5>
-                                            <p>4 products</p>
-                                            <a href="{{route('brand.product',array('id'=>$brands->id,'slug'=>$brands->slug))}}">view more</a>
+                                            <p>4 foods</p>
+                                            <a href="{{route('brand.food',array('id'=>$brands->id,'slug'=>$brands->slug))}}">view more</a>
                                         </div>
                                     </div>
                                 </div>
@@ -150,17 +150,17 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h3>featured product</h3>
+                        <h3>featured food</h3>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="row featured-slider">
                         @forelse ($featured as $featureds)
                         <div class="col-lg-3">
-                            <div class="single-product">
+                            <div class="single-food">
                                 <div class="image-area">
-                                    <img src="{{asset('vendor/product/'.$featureds->image)}}" class="img-main" alt="Product Image"/>
-                                    <img src="{{asset('vendor/product/'.$featureds->image)}}" class="img-hover" alt="Product Image"/>
+                                    <img src="{{asset('owner/food/'.$featureds->image)}}" class="img-main" alt="food Image"/>
+                                    <img src="{{asset('owner/food/'.$featureds->image)}}" class="img-hover" alt="food Image"/>
                                     <span class="sale-status">sale</span>
                                     <div class="action">
                                         <ul class="d-flex">
@@ -186,8 +186,8 @@
                                     </div>
                                 </div>
                                 <div class="bottom-area">
-                                    <a href="{{route('product.single',array('id'=>$featureds->id,'slug'=>$featureds->product_slug))}}">
-                                        <h5>{{$featureds->product_name}}</h5>
+                                    <a href="{{route('food.single',array('id'=>$featureds->id,'slug'=>$featureds->food_slug))}}">
+                                        <h5>{{$featureds->food_name}}</h5>
                                     </a>
                                     <p><span>$110</span> - $78</p>
                                     <ul class="rating d-flex">
@@ -201,7 +201,7 @@
                             </div>
                         </div>
                         @empty
-                        <p>No Product Found</p>
+                        <p>No food Found</p>
                        @endforelse
                     </div>
                 </div>

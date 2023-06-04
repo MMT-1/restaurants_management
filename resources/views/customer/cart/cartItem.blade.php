@@ -30,14 +30,14 @@
                                     <th scope="row" class="pro-img">
                                         <a href="shop-4-column-sidebar.html">
                                             @if(isset($carts->attributeType))
-                                              <img width="130px" height="50px" src="{{asset('vendor/product/attribute/'.$carts->image)}}" alt="Product Image"/>
+                                              <img width="130px" height="50px" src="{{asset('owner/food/attribute/'.$carts->image)}}" alt="food Image"/>
                                               @else 
-                                               <img width="130px" height="50px" src="{{asset('vendor/product/'.$carts->image)}}" alt="Product Image"/>
+                                               <img width="130px" height="50px" src="{{asset('owner/food/'.$carts->image)}}" alt="food Image"/>
                                             @endif
                                         </a>
                                     </th>
                                     <td class="pro-name">
-                                        <a href="shop-4-column-sidebar.html">{{$carts->product->product_name}}</a>
+                                        <a href="shop-4-column-sidebar.html">{{$carts->food->food_name}}</a>
                                         @if(isset($carts->attributeType))
                                         <p>{{$carts->attributeType->attribute_type}}: {{$carts->attributeValue->attribute}}</p>
                                         @endif 

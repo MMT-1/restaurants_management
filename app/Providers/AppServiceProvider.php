@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\admin\Category;
-use App\Models\customer\ProductCart;
+use App\Models\customer\FoodCart;
 use App\Traits\CommonTrait;
 use App\Traits\CartTrait;
 use App\Traits\WishlistTrait;

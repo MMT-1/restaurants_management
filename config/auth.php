@@ -46,9 +46,9 @@ return [
             'provider' => 'admins',
         ],
 
-        'vendor' => [
+        'owner' => [
             'driver' => 'session',
-            'provider' => 'vendors',
+            'provider' => 'owners',
         ],
 
         'api' => [
@@ -84,9 +84,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\admin\Admin::class,
         ],
-        'vendors' => [
+        'owners' => [
             'driver' => 'eloquent',
-            'model' => App\Models\vendor\Vendor::class,
+            'model' => App\Models\owner\Owner::class,
         ],
 
         // 'users' => [

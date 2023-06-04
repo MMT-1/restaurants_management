@@ -27,42 +27,42 @@
                 </li>
 
                 <li class="submenu">
-                    <a id="tables" class="@if($url==='vendors.index' || $url==='vendors.create' || $url==='vendors.edit') active @endif" href="#">
+                    <a id="tables" class="@if($url==='owners.index' || $url==='owners.create' || $url==='owners.edit') active @endif" href="#">
                         <i class="fas fa-user"></i>
-                        <span>Vendor</span>
+                        <span>Owner</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
-                        <li class="@if($url==='vendors.index') active @endif">
-                            <a href="{{route('vendors.index')}}">List</a>
+                        <li class="@if($url==='owners.index') active @endif">
+                            <a href="{{route('owners.index')}}">List</a>
                         </li>
-                        <li class="@if($url==='vendors.create') active @endif">
-                            <a href="{{route('vendors.create')}}">Add New</a>
+                        <li class="@if($url==='owners.create') active @endif">
+                            <a href="{{route('owners.create')}}">Add New</a>
                         </li>
                     </ul>
                 </li>
                 
                 <li class="submenu">
-                    <a id="tables" class="@if($url==='products.index' || $url==='products.create' || $url==='products.edit') active @endif" href="#">
+                    <a id="tables" class="@if($url==='foods.index' || $url==='foods.create' || $url==='foods.edit') active @endif" href="#">
                         <i class="fab fa-product-hunt"></i>
-                        <span> Product </span>
+                        <span> Food </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
-                        <li class="@if($url==='products.index') active @endif">
-                            <a href="{{route('products.index')}}">List</a>
+                        <li class="@if($url==='foods.index') active @endif">
+                            <a href="{{route('foods.index')}}">List</a>
                         </li>
-                        <li class="@if($url==='products.create') active @endif">
-                            <a href="{{route('products.create')}}">Add New</a>
+                        <li class="@if($url==='foods.create') active @endif">
+                            <a href="{{route('foods.create')}}">Add New</a>
                         </li>
                         <li>
                             <a href="tables-datatable.html">Stock</a>
                         </li>
                         <li>
-                            <a href="tables-datatable.html">Product Review</a>
+                            <a href="tables-datatable.html">Food Review</a>
                         </li>
                         <li>
-                            <a href="tables-datatable.html">Product Wishlist</a>
+                            <a href="tables-datatable.html">Food Wishlist</a>
                         </li>
                     </ul>
                 </li>

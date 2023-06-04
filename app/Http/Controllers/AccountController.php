@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\admin\VendorValidate;
+use App\Http\Requests\admin\OwnerValidate;
 use App\Http\Requests\customer\CustomerValidate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\vendor\Vendor;
-use App\Models\vendor\Shop;
+use App\Models\owner\Owner;
+use App\Models\owner\Restaurant;
 use App\Models\User;
 use Auth;
 
@@ -51,16 +51,16 @@ class AccountController extends Controller
             return redirect()->intended('/customer/dashboard');
     }
 
-    //vendor registration
-    public function vendorRegister(){
-      return view('vendor.auth.register');
+    //owner registration
+    public function ownerRegister(){
+      return view('owner.auth.register');
     }
 
-    //vendor registration process
-    public function vendorRegisterProcess(VendorValidate $request){
+    //owner registration process
+    public function ownerRegisterProcess(OwnerValidate $request){
       
-            // vendor profile information
-            $store = new Vendor;  
+            // Owner profile information
+            $store = new Owner;  
 
             $store->first_name=$request->first_name;
 
@@ -80,22 +80,22 @@ class AccountController extends Controller
         
             $store->save();
 
-            //vendor shop information 
-            $shop = new Shop;
+            //Owner Restaurant information 
+            $restaurant = new Restaurant;
 
-            $shop->shop_name=$request->shop_name;
+            $restaurant->restaurant_name=$request->restaurant_name;
 
-            $shop->shop_slug=Str::slug($request->shop_name);
+            $restaurant->restaurant_slug=Str::slug($request->restaurant_name);
 
-            $shop->vendor_id=$store->id;
+            $restaurant->owner_id=$store->id;
 
-            $shop->created_by=0;
+            $restaurant->created_by=0;
 
-            $shop->status=0;
+            $restaurant->status=0;
 
-            $shop->save();
+            $restaurant->save();
 
-            return redirect()->route('vendor.registration')
+            return redirect()->route('owner.registration')
             ->with('success','Registration has completed successfully.Please wait for admin approval');
     }
 

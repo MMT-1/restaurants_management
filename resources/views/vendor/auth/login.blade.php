@@ -11,7 +11,7 @@
 
     <title>@yield('title')</title>
 
-    <!-- vendor css files -->
+    <!-- owner css files -->
     
     <!--==== bootstrap css ====-->
     
@@ -47,7 +47,7 @@
 
 <!-- start account area -->
 
-@section('title') Vendor Login @endsection
+@section('title') Owner Login @endsection
 
 <div class="d-lg-flex half">
   <div class="bg order-1 order-md-2" style="background-image: url('{{asset('front/assets/images/1682747491.jpg')}}');"></div>
@@ -63,7 +63,7 @@
             {{ Session::get('message') }}
            @endif
         </span>
-        <form action="{{route('vendor.login.process')}}" method="post">
+        <form action="{{route('owner.login.process')}}" method="post">
           @csrf 
           <div class="form-group first">
               <label for="username">Email</label>
@@ -101,7 +101,7 @@
               <span class="ms-auto"><a href="{{route('customer.registration')}}">Sign up now</a></span> 
             </div> -->
 <div class="text-center mt-3">
-<span >Don't Have an Account? <a href="{{route('vendor.registration')}}">Sign up now</a> </span>
+<span >Don't Have an Account? <a href="{{route('owner.registration')}}">Sign up now</a> </span>
 
 </div>
 

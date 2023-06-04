@@ -183,7 +183,7 @@
                         <a href="#">
                             <div class="message-item">
                                 <p class="message-item-user">John Doe</p>
-                                <p class="message-item-msg">Hello. I want to buy your product</p>
+                                <p class="message-item-msg">Hello. I want to buy your Food</p>
                                 <p class="message-item-date">11:50 PM</p>
                             </div>
                         </a>

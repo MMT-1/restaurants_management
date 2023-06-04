@@ -16,7 +16,7 @@ class CreateSystemLogsTable extends Migration
         Schema::create('system_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('vendor_id');
+            $table->unsignedBigInteger('owner_id');
             $table->string('user_ip',100);
             $table->tinyInteger('status');
             $table->timestamps();

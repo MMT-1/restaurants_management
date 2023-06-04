@@ -178,20 +178,20 @@
         <div class="col-md-8">
             <ul class="cardul">
         
-                @if ($nearbyShops->count() > 0)
-                @foreach ($nearbyShops as $shop)
+                @if ($nearbyRestaurants->count() > 0)
+                @foreach ($nearbyRestaurants as $restaurant)
                 <li class="card">
                     <a 
                         href="#" 
                         class="featured-image" 
-                        style='background-image:url("{{ asset('vendor/shop/' . $shop->logo) }}")'>
+                        style='background-image:url("{{ asset('owner/restaurant/' . $restaurant->logo) }}")'>
                     </a>
                     <article class="card-body">
                         <header>
                             <a href="utilidata-national-governors-association-meeting">
                                 <span class="pre-heading">Blog</span>
                                 <div class="title">
-                                    <h3>{{ $shop->shop_name }}</h3>
+                                    <h3>{{ $restaurant->restaurant_name }}</h3>
                                 </div>
                                 <p class="meta">
                                     <span class="author">Utilidata</span>
@@ -203,7 +203,7 @@
                 </li>
                        @endforeach
                     @else
-                        <li>No nearby shops found</li>
+                        <li>No nearby restaurants found</li>
                     @endif
                 </ul>
         </div>

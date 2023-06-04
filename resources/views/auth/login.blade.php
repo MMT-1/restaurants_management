@@ -11,7 +11,7 @@
 
     <title>@yield('title')</title>
 
-    <!-- vendor css files -->
+    <!-- owner css files -->
     
     <!--==== bootstrap css ====-->
     

@@ -22,8 +22,8 @@ class RedirectIfAuthenticated
         if ($guard == "admin" && Auth::guard($guard)->check()) {
             return redirect('/admin/dashboard');
         }
-        if ($guard == "vendor" && Auth::guard($guard)->check()) {
-            return redirect('/vendor/dashboard');
+        if ($guard == "owner" && Auth::guard($guard)->check()) {
+            return redirect('/owner/dashboard');
         }
         if (Auth::guard($guard)->check()) {
             return redirect('/customer/dashboard');

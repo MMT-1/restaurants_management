@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\front;
 
 use App\Models\admin\Blog;
-use App\Models\vendor\Shop;
+use App\Models\owner\Food;
 use App\Traits\CommonTrait;
 use App\Models\admin\Slider;
 use Illuminate\Http\Request;
-use App\Models\vendor\Product;
-use App\Models\vendor\Reservation;
-use Illuminate\Support\Facades\DB;
-use App\Models\vendor\ProductBrand;
+use App\Models\owner\Restaurant;
+use App\Models\owner\Reservation;
 
+use Illuminate\Support\Facades\DB;
+use App\Models\owner\FoodCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Models\vendor\ProductCategory;
+
 
 class FrontController extends Controller
 {
@@ -23,12 +22,12 @@ class FrontController extends Controller
 
     //home page method
     public function index(){
-        $shop=$this->activeShop();
+        $restaurant=$this->activeRestaurant();
         $brand=$this->activeBrand();
         $slider=Slider::where('status',1)->orderBy('id','DESC')->get();
-        $featured=Product::where(['status'=>1,'is_featured'=>1])->orderBy('id','DESC')->get();
+        $featured=Food::where(['status'=>1,'is_featured'=>1])->orderBy('id','DESC')->get();
         $blog=Blog::where('status',1)->orderBy('id','DESC')->limit(3)->get();
-        return view('front.index',compact('shop','brand','slider','featured','blog'));
+        return view('front.index',compact('restaurant','brand','slider','featured','blog'));
     } 
 
     //contact method view
@@ -36,40 +35,40 @@ class FrontController extends Controller
       return view('front.page.contact');
     } 
 
-    //shop single method
-    public function shopSingle($id){
-     $shop=Shop::findOrFail($id);
-     return view('front.shop.shopDetails',compact('shop'));
+    //Restaurant single method
+    public function restaurantSingle($id){
+     $restaurant=Restaurant::findOrFail($id);
+     return view('front.restaurant.restaurantDetails',compact('restaurant'));
     }
 
-    //product single method
-    public function productSingle($id){
-        $product=Product::findOrFail($id);
-        $attributeType=$product->productAttributeType($id);
-        return view('front.product.productDetails',compact('product','attributeType'));
+    //food single method
+    public function foodSingle($id){
+        $food=Food::findOrFail($id);
+        $attributeType=$food->foodAttributeType($id);
+        return view('front.food.foodtDetails',compact('food','attributeType'));
     }
 
-    //product search
+    //food search
     public function search(Request $request){
       if($request->cat_id==''){
-        $products=Product::where('status',1)
-        ->where('product_name', 'like', '%'.$request->search.'%')
-        ->select('products.id','products.product_name','products.image','products.product_slug')
+        $foods=Food::where('status',1)
+        ->where('food_name', 'like', '%'.$request->search.'%')
+        ->select('foods.id','foods.food_name','foods.image','foods.food_slug')
         ->get();
       }else{
-        $products=ProductCategory::
+        $foods=FoodCategory::
          where('category_id',$request->cat_id)
-        ->leftjoin('products','products.id','=','product_categories.product_id')
-        ->select('products.id','products.product_name','products.image','products.product_slug')
+        ->leftjoin('foods','foods.id','=','food_categories.food_id')
+        ->select('foods.id','foods.food_name','foods.image','foods.food_slug')
         ->get();
       }
-      return view('front.product.search',compact('products'));
+      return view('front.food.search',compact('foods'));
     }
 
-    //category product method
-    public function categoryProduct($id){
-      $category=ProductCategory::where(['category_id'=>$id,'status'=>1])->get();
-      return view('front.product.categoryProduct',compact('category'));
+    //category food method
+    public function categoryFood($id){
+      $category=FoodCategory::where(['category_id'=>$id,'status'=>1])->get();
+      return view('front.food.categoryFood',compact('category'));
     }
 
     //all active category
@@ -78,22 +77,22 @@ class FrontController extends Controller
       return view('front.category.allCategory',compact('category'));
     }
 
-    //all active shop
-    public function allShop(){
-      $allShop=$this->allActiveShop();
-      return view('front.shop.allShop',compact('allShop'));
+    //all active Restaurant
+    public function allRestaurant(){
+      $allRestaurant=$this->allActiveRestaurant();
+      return view('front.restaurant.allRestaurant',compact('allSRestaurant'));
     }
 
-    //all active shop
+    //all active Restaurant
      public function allBrand(){
         $allbrand=$this->allActiveBrand();
         return view('front.brand.allBrand',compact('allbrand'));
      }
 
-    //brand product method
-    public function brandProduct($id){
-      $brand=Product::where(['brand_id'=>$id,'status'=>1])->get();
-      return view('front.product.brandProduct',compact('brand'));
+    //brand food method
+    public function brandFood($id){
+      $brand=Food::where(['brand_id'=>$id,'status'=>1])->get();
+      return view('front.food.brandFood',compact('brand'));
     }
     public function reservation(Request $request)
 {
@@ -107,7 +106,7 @@ class FrontController extends Controller
     $reservation->time = $request->time;
     $reservation->guests = $request->guests;
 
-    $reservation->shop_id = $request->shop_id; 
+    $reservation->restaurant_id = $request->restaurant_id; 
     $reservation->email = $request->email; 
     $reservation->first_name = $request->first_name; 
     $reservation->last_name = $request->last_name; 
@@ -127,7 +126,7 @@ class FrontController extends Controller
 
 
 
-public function getNearbyShops(Request $request)
+public function getNearbyRestaurants(Request $request)
 {
     $location = $request->input('location');
 
@@ -139,13 +138,13 @@ public function getNearbyShops(Request $request)
         $latitude = $geocodeResponse->results[0]->geometry->location->lat;
         $longitude = $geocodeResponse->results[0]->geometry->location->lng;
 
-        // Retrieve nearby shops based on the latitude and longitude
-        $nearbyShops = Shop::select('shops.*', DB::raw('
+        // Retrieve nearby Restaurants based on the latitude and longitude
+        $nearbyRestaurants = Restaurant::select('restaurants.*', DB::raw('
             ( 6371 * acos( cos( radians(' . $latitude . ') ) *
-            cos( radians( shops.latitude ) ) *
-            cos( radians( shops.longitude ) - radians(' . $longitude . ') ) +
+            cos( radians( restaurants.latitude ) ) *
+            cos( radians( restaurants.longitude ) - radians(' . $longitude . ') ) +
             sin( radians(' . $latitude . ') ) *
-            sin( radians( shops.latitude ) ) ) ) AS distance
+            sin( radians( restaurants.latitude ) ) ) ) AS distance
         '))
         ->having('distance', '<', 100) // 10 represents the distance in kilometers
         ->orderBy('distance', 'asc')
@@ -153,18 +152,18 @@ public function getNearbyShops(Request $request)
 
 
 
-        $restaurantLocations = $nearbyShops->map(function ($shop) {
+        $restaurantLocations = $nearbyRestaurants->map(function ($restaurant) {
             return [
-                'name' => $shop->name,
-                'lat' => $shop->latitude,
-                'lng' => $shop->longitude,
+                'name' => $restaurant->name,
+                'lat' => $restaurant->latitude,
+                'lng' => $restaurant->longitude,
             ];
         });
 
 
 
 
-      return view('front.nearby', compact('nearbyShops','restaurantLocations'));
+      return view('front.nearby', compact('nearbyRestaurants','restaurantLocations'));
     }
 
     // Handle error case when geocoding fails

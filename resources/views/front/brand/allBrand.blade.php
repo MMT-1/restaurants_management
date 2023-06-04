@@ -43,7 +43,7 @@
                                             <a href="shop-detail.html">
                                                 <img src="{{asset('admin/brand/'.$brands->image)}}" class="img-active" alt="Brand Logo"/>
                                             </a>
-                                            <a href="{{route('brand.product',array('id'=>$brands->id,'slug'=>$brands->slug))}}">
+                                            <a href="{{route('brand.food',array('id'=>$brands->id,'slug'=>$brands->slug))}}">
                                                 <img src="{{asset('admin/brand/'.$brands->image)}}" class="img-hover" alt="Brand Logo"/>
                                             </a>
                                             <span class="sale-status">{{$brands->brand_name}}</span>

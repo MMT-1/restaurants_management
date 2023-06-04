@@ -40,7 +40,7 @@
                                     <li><a href="wishlist.html">wishlist</a></li>
                                     <li><a href="login.html">login</a></li>
                                     <li><a href="contact.html">addresses</a></li>
-                                    <li><a href="shop-3-column-sidebar.html">new products</a></li>
+                                    <li><a href="shop-3-column-sidebar.html">new Foods</a></li>
                                     <li><a href="faq.html">FAQ</a></li>
                                 </ul>
                             </div>

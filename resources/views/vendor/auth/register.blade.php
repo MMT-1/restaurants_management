@@ -11,7 +11,7 @@
 
     <title>@yield('title')</title>
 
-    <!-- vendor css files -->
+    <!-- owner css files -->
     
     <!--==== bootstrap css ====-->
     
@@ -60,7 +60,7 @@
           <h3>Sign Up to <strong>Website</strong></h3>
           <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
          
-        <form action="{{route('vendor.registration.process')}}" method="post">
+        <form action="{{route('owner.registration.process')}}" method="post">
           @csrf 
           <div class="form-group first">
               <label for="username">First Name</label>
@@ -104,10 +104,10 @@
 
 
             <div class="form-group last mb-3 mt-3">
-                <label for="shop_name">Shop Name</label>
-                <input  class="form-control"    type="text" name="shop_name"  value="{{old('shop_name')}}" placeholder="Shop Name *" id="shop_name">
-                @if($errors->has('shop_name'))
-                         <span class="text-danger"> {{$errors->first('shop_name')}}</span>
+                <label for="restaurant_name">restaurant Name</label>
+                <input  class="form-control"    type="text" name="restaurant_name"  value="{{old('restaurant_name')}}" placeholder="restaurant Name *" id="restaurant_name">
+                @if($errors->has('restaurant_name'))
+                         <span class="text-danger"> {{$errors->first('restaurant_name')}}</span>
                          @endif
               </div>
 
@@ -128,7 +128,7 @@
               <span class="ms-auto"><a href="{{route('customer.registration')}}">Sign up now</a></span> 
             </div> -->
 <div class="text-center mt-3">
-<span >Have an Account? <a href="{{route('vendor.login')}}">Login</a> </span>
+<span >Have an Account? <a href="{{route('owner.login')}}">Login</a> </span>
 
 </div>
 

@@ -74,12 +74,12 @@
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- PRODUCTS YEARLY SALES -->
+                <!-- foodS YEARLY SALES -->
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Products Yearly Sales</h3>
+                            <h3 class="box-title">Foods Yearly Sales</h3>
                             <div class="d-md-flex">
                                 <ul class="list-inline d-flex ms-auto">
                                     <li class="ps-3">

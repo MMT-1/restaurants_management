@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,15 +13,15 @@
     <title>@yield('title')</title>
 
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('vendor/assets/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('owner/assets/images/favicon.png')}}">
     <!-- Custom CSS -->
-    <link href="{{asset('vendor/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
+    <link href="{{asset('owner/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link href="{{asset('vendor/assets/dist/css/style.min.css')}}" rel="stylesheet">
+    <link href="{{asset('owner/assets/dist/css/style.min.css')}}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-    @include('vendor.include.header')
+    @include('owner.include.header')
 
 </head>
 <body>
@@ -43,14 +42,14 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-         @include('vendor.include.top_bar')
+         @include('owner.include.top_bar')
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-         @include('vendor.include.sidebar')
+         @include('owner.include.sidebar')
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -67,7 +66,7 @@
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
             {{-- footer start --}}
-             @include('vendor.include.footer')
+             @include('owner.include.footer')
             {{-- footer end --}}
         </div>
         <!-- ============================================================== -->
@@ -80,28 +79,28 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="{{asset('vendor/assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{asset('vendor/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('vendor/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
-    <script src="{{asset('vendor/assets/extra-libs/sparkline/sparkline.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{asset('owner/assets/extra-libs/sparkline/sparkline.js')}}"></script>
     <!--Wave Effects -->
-    <script src="{{asset('vendor/assets/dist/js/waves.js')}}"></script>
+    <script src="{{asset('owner/assets/dist/js/waves.js')}}"></script>
     <!--Menu sidebar -->
-    <script src="{{asset('vendor/assets/dist/js/sidebarmenu.js')}}"></script>
+    <script src="{{asset('owner/assets/dist/js/sidebarmenu.js')}}"></script>
     <!--Custom JavaScript -->
-    <script src="{{asset('vendor/assets/dist/js/custom.min.js')}}"></script>
+    <script src="{{asset('owner/assets/dist/js/custom.min.js')}}"></script>
     <!--This page JavaScript -->
     <!-- <script src="../../dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
-    <script src="{{asset('vendor/assets/libs/flot/excanvas.js')}}"></script>
-    <script src="{{asset('vendor/assets/libs/flot/jquery.flot.j')}}s"></script>
-    <script src="{{asset('vendor/assets/libs/flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{asset('vendor/assets/libs/flot/jquery.flot.time.js')}}"></script>
-    <script src="{{asset('vendor/assets/libs/flot/jquery.flot.stack.js')}}"></script>
-    <script src="{{asset('vendor/assets/libs/flot/jquery.flot.crosshair.js')}}"></script>
-    <script src="{{asset('vendor/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
-    <script src="{{asset('vendor/assets/dist/js/pages/chart/chart-page-init.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/flot/excanvas.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/flot/jquery.flot.j')}}s"></script>
+    <script src="{{asset('owner/assets/libs/flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/flot/jquery.flot.time.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/flot/jquery.flot.stack.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/flot/jquery.flot.crosshair.js')}}"></script>
+    <script src="{{asset('owner/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
+    <script src="{{asset('owner/assets/dist/js/pages/chart/chart-page-init.js')}}"></script>
 
     <script src="{{asset('admin/assets/plugins/datatables/datatables.min.js')}}"></script>
     <script src="{{asset('admin/assets/data/data_datatables.js')}}"></script>

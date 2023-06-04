@@ -17,8 +17,8 @@ class CreateOrderItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('vendor_id');
+            $table->unsignedBigInteger('food_id');
+            $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('attribute_id');
             $table->bigInteger('quantity');
             $table->unsignedBigInteger('status_id');

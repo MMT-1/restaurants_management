@@ -1,12 +1,12 @@
 <?php 
 
 namespace App\Traits;
-use App\Models\admin\Category;
-use App\Models\admin\Country;
 use App\Models\admin\Brand;
+use App\Models\owner\Owner;
+use App\Models\admin\Country;
+use App\Models\admin\Category;
 use App\Models\admin\Attribute;
-use App\Models\vendor\Shop;
-use App\Models\vendor\Vendor;
+use App\Models\owner\Restaurant;
 
 trait CommonTrait {
 
@@ -58,21 +58,21 @@ trait CommonTrait {
           return $data;
      }
 
-     //all limit shop list
-    public function activeShop() {
-         $data = Shop::where('status',1)->orderBy('id','DESC')->limit(10)->get();
+     //all limit restaurant list
+    public function activeRestaurant() {
+         $data = Restaurant::where('status',1)->orderBy('id','DESC')->limit(10)->get();
          return $data;
     }
 
-     //all active shop list
-      public function allActiveShop() {
-          $data = Shop::where('status',1)->orderBy('id','DESC')->get();
+     //all active Restaurant list
+      public function allActiveRestaurant() {
+          $data = Restaurant::where('status',1)->orderBy('id','DESC')->get();
           return $data;
      }
 
-     //all active shop list
-     public function activeVendor() {
-          $data = Vendor::where('status',1)->orderBy('id','DESC')->get();
+     //all active Restaurant list
+     public function activeOwner() {
+          $data = Owner::where('status',1)->orderBy('id','DESC')->get();
           return $data;
      }
 

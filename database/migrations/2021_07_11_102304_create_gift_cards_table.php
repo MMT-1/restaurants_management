@@ -15,7 +15,7 @@ class CreateGiftCardsTable extends Migration
     {
         Schema::create('gift_cards', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('vendor_id');
+            $table->unsignedBigInteger('owner_id');
             $table->string('card_name',100);
             $table->decimal('amount',18,2);
             $table->tinyInteger('status')->default(1);

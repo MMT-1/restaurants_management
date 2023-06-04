@@ -16,7 +16,7 @@ class CreateLoginBonusesTable extends Migration
         Schema::create('login_bonuses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('vendor_id');
+            $table->unsignedBigInteger('owner_id');
             $table->decimal('amount',18,2);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

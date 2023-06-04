@@ -17,7 +17,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">image</th>
-                                    <th scope="col">product name</th>
+                                    <th scope="col">Food name</th>
                                     <th scope="col">price</th>
                                     <th scope="col">add to Cart</th>
                                     <th scope="col">delete</th>
@@ -28,15 +28,15 @@
                               <tr>
                                     <th scope="row" class="pro-img">
                                         <a href="shop-4-column-sidebar.html">
-                                          <img width="130px" height="50px" src="{{asset('vendor/product/'.$item->product->image)}}">
+                                          <img width="130px" height="50px" src="{{asset('owner/food/'.$item->food->image)}}">
                                         </a>
                                     </th>
                                     <td class="pro-name">
-                                        <a href="shop-4-column-sidebar.html">{{$item->product->product_name}}</a>
+                                        <a href="shop-4-column-sidebar.html">{{$item->food->food_name}}</a>
                                     </td>
-                                    <td class="pro-price"><p>{{number_format($item->product->sale_price)}}</p></td>
+                                    <td class="pro-price"><p>{{number_format($item->food->sale_price)}}</p></td>
                                   
-                                    <td class="pro-total"><a href="{{route('add.cart',$item->product->id)}}"><p><i class="flaticon-shopping-cart" style="font-size:20px;color:#000;cursor:pointer"></i></p></a></td>
+                                    <td class="pro-total"><a href="{{route('add.cart',$item->food->id)}}"><p><i class="flaticon-shopping-cart" style="font-size:20px;color:#000;cursor:pointer"></i></p></a></td>
                                     <td class="pro-delete">
                                     <a href="{{route('item.delete',$item->id)}}">
                                             <i class="flaticon-delete"></i>

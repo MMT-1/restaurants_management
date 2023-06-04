@@ -6,8 +6,8 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CountryController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\AttributeController;
-use App\Http\Controllers\admin\VendorController;
-use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\OwnerController;
+use App\Http\Controllers\admin\FoodController;
 
 
 //login route start
@@ -36,11 +36,11 @@ use App\Http\Controllers\admin\ProductController;
   Route::post('attributes/value/{id}',[AttributeController::class,'attributeValue'])->name('attribute.value');
 //attribute route end
 
-//vendor route start
-  Route::resource('vendors',VendorController::class);
-//vendor route end
+//Owner route start
+  Route::resource('owners',OwnerController::class);
+//Owner route end
 
-//product route start
-  Route::resource('vendor/products',ProductController::class);
-  Route::get('att/value/{id}',[ProductController::class,'attributeValue'])->name('att.values');
-//product route end
+//Food route start
+  Route::resource('owner/foods',FoodController::class);
+  Route::get('att/value/{id}',[FoodController::class,'attributeValue'])->name('att.values');
+//Food route end

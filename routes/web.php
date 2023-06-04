@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 require('admin/admin.php');
-require('vendor/vendor.php');
+require('owner/owner.php');
 require('customer/customer.php');
 require('front/front.php');
 
