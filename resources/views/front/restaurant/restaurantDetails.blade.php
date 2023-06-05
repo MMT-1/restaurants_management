@@ -10,13 +10,13 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-start">
                           <li class="breadcrumb-item"><a href="{{route('home.page')}}" style="color: #589442;">Home</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">{{$shop->shop_name}}</li>
+                          <li class="breadcrumb-item active" aria-current="page">{{$restaurant->restaurant_name}}</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
-     <section class="inner-page banner" data-img="{{asset('owner/shop/'.$shop->logo)}}" style="height:400px">
+     <section class="inner-page banner" data-img="{{asset('owner/restaurant/'.$restaurant->logo)}}" style="height:400px">
          <div class="container">
             
             <div class="row">
@@ -24,7 +24,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center">
                           <li class="breadcrumb-item"><a href="{{route('home.page')}}">Home</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">{{$shop->shop_name}}</li>
+                          <li class="breadcrumb-item active" aria-current="page">{{$restaurant->restaurant_name}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -33,7 +33,7 @@
     </section>
     <!-- end banner area -->
 
-        @include('front.shop.reservation')
+        @include('front.restaurant.reservation')
         
     <!-- start main area -->
     <section class="shop-page left-sidebar main">
@@ -49,7 +49,7 @@
                 <form action="{{url('/reservation')}}" method="POST" class="personalinfo-form">
   @csrf
 <h2>Find a table</h2>
-  <input type="hidden" name="shop_id" value="{{$shop->id}}">
+  <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
 
   <label for="date">Date:</label>
   <input type="date" class="personalinfo" id="date" name="date">
@@ -76,13 +76,13 @@
                 <div class="">
                     <div class="content right-content">
                         <div class="title d-flex justify-content-between align-items-center">
-                            <h4>{{$shop->shop_name}}</h4>
+                            <h4>{{$restaurant->restaurant_name}}</h4>
                            
                         </div>
                         <div class="home1 collection">
                             <div class="row">
 
-                             @forelse ($shop->foods as $foods)
+                             @forelse ($restaurant->foods as $foods)
                              <div class="col-lg-3 col-md-4 col-sm-6 m-0 p-0">
                                 <div class="single-item">
                                     <div class="image-area">
