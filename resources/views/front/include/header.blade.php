@@ -66,7 +66,7 @@
         <div class="css-1v8u8fq elkhwc30">
             <div data-test="brand-logo" data-testid="brand-logo">
                 <div data-testid="header-logo-link" class="css-1jhwvdw ehfrn900">
-                    <a href="home">
+                    <a href="{{route('home.page')}}">
                         <div class="css-16zivgd e1tpugp10">
                             <svg width="8.25rem" height="2.5rem" viewBox="0 0 132 40" aria-hidden="true"
                                 focusable="false" class="e1tpugp13 css-dry3jv e1gre9u0">

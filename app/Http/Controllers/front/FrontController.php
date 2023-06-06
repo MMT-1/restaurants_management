@@ -27,7 +27,23 @@ class FrontController extends Controller
         $slider=Slider::where('status',1)->orderBy('id','DESC')->get();
         $featured=Food::where(['status'=>1,'is_featured'=>1])->orderBy('id','DESC')->get();
         $blog=Blog::where('status',1)->orderBy('id','DESC')->limit(3)->get();
-        return view('front.index',compact('restaurant','brand','slider','featured','blog'));
+
+
+        $cities = ['guelmim', 'City 2', 'City 3', 'paris', 'City 5'];
+
+        $restaurantData = [];
+    
+        foreach ($cities as $city) {
+            $restaurants = Restaurant::where('restaurant_address', 'like', "%$city%")
+                ->get();
+    
+            $restaurantData[$city] = $restaurants;
+        }
+
+        $restaurant = $this->activeRestaurant();
+
+
+        return view('front.index',compact('restaurantData','restaurant','brand','slider','featured','blog'));
     } 
 
     //contact method view

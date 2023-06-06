@@ -93,7 +93,6 @@
   display: block;
   margin: 0 auto;
   max-width: 1160px;
-  padding: 30px;
 }
 
 .cardul a {

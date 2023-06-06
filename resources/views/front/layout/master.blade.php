@@ -701,9 +701,15 @@ input[type="radio"]:checked::before {
         integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-<script>
-    $(document).ready(function () {
-    var owl = $("#slider-carousel");
+
+
+
+
+
+
+        {{-- <script>
+             $(document).ready(function () {
+    var owl = $("#slider-carousel6");
     owl.owlCarousel({
         items: 4,
         // itemsDesktop: [1000, 3],
@@ -712,83 +718,39 @@ input[type="radio"]:checked::before {
         // itemsMobile: false,
         // pagination: false
     });
-    $(".next").click(function () {
+    $(".next6").click(function () {
         owl.trigger('owl.next');
     })
-    $(".prev").click(function () {
+    $(".prev6").click(function () {
         owl.trigger('owl.prev');
     })
 });
-    $(document).ready(function () {
-    var owl = $("#slider-carousel2");
-    owl.owlCarousel({
-        items: 4,
-        // itemsDesktop: [1000, 3],
-        // itemsDesktopSmall: [900, 2],
-        // itemsTablet: [600, 1],
-        // itemsMobile: false,
-        // pagination: false
+          </script>--}}
+
+<script> 
+     $(document).ready(function () {
+        $('.owl-carousel').each(function () {
+            var carousel = $(this);
+            var carouselContainer = carousel.closest('.carousel-container');
+            var prevButton = carouselContainer.find('.prev');
+            var nextButton = carouselContainer.find('.next');
+
+            carousel.owlCarousel({
+                items: 4,
+                // Configure other options as needed
+            });
+
+            nextButton.click(function () {
+                carousel.trigger('next.owl.carousel');
+            });
+
+            prevButton.click(function () {
+                carousel.trigger('prev.owl.carousel');
+            });
+        });
     });
-    $(".next").click(function () {
-        owl.trigger('owl.next');
-    })
-    $(".prev").click(function () {
-        owl.trigger('owl.prev');
-    })
-});
-   
-$(document).ready(function () {
-    var owl = $("#slider-carousel3");
-    owl.owlCarousel({
-        items: 4,
-        // itemsDesktop: [1000, 3],
-        // itemsDesktopSmall: [900, 2],
-        // itemsTablet: [600, 1],
-        // itemsMobile: false,
-        // pagination: false
-    });
-    $(".next").click(function () {
-        owl.trigger('owl.next');
-    })
-    $(".prev").click(function () {
-        owl.trigger('owl.prev');
-    })
-}); 
-$(document).ready(function () {
-    var owl = $("#slider-carousel4");
-    owl.owlCarousel({
-        items: 4,
-        // itemsDesktop: [1000, 3],
-        // itemsDesktopSmall: [900, 2],
-        // itemsTablet: [600, 1],
-        // itemsMobile: false,
-        // pagination: false
-    });
-    $(".next").click(function () {
-        owl.trigger('owl.next');
-    })
-    $(".prev").click(function () {
-        owl.trigger('owl.prev');
-    })
-}); 
-$(document).ready(function () {
-    var owl = $("#slider-carousel5");
-    owl.owlCarousel({
-        items: 4,
-        // itemsDesktop: [1000, 3],
-        // itemsDesktopSmall: [900, 2],
-        // itemsTablet: [600, 1],
-        // itemsMobile: false,
-        // pagination: false
-    });
-    $(".next").click(function () {
-        owl.trigger('owl.next');
-    })
-    $(".prev").click(function () {
-        owl.trigger('owl.prev');
-    })
-}); 
 </script>
+
 
 </body>
 </html>
