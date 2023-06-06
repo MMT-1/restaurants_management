@@ -15,7 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\AttributeValue;
 use App\Models\owner\FoodAttribute;
 
-use App\Http\Requests\admin\ProductValidate;
+use App\Http\Requests\admin\FoodValidate;
 
 class FoodController extends Controller
 {

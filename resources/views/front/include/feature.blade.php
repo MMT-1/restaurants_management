@@ -67,17 +67,12 @@
                         </div>
                         <div data-test="homepage-tagline" class="styles_heroForm__uSl_W">
                             <h1 class="css-f0b5kp e1fq6wxe0">Discover and book the best restaurant</h1>
-                            <form method="POST" action="/restaurants/nearby" id="locationForm">
-                                @csrf
-                                <input type="text" name="location" id="locationInput" placeholder="Enter your location">
-                                <input type="text" name="latitude" id="latitudeInput">
-                                <input type="text" name="longitude" id="longitudeInput">
-                                <button type="button" id="locationButton" class="btn btn-primary">Get My Location</button>
-
-                                <button type="submit">Submit</button>
-                              </form>
+                            
+                                
 
                             <div data-test="search-component" class="styles_form__k_OCj">
+                                <form method="POST" action="/restaurants/nearby" id="locationForm">
+                                    @csrf
                                 <div class="css-1sn0ou2 elkhwc30">
                                     <div class="styles_inputContainer__oP8eT">
                                         <div class="styles_header__LvEz8">
@@ -96,7 +91,7 @@
                                                 </button>
                                             </div>
                                             <label color="gray.xl" display="block" for="whatinput"
-                                                class="css-14l0plx eulusyj0">
+                                                class="">
                                                 <span class="styles_mobileLabel___v_v9" role="button">
                                                     <span>What</span>
                                                 </span>
@@ -122,9 +117,9 @@
                                                     </span>
                                                     <label class="styles_labelWrapper__Ce7TK">
                                                         <span class="styles_inputWrapper__eMJ2o styles_search__tjTV0">
-                                                            <input type="search" class="styles_input__vCYji"
+                                                            <input type="text" class="styles_input__vCYji"
                                                                  placeholder="Cuisine, restaurant name..."
-                                                                id="whatinput" />
+                                                                id="whatinput" name="restaurant_name"/>
                                                         </span>
                                                     </label>
                                                 </span>
@@ -147,10 +142,14 @@
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <label color="gray.xl" display="block" for="whereinput"
-                                                class="css-14l0plx eulusyj0">
-                                                <span class="styles_mobileLabel___v_v9" role="button">Where</span>
-                                            </label>
+
+                                            <label color="gray.xl" display="block" for="whatinput1"
+                                            class="">
+                                            <span class="styles_mobileLabel___v_v9" role="button">
+                                                <span>What</span>
+                                            </span>
+                                        </label>
+                                         
                                             <span class="styles_wrapper__yAYpU styles_searchInputWrapper__VlR2_">
                                                 <span
                                                     class="styles_inputLine__o5Lpc styles_hasBorder__RBeU2 styles_search__tjTV0 styles_searchInput__u_8Vt">
@@ -158,7 +157,7 @@
                                                         <span class="styles_searchIcon__ureZe">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                 height="24" viewBox="0 0 24 24" aria-hidden="true"
-                                                                focusable="false" class="css-p3qwn0 e3pjkim0">
+                                                              class="css-p3qwn0 e3pjkim0">
                                                                 <g fill-rule="evenodd">
                                                                     <path
                                                                         d="M12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 .82-.146 1.62-.413 2.324-.775 2.588-2.671 6.43-5.69 11.557a.75.75 0 0 1-1.293 0c-3.02-5.127-4.916-8.97-5.675-11.51A6.75 6.75 0 0 1 12 1.5ZM12 3a5.25 5.25 0 0 0-5.25 5.25c0 .639.114 1.26.35 1.892.673 2.249 2.294 5.605 4.856 10.045l.043.073.43-.746c2.229-3.912 3.69-6.942 4.389-9.101l.099-.318A5.25 5.25 0 0 0 12 3Z">
@@ -170,11 +169,10 @@
                                                             </svg>
                                                         </span>
                                                     </span>
-                                                    <label class="styles_labelWrapper__Ce7TK">
+                                                    <label class="styles_labelWrapper__Ce7TK"  id="whatinput1">
                                                         <span class="styles_inputWrapper__eMJ2o styles_search__tjTV0">
                                                             <input type="search" class="styles_input__vCYji"
-                                                                name="location"
-                                                                placeholder="Near me, exact address, station..."
+                                                            name="location" id="locationInput" placeholder="Near me, exact address, station..."
                                                                  />
                                                         </span>
                                                     </label>
@@ -182,6 +180,7 @@
                                             </span>
                                         </div>
                                     </div>
+                                
                                 </div>
 
 
@@ -191,7 +190,13 @@
                                     <button width="100%" type="submit" 
                                          display="block"
                                         class="css-m080s5 ektx8jp0">Search</button>
-                                </div>
+                                <input type="text"  placeholder="Enter your location">
+                                <input type="text" name="latitude" id="latitudeInput">
+                                <input type="text" name="longitude" id="longitudeInput">
+                                <button type="button" id="locationButton" class="btn btn-primary">Get My Location</button>
+
+                                <button type="submit">Submit</button>
+                              </form>
                             </div>
                         </div>
                     </div>

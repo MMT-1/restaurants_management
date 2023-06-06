@@ -20,11 +20,7 @@ class CategoryController extends Controller
     //import trait
     use CommonTrait;    
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index(Request $request)
     {
         $list = Category::orderBy('id','DESC')->get();

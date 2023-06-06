@@ -6,8 +6,8 @@ use App\Models\admin\Brand;
 use App\Models\owner\Owner;
 use App\Models\owner\FoodGallery;
 use App\Models\owner\FoodCategory;
-use App\Models\owner\FoodAttribute;
 
+use App\Models\owner\FoodAttribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -39,7 +39,7 @@ class Food extends Model
 
      //this function shows food multiple attribute type
     public function foodAttributeType($id){
-      $data=FoodAttribute::where('food_id',$id)
+      $data= FoodAttribute::where('food_id',$id)
       ->where('food_attributes.status',1)
       ->leftjoin('attributes','attributes.id','=','food_attributes.type_id')
       ->groupBy('food_attributes.type_id')

@@ -22,7 +22,6 @@
 .cardul .card .card-body {
   display: flex;
   flex-flow: row wrap;
-  padding: 30px;
 }
 .cardul .card header {
   flex: 100%;
@@ -94,6 +93,7 @@
   display: block;
   margin: 0 auto;
   max-width: 1160px;
+  padding: 30px;
 }
 
 .cardul a {
@@ -172,14 +172,13 @@
 <input type="hidden" id="longitudeInput" name="longitude" value="{{ request()->get('longitude') }}">
 
 <div class="container">
-  <h1>The Best Restaurants in {{ request()->get('location') }}</h1>
-    <div class="row m-0 p-0">
+    <div class="row ">
     
-        <div class="col-md-8 m-0 p-0" >
+        <div class="col-md-8">
             <ul class="cardul">
         
-                @if ($nearbyRestaurants->count() > 0)
-                @foreach ($nearbyRestaurants as $restaurant)
+                @if ($Restaurants->count() > 0)
+                @foreach ($Restaurants as $restaurant)
                 <li class="card">
                     <a 
                         href="#" 

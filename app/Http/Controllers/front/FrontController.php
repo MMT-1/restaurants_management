@@ -45,7 +45,7 @@ class FrontController extends Controller
     public function foodSingle($id){
         $food=Food::findOrFail($id);
         $attributeType=$food->foodAttributeType($id);
-        return view('front.food.foodtDetails',compact('food','attributeType'));
+        return view('front.food.foodDetails',compact('food','attributeType'));
     }
 
     //food search
@@ -129,45 +129,55 @@ class FrontController extends Controller
 public function getNearbyRestaurants(Request $request)
 {
     $location = $request->input('location');
+    $restaurantName = $request->input('restaurant_name');
 
-    // Make a request to Google Maps Geocoding API to obtain the latitude and longitude
-    $geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($location) . '&key=AIzaSyA6vplU0Ty7M1OQTJ3yhZBroOJ59i7bMpg';
-    $geocodeResponse = json_decode(file_get_contents($geocodeUrl));
+    if (!empty($location)) {
+        // Make a request to Google Maps Geocoding API to obtain the latitude and longitude
+        $geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($location) . '&key=AIzaSyA6vplU0Ty7M1OQTJ3yhZBroOJ59i7bMpg';
+        $geocodeResponse = json_decode(file_get_contents($geocodeUrl));
 
-    if ($geocodeResponse->status === 'OK') {
-        $latitude = $geocodeResponse->results[0]->geometry->location->lat;
-        $longitude = $geocodeResponse->results[0]->geometry->location->lng;
+        if ($geocodeResponse->status === 'OK') {
+            $latitude = $geocodeResponse->results[0]->geometry->location->lat;
+            $longitude = $geocodeResponse->results[0]->geometry->location->lng;
 
-        // Retrieve nearby Restaurants based on the latitude and longitude
-        $nearbyRestaurants = Restaurant::select('restaurants.*', DB::raw('
-            ( 6371 * acos( cos( radians(' . $latitude . ') ) *
-            cos( radians( restaurants.latitude ) ) *
-            cos( radians( restaurants.longitude ) - radians(' . $longitude . ') ) +
-            sin( radians(' . $latitude . ') ) *
-            sin( radians( restaurants.latitude ) ) ) ) AS distance
-        '))
-        ->having('distance', '<', 100) // 10 represents the distance in kilometers
-        ->orderBy('distance', 'asc')
-        ->get();
+            // Retrieve nearby Restaurants based on the latitude and longitude
+            $nearbyRestaurants = Restaurant::select('restaurants.*', DB::raw('
+                ( 6371 * acos( cos( radians(' . $latitude . ') ) *
+                cos( radians( restaurants.latitude ) ) *
+                cos( radians( restaurants.longitude ) - radians(' . $longitude . ') ) +
+                sin( radians(' . $latitude . ') ) *
+                sin( radians( restaurants.latitude ) ) ) ) AS distance
+            '))
+            ->having('distance', '<', 100) // 100 represents the distance in kilometers
+            ->orderBy('distance', 'asc')
+            ->get();
 
+            $restaurantLocations = $nearbyRestaurants->map(function ($restaurant) {
+                return [
+                    'name' => $restaurant->name,
+                    'lat' => $restaurant->latitude,
+                    'lng' => $restaurant->longitude,
+                ];
+            });
 
-
-        $restaurantLocations = $nearbyRestaurants->map(function ($restaurant) {
-            return [
-                'name' => $restaurant->name,
-                'lat' => $restaurant->latitude,
-                'lng' => $restaurant->longitude,
-            ];
-        });
-
-
-
-
-      return view('front.nearby', compact('nearbyRestaurants','restaurantLocations'));
+            return view('front.nearby', compact('nearbyRestaurants', 'restaurantLocations'));
+        } 
+    } elseif (!empty($restaurantName)) {
+        // Retrieve Restaurants based on the entered restaurant name
+        $Restaurants = Restaurant::where('restaurant_name', 'LIKE', '%' . $restaurantName . '%')->get();
+        $restaurantLocations = $Restaurants->map(function ($restaurant) {
+          return [
+              'name' => $restaurant->name,
+              'lat' => $restaurant->latitude,
+              'lng' => $restaurant->longitude,
+          ];
+      });
+        return view('front.restaurantSearch', compact('Restaurants','restaurantLocations'));
+    } else {
+        // Handle case when neither location nor restaurant name is provided
+        return response()->json(['error' => 'Please provide either a location or restaurant name']);
     }
-
-    // Handle error case when geocoding fails
-    return redirect()->back()->with('error', 'Location not found');
 }
+
 
 }

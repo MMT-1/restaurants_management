@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\customer;
 
 use App\Traits\CartTrait;
+use App\Models\owner\Food;
 use Illuminate\Http\Request;
-use App\Models\vendor\Product;
 use App\Models\customer\FoodCart;
 use App\Http\Controllers\Controller;
-use App\Models\customer\ProductCart;
-use App\Models\vendor\ProductAttribute;
 
 class CartController extends Controller
 {
