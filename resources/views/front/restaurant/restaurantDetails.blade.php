@@ -86,10 +86,10 @@
                              <div class="col-lg-3 col-md-4 col-sm-6 m-0 p-0">
                                 <div class="single-item">
                                     <div class="image-area">
-                                        <a href="{{route('food.single',array('id'=>$foods->id,'slug'=>$foods->food_slug))}}">
+                                        <a href="#">
                                             <img src="{{asset('owner/food/'.$foods->image)}}" class="img-active" alt="food Image"/>
                                         </a>
-                                        <a href="{{route('food.single',array('id'=>$foods->id,'slug'=>$foods->food_slug))}}">
+                                        <a href="#">
                                             <img src="{{asset('owner/food/'.$foods->image)}}" class="img-hover" alt="food Image"/>
                                         </a>
                                         <span class="sale-status">sale</span>
@@ -127,7 +127,7 @@
                                         <a href="shop-detail.html">
                                             <h5>{{$foods->food_name}}</h5>
                                         </a>
-                                        <!-- <a href="{{route('food.single',array('id'=>$foods->id,'slug'=>$foods->food_slug))}}" class="add-cart button-style1">View More <span class="btn-dot"></span></a> -->
+                                        <!-- <a href="#" class="add-cart button-style1">View More <span class="btn-dot"></span></a> -->
                                     </div>
                                 </div>
                             </div>

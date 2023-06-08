@@ -13,16 +13,14 @@
 
 <style>
    .cardul .card {
-  box-shadow: 0 0px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
   background: #fff;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
 }
 .cardul .card .card-body {
   display: flex;
   flex-flow: row wrap;
-  padding: 30px;
+  padding: 0 30px ;
 }
 .cardul .card header {
   flex: 100%;
@@ -128,8 +126,7 @@
 .cardul .chip.large {
   text-transform: uppercase;
   color: black;
-  border: 1px solid #E0E0E0;
-  background: white;
+   background: white;
   padding: 10px 15px;
   max-height: 44px;
 }
@@ -160,6 +157,56 @@
   height: 860px;
 }
 
+
+
+
+.card {
+    content: '';
+     width: 100%;
+    border-bottom: 1px solid hsl(220, 9%, 62%);
+     
+}
+.title h3{
+  font-family: RalewayX,arial,sans-serif;
+  font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    line-height: 1.875rem !important;
+}
+.css-1bgn2qo {
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: RalewayX,arial,sans-serif;
+    font-style: normal;
+    line-height: 1.375;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.css-fl00r9 {
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 300;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8125rem;
+    border-radius: 0.25rem;
+    color: hsl(354, 69%, 44%);
+    background-color: hsl(354, 52%, 94%);
+    font-weight: 400;
+    width: m;
+    height: m;
+    display: inline-block;
+}
+.css-ibqusf {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    color: hsl(218, 9%, 17%);
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: RalewayX,arial,sans-serif;
+    font-style: normal;
+    line-height: 1.375;
+}
 </style>
 
 
@@ -171,16 +218,16 @@
 <input type="hidden" id="latitudeInput" name="latitude" value="{{ request()->get('latitude') }}">
 <input type="hidden" id="longitudeInput" name="longitude" value="{{ request()->get('longitude') }}">
 
-<div class="container">
-  <h1>The Best Restaurants in {{ request()->get('location') }}</h1>
+<div class="container" style="max-width: 80rem;">
+  <h1 style="">The Best Restaurants in {{ request()->get('location') }}</h1>
     <div class="row m-0 p-0">
     
         <div class="col-md-8 m-0 p-0" >
-            <ul class="cardul">
+            <ul class="cardul" style="">
         
                 @if ($nearbyRestaurants->count() > 0)
                 @foreach ($nearbyRestaurants as $restaurant)
-                <li class="card">
+                <li class="card" style="border:0;border-bottom: 1px solid  hsl(220, 9%, 62%);padding-bottom: 1rem;padding-top: 1rem; border-radius:0">
                     <a 
                         href="#" 
                         class="featured-image" 
@@ -189,13 +236,14 @@
                     <article class="card-body">
                         <header>
                             <a href="utilidata-national-governors-association-meeting">
-                                <span class="pre-heading">Blog</span>
+                              <span data-test="search-restaurant-tags-MICHELIN"><span font-weight="m" data-test="michelin-tag" data-testid="tag" display="inline-block" color="information" class="css-fl00r9 e13tleqf0">MICHELIN</span></span>
                                 <div class="title">
                                     <h3>{{ $restaurant->restaurant_name }}</h3>
                                 </div>
-                                <p class="meta">
-                                    <span class="author">Utilidata</span>
+                                <p color="gray.xl" class="css-ibqusf eulusyj0">
+                                  {{$restaurant->restaurant_address}}
                                 </p>
+                                
                             </a>
                         </header>
                       
