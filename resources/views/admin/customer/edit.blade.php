@@ -106,6 +106,17 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Zip code (required):</label>
+                                                        <div class="form-group">
+                                                            <input class="form-control" name="zip_code" type="text" value="{{$customer->zip_code}}" placeholder="Zip code" />
+                                                            @if($errors->has('zip_code'))
+                                                            <span class="text-danger"> {{$errors->first('zip_code')}}</span>
+                                                            @endif
+                                                        </div>
+                                                   </div>
+                                                </div>
                                             </div>
 
                                          
@@ -122,17 +133,7 @@
                                                         </div>
                                                    </div>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Zip code (required):</label>
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="zip_code" type="text" value="{{$customer->zip_code}}" placeholder="Zip code" />
-                                                            @if($errors->has('zip_code'))
-                                                            <span class="text-danger"> {{$errors->first('zip_code')}}</span>
-                                                            @endif
-                                                        </div>
-                                                   </div>
-                                                </div>
+                                                
 
                                                 <div class="col-lg-6">
                                                     <label>Status:</label>
