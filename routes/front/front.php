@@ -20,7 +20,6 @@ use App\Http\Controllers\front\FrontController;
 //all restaurant route end
 
 //single Food route start
-  Route::get('/food/{id}/{slug}', [FrontController::class,'foodSingle'])->name('food.single');
 //single food route end
 
 //food search route start

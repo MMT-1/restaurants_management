@@ -40,8 +40,8 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   overflow: hidden;
-  width: 100%;
-  height: 300px;
+  width: 276px;
+    height: 216px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -56,8 +56,8 @@
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 0;
-    max-width: 390px;
-    max-height: 279px;
+    max-width: 276px;
+    max-height: 216px;
   }
 }
 @media only screen and (min-width: 1280px) {
@@ -184,7 +184,7 @@
                     <a 
                         href="#" 
                         class="featured-image" 
-                        style='background-image:url("{{ asset('owner/restaurant/' . $restaurant->logo) }}")'>
+                        style='background-image:url("{{ asset('owner/restaurant/' . $restaurant->logo) }}");'>
                     </a>
                     <article class="card-body">
                         <header>
