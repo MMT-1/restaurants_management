@@ -8,13 +8,13 @@
 
                          <section class="styles_restaurantShelf__pWKxZ container">
                             @php
-    $counter = 1;
+    $counter = 0;
 @endphp
                             @foreach ($restaurantData as $city => $restaurants)
                             @php
         $counter++;
     @endphp
-                                <div>
+                                <div class="carousel{{$counter}}">
                                     <div class="css-x44yx7 ei4pj1i0" style="display: flex; justify-content: space-between; align-items: center;">
                                         <h2 class="styles_title__0O4of" style="margin: 0;">Popular restaurants in {{ $city }}</h2>
                                         <div style="display: flex; align-items: center;">
@@ -23,6 +23,7 @@
                                                     <span role="link" class="css-1unvnzj e1xxesyf0" style="cursor: pointer;">See more</span>
                                                 </span> -->
                                             </button>
+                                            
                                             <div class="customNavigation">
                                                 <button class="styles_carrouselPrevArrow__C3mmT styles_arrow__2WdUo e1ovfzkv0 css-1rfw4ap ektx8jp0 prev{{$counter}}"   style="margin-right: 8px;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 ejhntxf0">
@@ -30,7 +31,7 @@
                                                       </svg>
                                                     <span class="css-l7ijkl ezjtbe50"><span>Previous</span></span>
                                                 </button>
-                                                <button class="styles_carrouselNextArrow__rSpzl styles_arrow__2WdUo e1ovfzkv0 css-1rfw4ap ektx8jp0 next{{$counter}}"  data-carousel-id="slider-carousel-{{ str_replace(' ', '-', strtolower($city)) }}">
+                                                <button class="styles_carrouselNextArrow__rSpzl styles_arrow__2WdUo e1ovfzkv0 css-1rfw4ap ektx8jp0 next{{$counter}}"  >
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e10xbrur0">
                                                         <path fill-rule="evenodd" d="M8.25 20.5a1.002 1.002 0 0 1-.673-1.74l7.436-6.756-7.436-6.765a1 1 0 1 1 1.346-1.478l8.249 7.504a1 1 0 0 1 0 1.479L8.923 20.24c-.193.174-.433.26-.673.26"></path>
                                                       </svg>
@@ -41,7 +42,7 @@
                                     </div>
                         
                                     <div class="row">
-                                        <div id="slider-carousel{{$counter}}" class="owl-carousel">
+                                        <div id="slider-carousel{{$counter}}"  class="owl-carousel">
                                             @foreach ($restaurants as $restaurant)
                                                 <div class="" style="outline:none;">
                                                     <div class="">

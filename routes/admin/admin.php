@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\admin\DashboardController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\CountryController;
-use App\Http\Controllers\admin\BrandController;
-use App\Http\Controllers\admin\AttributeController;
-use App\Http\Controllers\admin\OwnerController;
 use App\Http\Controllers\admin\FoodController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\admin\BrandController;
+use App\Http\Controllers\admin\OwnerController;
+use App\Http\Controllers\admin\CountryController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\CustomerController;
+use App\Http\Controllers\admin\AttributeController;
+use App\Http\Controllers\admin\DashboardController;
 
 
 //login route start
@@ -38,6 +39,12 @@ use App\Http\Controllers\admin\FoodController;
 
 //Owner route start
   Route::resource('owners',OwnerController::class);
+  Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create');
+Route::post('customers', [CustomerController::class, 'store'])->name('customers.store');
+Route::get('customer/{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::put('customer/{customer}', [CustomerController::class, 'update'])->name('customers.update');
+
 //Owner route end
 
 //Food route start

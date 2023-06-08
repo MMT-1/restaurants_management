@@ -190,12 +190,10 @@
                                     <button width="100%" type="submit" 
                                          display="block"
                                         class="css-m080s5 ektx8jp0">Search</button>
-                                <input type="text"  placeholder="Enter your location">
-                                <input type="text" name="latitude" id="latitudeInput">
-                                <input type="text" name="longitude" id="longitudeInput">
-                                <button type="button" id="locationButton" class="btn btn-primary">Get My Location</button>
+                                <input type="hidden" name="latitude" id="latitudeInput">
+                                <input type="hidden" name="longitude" id="longitudeInput">
+                                <button type="button" id="locationButton" class="btn btn-primary d-none" >Get My Location</button>
 
-                                <button type="submit">Submit</button>
                               </form>
                             </div>
                         </div>

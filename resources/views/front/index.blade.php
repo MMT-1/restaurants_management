@@ -39,7 +39,7 @@
     <!-- start feature area -->
     @include('front.include.feature')
     <!-- end feature area -->
-   @include('front.resSectionOne')
+   @include('front.restaurantsSection')
    
      <!-- start shop area -->
       <!-- <section class="home1 category mt-5">

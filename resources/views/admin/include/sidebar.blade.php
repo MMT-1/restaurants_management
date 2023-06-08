@@ -11,17 +11,17 @@
                 </li>
 
                 <li class="submenu">
-                    <a id="tables" href="#">
+                    <a id="tables" class="@if($url==='customers.index' || $url==='customers.create' || $url==='customers.edit') active @endif" href="#">
                         <i class="fas fa-user"></i>
                         <span> Customer </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="tables-basic.html">List</a>
+                            <a href="{{route('customers.index')}}">List</a>
                         </li>
                         <li>
-                            <a href="tables-datatable.html">Add New</a>
+                            <a href="{{route('customers.create')}}">Add New</a>
                         </li>
                     </ul>
                 </li>

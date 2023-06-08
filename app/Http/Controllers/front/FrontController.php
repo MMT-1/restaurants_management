@@ -29,7 +29,7 @@ class FrontController extends Controller
         $blog=Blog::where('status',1)->orderBy('id','DESC')->limit(3)->get();
 
 
-        $cities = ['guelmim', 'City 2', 'City 3', 'paris', 'City 5'];
+        $cities = ['Guelmim', 'Paris', 'Tantan', 'Agadir', 'City 5'];
 
         $restaurantData = [];
     
@@ -142,6 +142,61 @@ class FrontController extends Controller
 
 
 
+// public function getNearbyRestaurants(Request $request)
+// {
+//     $location = $request->input('location');
+//     $restaurantName = $request->input('restaurant_name');
+
+//     if (!empty($location)) {
+//         // Make a request to Google Maps Geocoding API to obtain the latitude and longitude
+//         $geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($location) . '&key=AIzaSyA6vplU0Ty7M1OQTJ3yhZBroOJ59i7bMpg';
+//         $geocodeResponse = json_decode(file_get_contents($geocodeUrl));
+
+//         if ($geocodeResponse->status === 'OK') {
+//             $latitude = $geocodeResponse->results[0]->geometry->location->lat;
+//             $longitude = $geocodeResponse->results[0]->geometry->location->lng;
+
+//             // Retrieve nearby Restaurants based on the latitude and longitude
+//             $nearbyRestaurants = Restaurant::select('restaurants.*', DB::raw('
+//                 ( 6371 * acos( cos( radians(' . $latitude . ') ) *
+//                 cos( radians( restaurants.latitude ) ) *
+//                 cos( radians( restaurants.longitude ) - radians(' . $longitude . ') ) +
+//                 sin( radians(' . $latitude . ') ) *
+//                 sin( radians( restaurants.latitude ) ) ) ) AS distance
+//             '))
+//             ->having('distance', '<', 100) // 100 represents the distance in kilometers
+//             ->orderBy('distance', 'asc')
+//             ->get();
+
+//             $restaurantLocations = $nearbyRestaurants->map(function ($restaurant) {
+//                 return [
+//                     'name' => $restaurant->name,
+//                     'lat' => $restaurant->latitude,
+//                     'lng' => $restaurant->longitude,
+//                 ];
+//             });
+
+//             return view('front.nearby', compact('nearbyRestaurants', 'restaurantLocations'));
+//         } 
+//     } elseif (!empty($restaurantName)) {
+//         // Retrieve Restaurants based on the entered restaurant name
+//         $Restaurants = Restaurant::where('restaurant_name', 'LIKE', '%' . $restaurantName . '%')->get();
+//         $restaurantLocations = $Restaurants->map(function ($restaurant) {
+//           return [
+//               'name' => $restaurant->name,
+//               'lat' => $restaurant->latitude,
+//               'lng' => $restaurant->longitude,
+//           ];
+//       });
+//         return view('front.restaurantSearch', compact('Restaurants','restaurantLocations'));
+//     } else {
+//         // Handle case when neither location nor restaurant name is provided
+//         return response()->json(['error' => 'Please provide either a location or restaurant name']);
+//     }
+// }
+
+
+
 public function getNearbyRestaurants(Request $request)
 {
     $location = $request->input('location');
@@ -156,17 +211,21 @@ public function getNearbyRestaurants(Request $request)
             $latitude = $geocodeResponse->results[0]->geometry->location->lat;
             $longitude = $geocodeResponse->results[0]->geometry->location->lng;
 
-            // Retrieve nearby Restaurants based on the latitude and longitude
-            $nearbyRestaurants = Restaurant::select('restaurants.*', DB::raw('
+            $query = Restaurant::select('restaurants.*', DB::raw('
                 ( 6371 * acos( cos( radians(' . $latitude . ') ) *
                 cos( radians( restaurants.latitude ) ) *
                 cos( radians( restaurants.longitude ) - radians(' . $longitude . ') ) +
                 sin( radians(' . $latitude . ') ) *
                 sin( radians( restaurants.latitude ) ) ) ) AS distance
             '))
-            ->having('distance', '<', 100) // 100 represents the distance in kilometers
-            ->orderBy('distance', 'asc')
-            ->get();
+            ->having('distance', '<', 700); // 100 represents the distance in kilometers
+
+            if (!empty($restaurantName)) {
+                // Filter by restaurant name
+                $query->where('restaurant_name', 'LIKE', '%' . $restaurantName . '%');
+            }
+
+            $nearbyRestaurants = $query->orderBy('distance', 'asc')->get();
 
             $restaurantLocations = $nearbyRestaurants->map(function ($restaurant) {
                 return [
@@ -191,7 +250,7 @@ public function getNearbyRestaurants(Request $request)
         return view('front.restaurantSearch', compact('Restaurants','restaurantLocations'));
     } else {
         // Handle case when neither location nor restaurant name is provided
-        return response()->json(['error' => 'Please provide either a location or restaurant name']);
+        return response()->json(['error' => 'Please provide either a location or a restaurant name']);
     }
 }
 

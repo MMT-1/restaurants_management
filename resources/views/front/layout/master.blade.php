@@ -706,50 +706,35 @@ input[type="radio"]:checked::before {
 
 
 
-
-        {{-- <script>
-             $(document).ready(function () {
-    var owl = $("#slider-carousel6");
-    owl.owlCarousel({
-        items: 4,
-        // itemsDesktop: [1000, 3],
-        // itemsDesktopSmall: [900, 2],
-        // itemsTablet: [600, 1],
-        // itemsMobile: false,
-        // pagination: false
-    });
-    $(".next6").click(function () {
-        owl.trigger('owl.next');
-    })
-    $(".prev6").click(function () {
-        owl.trigger('owl.prev');
-    })
-});
-          </script>--}}
-
-<script> 
-     $(document).ready(function () {
-        $('.owl-carousel').each(function () {
-            var carousel = $(this);
-            var carouselContainer = carousel.closest('.carousel-container');
-            var prevButton = carouselContainer.find('.prev');
-            var nextButton = carouselContainer.find('.next');
-
-            carousel.owlCarousel({
-                items: 4,
-                // Configure other options as needed
+        <script>
+            $(document).ready(function () {
+              for (var counter = 1; counter <= 10; counter++) {
+                (function (counter) {
+                  var owl = $(".carousel" + counter + " #slider-carousel" + counter);
+                  owl.owlCarousel({
+                    items: 4,
+                    // itemsDesktop: [1000, 3],
+                    // itemsDesktopSmall: [900, 2],
+                    // itemsTablet: [600, 1],
+                    // itemsMobile: false,
+                    // pagination: false
+                  });
+                  $(".next" + counter).click(function () {
+                    owl.trigger('owl.next');
+                  });
+                  $(".prev" + counter).click(function () {
+                    owl.trigger('owl.prev');
+                  });
+                })(counter);
+              }
             });
+          </script>
+          
+          
 
-            nextButton.click(function () {
-                carousel.trigger('next.owl.carousel');
-            });
 
-            prevButton.click(function () {
-                carousel.trigger('prev.owl.carousel');
-            });
-        });
-    });
-</script>
+
+ 
 
 
 </body>

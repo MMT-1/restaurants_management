@@ -99,9 +99,9 @@
             </div>
             <div class="notification ms-auto">
                         <ul class="d-flex justify-content-end" style="align-items:center">
-                                @if(Auth::guard('owner')->check())
+                                @if(Auth::guard('owner'))
                                     @php $url=route('owner.dashboard'); @endphp
-                                 @elseif(Auth::guard('web')->check())
+                                 @elseif(Auth::guard('web'))
                                     @php $url=route('customer.dashboard'); @endphp
                                   @else 
                                     @php $url=route('customer.login'); @endphp
@@ -111,6 +111,9 @@
                                     <i class="flaticon-user-1"></i>
                                 </a> -->
                             </li>
+
+                            @if(!Auth::guard('admin') &&  !Auth::guard('owner'))
+
                             <li>
                                <div class="containerIconX">
                                <a href="{{route('wishlist.index')}}" class="drop">
@@ -170,6 +173,10 @@
                                     </div>
                                 </div>
                             </li>
+                            @endif
+
+
+
                             <li>
                             @if(Auth::guard('owner')->check())
             <span class="nav-item dropdown position-relative">
@@ -254,7 +261,7 @@
                                </svg>
                             </span>
                          </span>
-                         <label class="styles_labelWrapper__Ce7TK"><span class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input type="text" class="styles_input__vCYji"  placeholder="Cuisine, restaurant name..." name="restaurant_name"></span></label>
+                         <label class="styles_labelWrapper__Ce7TK"><span class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input type="text" class="styles_input__vCYji"  placeholder="Cuisine, restaurant name..." name="restaurant_name" value="{{ request()->get('restaurant_name') }}"></span></label>
                       </span>
                    </span>
                 </div>
@@ -284,7 +291,7 @@
                                </svg>
                             </span>
                          </span>
-                         <label class="styles_labelWrapper__Ce7TK"><span class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input type="search" class="styles_input__vCYji styles_hasValue__KXB2d" name="search" placeholder="Near me, exact address, station..." id="whereinput" autocomplete="off" aria-owns="autocomplete" aria-autocomplete="both" aria-activedescendant="option1" data-hj-whitelist="true" data-test="search-where-input" label="" inputplacement="default" notice="" value="Madrid" name="location">
+                         <label class="styles_labelWrapper__Ce7TK"><span class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input type="search" class="styles_input__vCYji styles_hasValue__KXB2d" name="search" placeholder="Near me, exact address, station..." id="whereinput" autocomplete="off" aria-owns="autocomplete" aria-autocomplete="both" aria-activedescendant="option1" data-hj-whitelist="true" data-test="search-where-input" label="" inputplacement="default" notice="" value="{{ request()->get('location') }}" name="location">
                          </span></label>
                       </span>
                    </span>

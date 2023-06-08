@@ -12,7 +12,10 @@
     <!-- heder start -->
     @include('admin.include.header')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<style>
+  
 
+</style>
     <!-- heder end -->
 </head>
 
@@ -94,8 +97,8 @@
   $("#pac-input").focusin(function() {
     $(this).val('');
   });
-  $('#latitude').val('');
-  $('#longitude').val('');
+  $('#latitude');
+  $('#longitude');
 
   function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
