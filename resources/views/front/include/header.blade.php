@@ -1,51 +1,50 @@
 <style>
-.notification ul li  .quantityX {
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    background: #151a33;
-    line-height: 20px;
-    color: #fff;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 400;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    position: absolute;
-    top: -5px;
-    right: -10px;
-}
-.containerIconX{
-    position:relative;
-}
-.containerIconX .quantityY {
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    background: #151a33;
-    line-height: 20px;
-    color: #fff;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 400;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    position: absolute;
-    top: -5px;
-    right: -10px;
-}
+    .notification ul li .quantityX {
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        background: #151a33;
+        line-height: 20px;
+        color: #fff;
+        text-align: center;
+        font-size: 10px;
+        font-weight: 400;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        position: absolute;
+        top: -5px;
+        right: -10px;
+    }
 
+    .containerIconX {
+        position: relative;
+    }
 
-
+    .containerIconX .quantityY {
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        background: #151a33;
+        line-height: 20px;
+        color: #fff;
+        text-align: center;
+        font-size: 10px;
+        font-weight: 400;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        position: absolute;
+        top: -5px;
+        right: -10px;
+    }
 </style>
 <header>
-    
+
     <div class="css-1ol2wy6 eqdhima0">
         <div class="css-1qth4hc elkhwc30">
             <span aria-controls="register-my-restaurant" role="link" style="cursor:pointer"
@@ -66,7 +65,7 @@
         <div class="css-1v8u8fq elkhwc30">
             <div data-test="brand-logo" data-testid="brand-logo">
                 <div data-testid="header-logo-link" class="css-1jhwvdw ehfrn900">
-                    <a href="{{route('home.page')}}">
+                    <a href="{{ route('home.page') }}">
                         <div class="css-16zivgd e1tpugp10">
                             <svg width="8.25rem" height="2.5rem" viewBox="0 0 132 40" aria-hidden="true"
                                 focusable="false" class="e1tpugp13 css-dry3jv e1gre9u0">
@@ -98,209 +97,350 @@
                 </div>
             </div>
             <div class="notification ms-auto">
-                        <ul class="d-flex justify-content-end" style="align-items:center">
-                                @if(Auth::guard('owner'))
-                                    @php $url=route('owner.dashboard'); @endphp
-                                 @elseif(Auth::guard('web'))
-                                    @php $url=route('customer.dashboard'); @endphp
-                                  @else 
-                                    @php $url=route('customer.login'); @endphp
-                                @endif
-                            <li>
-                                <!-- <a href="{{$url}}">
+                <ul class="d-flex justify-content-end" style="align-items:center">
+                    @if (Auth::guard('owner'))
+                        @php $url=route('owner.dashboard'); @endphp
+                    @elseif(Auth::guard('web'))
+                        @php $url=route('customer.dashboard'); @endphp
+                    @else
+                        @php $url=route('customer.login'); @endphp
+                    @endif
+                    <li>
+                        <!-- <a href="{{ $url }}">
                                     <i class="flaticon-user-1"></i>
                                 </a> -->
-                            </li>
+                    </li>
 
-                            @if(!Auth::guard('admin') &&  !Auth::guard('owner'))
+                    @if (!Auth::guard('admin') && !Auth::guard('owner'))
+                    @endif
 
-                            <li>
-                               <div class="containerIconX">
-                               <a href="{{route('wishlist.index')}}" class="drop">
-                                    <i class="flaticon-heart" style="font-size: 24px;color: #606060;"></i>
-                                    <span class=" quantityY">{{$wishlistCount}}</span>
+
+
+                    <li>
+                        @if (Auth::guard('owner')->check())
+                            <span class="nav-item dropdown position-relative">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
+                                    href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="true">
+                                    <img class="user-avatar -medium"
+                                        src="{{ asset('owner/profile/' . Auth::guard('owner')->user()->image) }}">
                                 </a>
-                                </div>
+                                <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user me-1 ms-1"></i>
+                                        My Profile</a>
 
-                            </li>
-                            <li>
-                                <div class="dropdown dropdownX mx-4">
-                                    
-                                    <button class="dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="flaticon-shopping-cart" style="font-size: 26px;color: #606060;"></i>
-                                        <span class="quantity quantityX">{{$cartCount}}</span>
-                                    </button>
-                                    <div class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
-                                        <div class="heading d-flex justify-content-between">
-                                            <div class="cartView-icon">
+                                    <a class="dropdown-item dropdown-item1" href="javascript:void(0)"><i
+                                            class="ti-settings me-1 ms-1"></i> Account Setting</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="http://127.0.0.1:8000/logout"
+                                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"><i
+                                            class="fa fa-power-off me-1 ms-1"></i> Logout</a>
+                                    <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST"
+                                        style="display: none;">
+                                        <input type="hidden" name="_token"
+                                            value="T4NZTnDtLnNHfBJVjMFAeLxqDJSCHU0KKj43CgGF">
+                                    </form>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="ps-4 p-10"><a href="javascript:void(0)"
+                                            class="btn btn-sm btn-success btn-rounded text-white">View Profile</a>
+                                    </div>
+                                </ul>
+                            </span>
+                        @elseif(Auth::guard('web')->check())
+                            {{--                           
+                        <li>
+                            <div class="containerIconX">
+                                <a href="{{ route('wishlist.index') }}" class="drop">
+                                    <i class="flaticon-heart" style="font-size: 24px;color: #606060;"></i>
+                                    <span class=" quantityY">{{ $wishlistCount }}</span>
+                                </a>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="dropdown dropdownX mx-4">
+
+                                <button class="dropdown-toggle " type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="flaticon-shopping-cart" style="font-size: 26px;color: #606060;"></i>
+                                    <span class="quantity quantityX">{{ $cartCount }}</span>
+                                </button>
+                                <div class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
+                                    <div class="heading d-flex justify-content-between">
+                                        <div class="cartView-icon">
                                             <i class="flaticon-shopping-cart"></i>
-                                        <span class="quantity">{{$cartCount}}</span>
-                                </div>
-                                            <a href="{{route('cart.index')}}">view cart</a>
+                                            <span class="quantity">{{ $cartCount }}</span>
                                         </div>
-                                        <ul style="max-height: 200px; overflow-y: scroll;">
-                                            @foreach($cartItem as $item)
+                                        <a href="{{ route('cart.index') }}">view cart</a>
+                                    </div>
+                                    <ul style="max-height: 200px; overflow-y: scroll;">
+                                        @foreach ($cartItem as $item)
                                             <li class="mt-2">
                                                 <div class="d-flex position-relative cart-product-img">
-                                                    @if(isset($item->attributeType))
-                                                      <img src="{{asset('owner/food/attribute/'.$item->image)}}" alt="food Image"/>
-                                                    @else 
-                                                      <img src="{{asset('owner/food/'.$item->image)}}" alt="food Image"/>
+                                                    @if (isset($item->attributeType))
+                                                        <img src="{{ asset('owner/food/attribute/' . $item->image) }}"
+                                                            alt="food Image" />
+                                                    @else
+                                                        <img src="{{ asset('owner/food/' . $item->image) }}"
+                                                            alt="food Image" />
                                                     @endif
                                                     <div class="text ms-3">
                                                         <a href="shop-detail-left.html">
-                                                            <h5>{{$item->food->food_name}}dfaaaaaaaaaaaaaaa</h5>
+                                                            <h5>{{ $item->food->food_name }}dfaaaaaaaaaaaaaaa</h5>
                                                         </a>
-                                                        @if(isset($item->attributeType))
-                                                        <p>{{$item->attributeType->attribute_type}}: {{$item->attributeValue->attribute}}</p>
-                                                        @endif 
-                                                        <p>{{$item->quantity}} X {{number_format($item->price)}}</p>
+                                                        @if (isset($item->attributeType))
+                                                            <p>{{ $item->attributeType->attribute_type }}:
+                                                                {{ $item->attributeValue->attribute }}</p>
+                                                        @endif
+                                                        <p>{{ $item->quantity }} X {{ number_format($item->price) }}
+                                                        </p>
                                                         <a href="#!" class="icon">
                                                             <i class="far fa-times-circle"></i>
                                                         </a>
                                                     </div>
                                                 </div>
                                             </li>
-                                            @endforeach 
-                                        </ul>
-                                        <div class="total d-flex justify-content-between">
-                                            <p>total</p>
-                                            <p>{{number_format($subTotal)}}</p>
-                                        </div>
-                                        
-                                            <button href="checkout.html" class="button-style1">checkout</button>
-                                       
+                                        @endforeach
+                                    </ul>
+                                    <div class="total d-flex justify-content-between">
+                                        <p>total</p>
+                                        <p>{{ number_format($subTotal) }}</p>
                                     </div>
+
+                                    <button href="checkout.html" class="button-style1">checkout</button>
+
                                 </div>
-                            </li>
-                            @endif
+                            </div>
+                        </li> --}}
+
+                            <span class="nav-item dropdown position-relative py-3">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
+                                    href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="true">
+                                    <img class="user-avatar -medium"
+                                        src="{{ asset('customer/profile/' . Auth::guard('web')->user()->image) }}">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
+
+
+                                    <a class="dropdown-item my-2" href="{{route('customerProfile')}}">
+                                        <div class="">
+
+                                        <i class="fa fa-user  " style="font-size:1.46rem;padding:0"></i>
+                                        <span class="ms-2">My Profile</span>
+                                        </div>
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item my-2" href="{{ route('cart.index') }}">
+                                            <div class="">
+                                                <i class="fa fa-shopping-cart" style="padding:0;font-size: 1.46rem;"></i>
+                                                <span class="ms-2">Cart</span>
+                                            </div>
+                                            
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item my-2" href="{{ route('wishlist.index') }}">
+                                        <div class="">
+                                                <i class="fa fa-grin-hearts" style="font-size: 1.46rem;padding:0"></i>
+                                                <span class="ms-2">wishlist</span>
+                                        </div>
+                                    </a>
 
 
 
-                            <li>
-                            @if(Auth::guard('owner')->check())
-            <span class="nav-item dropdown position-relative">
-                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                    <img class="user-avatar -medium" src="{{ asset('owner/profile/'.Auth::guard('owner')->user()->image) }}">
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user me-1 ms-1"></i>
-                            My Profile</a>
-                        
-                        <a class="dropdown-item dropdown-item1" href="javascript:void(0)"><i class="ti-settings me-1 ms-1"></i> Account Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="http://127.0.0.1:8000/logout" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"><i class="fa fa-power-off me-1 ms-1"></i> Logout</a>
-                                <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST" style="display: none;">
-                                    <input type="hidden" name="_token" value="T4NZTnDtLnNHfBJVjMFAeLxqDJSCHU0KKj43CgGF">                                  </form>
-                        <div class="dropdown-divider"></div>
-                        <div class="ps-4 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded text-white">View Profile</a></div>
-                    </ul>
-                                </span>
-        
-        
-                                 @elseif(Auth::guard('web')->check())
-                                 
-                                 <div class="user-avatar -medium" style="background-image: url({{asset('admin/assets/images/avatars/admin.png')}}"></div>
 
-                               
-                            
-                
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{route('logout')}}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i
+                                            class="fa fa-power-off 1" style="font-size: 1.46rem;padding:0"></i> Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
 
-        
+                                    </form>
+
+
+
+
+
+
+                                    <div class="dropdown-divider"></div>
+                                   
+                                </ul>
+                            </span>
+                        @elseif(Auth::guard('web')->check())
+                            <div class="user-avatar -medium"
+                                style="background-image: url({{ asset('customer/profile/' . Auth::guard('web')->user()->image) }})">
+                            </div>
+                        @elseif(Auth::guard('admin')->check())
+                            <span class="nav-item dropdown position-relative">
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
+                                    href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="true">
+                                    <img class="user-avatar -medium"
+                                        src="{{ asset('customer/profile/' . Auth::guard('web')->user()->image) }}">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="javascript:void(0)"><i
+                                            class="ti-user me-1 ms-1"></i>
+                                        My Profile</a>
+
+                                    <a class="dropdown-item dropdown-item1" href="javascript:void(0)"><i
+                                            class="ti-settings me-1 ms-1"></i> Account Setting</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="http://127.0.0.1:8000/logout"
+                                       ><i
+                                            class="fa fa-power-off me-1 ms-1"></i> Logout</a>
+                                    <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST"
+                                        style="display: none;">
+
+                                    </form>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="ps-4 p-10"><a href="javascript:void(0)"
+                                            class="btn btn-sm btn-success btn-rounded text-white">View Profile</a>
+                                    </div>
+                                </ul>
+                            </span>
+                        @else
+                            <div class="css-u4ozf6 elkhwc30">
+                                <a class="css-zt4hrj edbh2gs2" href="{{ route('customer.login') }}"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+                                        class="edbh2gs0 css-1pck7r8 e159mnfu0">
+                                        <path fill-rule="evenodd"
+                                            d="M10.5 15.75c-2.002 0-3.628 1.58-3.73 3.56v1.792C3.623 19.287 1.5 15.886 1.5 12 1.5 6.21 6.21 1.5 12 1.5S22.5 6.21 22.5 12c0 3.886-2.122 7.286-5.269 9.101V19.31c-.103-1.98-1.729-3.56-3.73-3.56h-3Zm1.5-9c-1.654 0-3 1.346-3 3v1.5c0 1.654 1.346 3 3 3s3-1.346 3-3v-1.5c0-1.654-1.346-3-3-3Z">
+                                        </path>
+                                    </svg><span class="css-38p5yx edbh2gs1">login</span></a>
+                                <div id="USER_SPACE" class="css-1unvnzj e1xxesyf0">
+                                    <div class="css-1jlbi3k e1ckxu7x0"></div>
+                                </div>
+                            </div>
+
+
+
+            </div>
+            @endif
+            </li>
+            </ul>
         </div>
-                                 @elseif(Auth::guard('admin')->check())
-                                 
-                                 <div class="user-avatar -medium" style="background-image: url({{asset('admin/assets/images/avatars/admin.png')}})"></div>
 
-                
 
-        
-        </div>
-                                  @else 
-                                  <div class="css-u4ozf6 elkhwc30">
-                <a class="css-zt4hrj edbh2gs2" href="{{route('customer.login')}}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="edbh2gs0 css-1pck7r8 e159mnfu0"><path fill-rule="evenodd" d="M10.5 15.75c-2.002 0-3.628 1.58-3.73 3.56v1.792C3.623 19.287 1.5 15.886 1.5 12 1.5 6.21 6.21 1.5 12 1.5S22.5 6.21 22.5 12c0 3.886-2.122 7.286-5.269 9.101V19.31c-.103-1.98-1.729-3.56-3.73-3.56h-3Zm1.5-9c-1.654 0-3 1.346-3 3v1.5c0 1.654 1.346 3 3 3s3-1.346 3-3v-1.5c0-1.654-1.346-3-3-3Z"></path></svg><span class="css-38p5yx edbh2gs1">login</span></a><div id="USER_SPACE" class="css-1unvnzj e1xxesyf0"><div class="css-1jlbi3k e1ckxu7x0"></div></div></div>
-                
 
-        
-        </div>@endif
-                            </li>
-                        </ul>
-                    </div>
-           
-            
-            
-       
+
     </header>
     @if (Route::currentRouteName() == 'restaurant.single' || Route::currentRouteName() == 'restaurants.nearby')
-    <div data-test="header-content" class="css-1eszyna eqdhima1 my-3">
-        <form method="POST" action="/restaurants/nearby" id="locationForm">
-            @csrf
-       <div data-test="search-component" class="styles_formHorizontal___DjRa">
-          <div class="css-1sn0ou2 elkhwc30">
-             <div class="styles_inputContainer__oP8eT">
-                <div class="styles_header__LvEz8">
-                   <div class="styles_titleBar__faw9q">
-                      <span><span>What</span></span>
-                      <button class="styles_iconCross__sHcI3">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e7tclca0">
-                            <path fill-rule="evenodd" d="m12 10.94 6.22-6.22a.75.75 0 0 1 1.147.956l-.087.104L13.06 12l6.22 6.22a.75.75 0 0 1-.956 1.147l-.104-.087L12 13.06l-6.22 6.22a.75.75 0 0 1-1.147-.956l.087-.104L10.94 12 4.72 5.78a.75.75 0 0 1 .956-1.147l.104.087L12 10.94Z"></path>
-                         </svg>
-                      </button>
-                   </div>
-                   <label color="gray.xl" display="block" for="whatinput" class="css-14l0plx eulusyj0"><span><span>What</span></span></label>
-                   <span class="styles_wrapper__yAYpU styles_searchInputWrapper__VlR2_ styles_what__1qWvW">
-                      <span class="styles_inputLine__o5Lpc styles_hasBorder__RBeU2 styles_search__tjTV0 styles_searchInput__u_8Vt">
-                         <span role="button" tabindex="0" class="styles_prefix__FlGY7">
-                            <span class="styles_searchIcon__ureZe">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 elml5ar0">
-                                  <g fill-rule="evenodd">
-                                     <path d="M16.91 1.5C19.181 1.5 21 4.068 21 6.616c0 2.083-1.32 3.496-3.273 3.802V21.59a.91.91 0 1 1-1.819 0V10.418c-1.952-.306-3.09-1.719-3.09-3.802 0-2.548 1.819-5.116 4.091-5.116Zm0 1.467c-1.174 0-2.455 1.81-2.455 3.65 0 1.546.96 2.395 2.454 2.395 1.494 0 2.455-.849 2.455-2.396 0-1.839-1.282-3.649-2.455-3.649Z"></path>
-                                     <path d="M7.09 21.766c0 .406-.365.734-.817.734-.452 0-.818-.328-.818-.734V9.728C4.095 9.728 3 8.723 3 7.492V2.234c0-.406.366-.734.818-.734.452 0 .818.328.818.734v5.258c0 .428.371.769.819.769V2.234c0-.406.366-.734.818-.734.452 0 .818.328.818.734V8.26c.447 0 .818-.34.818-.769V2.234c0-.406.366-.734.818-.734.452 0 .818.328.818.734v5.258c0 1.231-1.094 2.236-2.454 2.236v12.038Z"></path>
-                                  </g>
-                               </svg>
-                            </span>
-                         </span>
-                         <label class="styles_labelWrapper__Ce7TK"><span class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input type="text" class="styles_input__vCYji"  placeholder="Cuisine, restaurant name..." name="restaurant_name" value="{{ request()->get('restaurant_name') }}"></span></label>
-                      </span>
-                   </span>
+        <div data-test="header-content" class="css-1eszyna eqdhima1 my-3">
+            <form method="POST" action="/restaurants/nearby" id="locationForm">
+                @csrf
+                <div data-test="search-component" class="styles_formHorizontal___DjRa">
+                    <div class="css-1sn0ou2 elkhwc30">
+                        <div class="styles_inputContainer__oP8eT">
+                            <div class="styles_header__LvEz8">
+                                <div class="styles_titleBar__faw9q">
+                                    <span><span>What</span></span>
+                                    <button class="styles_iconCross__sHcI3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+                                            class="css-p3qwn0 e7tclca0">
+                                            <path fill-rule="evenodd"
+                                                d="m12 10.94 6.22-6.22a.75.75 0 0 1 1.147.956l-.087.104L13.06 12l6.22 6.22a.75.75 0 0 1-.956 1.147l-.104-.087L12 13.06l-6.22 6.22a.75.75 0 0 1-1.147-.956l.087-.104L10.94 12 4.72 5.78a.75.75 0 0 1 .956-1.147l.104.087L12 10.94Z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <label color="gray.xl" display="block" for="whatinput"
+                                    class="css-14l0plx eulusyj0"><span><span>What</span></span></label>
+                                <span
+                                    class="styles_wrapper__yAYpU styles_searchInputWrapper__VlR2_ styles_what__1qWvW">
+                                    <span
+                                        class="styles_inputLine__o5Lpc styles_hasBorder__RBeU2 styles_search__tjTV0 styles_searchInput__u_8Vt">
+                                        <span role="button" tabindex="0" class="styles_prefix__FlGY7">
+                                            <span class="styles_searchIcon__ureZe">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+                                                    class="css-p3qwn0 elml5ar0">
+                                                    <g fill-rule="evenodd">
+                                                        <path
+                                                            d="M16.91 1.5C19.181 1.5 21 4.068 21 6.616c0 2.083-1.32 3.496-3.273 3.802V21.59a.91.91 0 1 1-1.819 0V10.418c-1.952-.306-3.09-1.719-3.09-3.802 0-2.548 1.819-5.116 4.091-5.116Zm0 1.467c-1.174 0-2.455 1.81-2.455 3.65 0 1.546.96 2.395 2.454 2.395 1.494 0 2.455-.849 2.455-2.396 0-1.839-1.282-3.649-2.455-3.649Z">
+                                                        </path>
+                                                        <path
+                                                            d="M7.09 21.766c0 .406-.365.734-.817.734-.452 0-.818-.328-.818-.734V9.728C4.095 9.728 3 8.723 3 7.492V2.234c0-.406.366-.734.818-.734.452 0 .818.328.818.734v5.258c0 .428.371.769.819.769V2.234c0-.406.366-.734.818-.734.452 0 .818.328.818.734V8.26c.447 0 .818-.34.818-.769V2.234c0-.406.366-.734.818-.734.452 0 .818.328.818.734v5.258c0 1.231-1.094 2.236-2.454 2.236v12.038Z">
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </span>
+                                        <label class="styles_labelWrapper__Ce7TK"><span
+                                                class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input
+                                                    type="text" class="styles_input__vCYji"
+                                                    placeholder="Cuisine, restaurant name..." name="restaurant_name"
+                                                    value="{{ request()->get('restaurant_name') }}"></span></label>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="css-uzcusv elkhwc30">
+                        <div class="styles_inputContainer__oP8eT">
+                            <div class="styles_header__LvEz8">
+                                <div class="styles_titleBar__faw9q">
+                                    <span>Where</span>
+                                    <button class="styles_iconCross__sHcI3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+                                            class="css-p3qwn0 e7tclca0">
+                                            <path fill-rule="evenodd"
+                                                d="m12 10.94 6.22-6.22a.75.75 0 0 1 1.147.956l-.087.104L13.06 12l6.22 6.22a.75.75 0 0 1-.956 1.147l-.104-.087L12 13.06l-6.22 6.22a.75.75 0 0 1-1.147-.956l.087-.104L10.94 12 4.72 5.78a.75.75 0 0 1 .956-1.147l.104.087L12 10.94Z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <label color="gray.xl" display="block" for="whereinput"
+                                    class="css-14l0plx eulusyj0"><span>Where</span></label>
+                                <span
+                                    class="styles_wrapper__yAYpU styles_searchInputWrapper__VlR2_ styles_where__NUu9b">
+                                    <span
+                                        class="styles_inputLine__o5Lpc styles_hasBorder__RBeU2 styles_search__tjTV0 styles_searchInput__u_8Vt">
+                                        <span role="button" tabindex="0" class="styles_prefix__FlGY7">
+                                            <span class="styles_searchIcon__ureZe">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+                                                    class="css-p3qwn0 e3pjkim0">
+                                                    <g fill-rule="evenodd">
+                                                        <path
+                                                            d="M12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 .82-.146 1.62-.413 2.324-.775 2.588-2.671 6.43-5.69 11.557a.75.75 0 0 1-1.293 0c-3.02-5.127-4.916-8.97-5.675-11.51A6.75 6.75 0 0 1 12 1.5ZM12 3a5.25 5.25 0 0 0-5.25 5.25c0 .639.114 1.26.35 1.892.673 2.249 2.294 5.605 4.856 10.045l.043.073.43-.746c2.229-3.912 3.69-6.942 4.389-9.101l.099-.318A5.25 5.25 0 0 0 12 3Z">
+                                                        </path>
+                                                        <path
+                                                            d="M12 5.25a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z">
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                        </span>
+                                        <label class="styles_labelWrapper__Ce7TK"><span
+                                                class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input
+                                                    type="search" class="styles_input__vCYji styles_hasValue__KXB2d"
+                                                    name="search" placeholder="Near me, exact address, station..."
+                                                    id="whereinput" autocomplete="off" aria-owns="autocomplete"
+                                                    aria-autocomplete="both" aria-activedescendant="option1"
+                                                    data-hj-whitelist="true" data-test="search-where-input"
+                                                    label="" inputplacement="default" notice=""
+                                                    value="{{ request()->get('location') }}" name="location">
+                                            </span></label>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="css-iehb9x elkhwc30"><button height="40px" type="submit"
+                            class="css-m60cff ektx8jp0"><span>Search</span></button>
+                    </div>
                 </div>
-             </div>
-          </div>
-          <div class="css-uzcusv elkhwc30">
-             <div class="styles_inputContainer__oP8eT">
-                <div class="styles_header__LvEz8">
-                   <div class="styles_titleBar__faw9q">
-                      <span>Where</span>
-                      <button class="styles_iconCross__sHcI3">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e7tclca0">
-                            <path fill-rule="evenodd" d="m12 10.94 6.22-6.22a.75.75 0 0 1 1.147.956l-.087.104L13.06 12l6.22 6.22a.75.75 0 0 1-.956 1.147l-.104-.087L12 13.06l-6.22 6.22a.75.75 0 0 1-1.147-.956l.087-.104L10.94 12 4.72 5.78a.75.75 0 0 1 .956-1.147l.104.087L12 10.94Z"></path>
-                         </svg>
-                      </button>
-                   </div>
-                   <label color="gray.xl" display="block" for="whereinput" class="css-14l0plx eulusyj0"><span>Where</span></label>
-                   <span class="styles_wrapper__yAYpU styles_searchInputWrapper__VlR2_ styles_where__NUu9b">
-                      <span class="styles_inputLine__o5Lpc styles_hasBorder__RBeU2 styles_search__tjTV0 styles_searchInput__u_8Vt">
-                         <span role="button" tabindex="0" class="styles_prefix__FlGY7">
-                            <span class="styles_searchIcon__ureZe">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="css-p3qwn0 e3pjkim0">
-                                  <g fill-rule="evenodd">
-                                     <path d="M12 1.5a6.75 6.75 0 0 1 6.75 6.75c0 .82-.146 1.62-.413 2.324-.775 2.588-2.671 6.43-5.69 11.557a.75.75 0 0 1-1.293 0c-3.02-5.127-4.916-8.97-5.675-11.51A6.75 6.75 0 0 1 12 1.5ZM12 3a5.25 5.25 0 0 0-5.25 5.25c0 .639.114 1.26.35 1.892.673 2.249 2.294 5.605 4.856 10.045l.043.073.43-.746c2.229-3.912 3.69-6.942 4.389-9.101l.099-.318A5.25 5.25 0 0 0 12 3Z"></path>
-                                     <path d="M12 5.25a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"></path>
-                                  </g>
-                               </svg>
-                            </span>
-                         </span>
-                         <label class="styles_labelWrapper__Ce7TK"><span class="styles_inputWrapper__eMJ2o styles_search__tjTV0"><input type="search" class="styles_input__vCYji styles_hasValue__KXB2d" name="search" placeholder="Near me, exact address, station..." id="whereinput" autocomplete="off" aria-owns="autocomplete" aria-autocomplete="both" aria-activedescendant="option1" data-hj-whitelist="true" data-test="search-where-input" label="" inputplacement="default" notice="" value="{{ request()->get('location') }}" name="location">
-                         </span></label>
-                      </span>
-                   </span>
-                </div>
-             </div>
-          </div>
-          <div class="css-iehb9x elkhwc30"><button height="40px" type="submit" class="css-m60cff ektx8jp0"><span>Search</span></button>
-          </div>
-       </div>
-        </form>
-    </div>
+            </form>
+        </div>
     @endif

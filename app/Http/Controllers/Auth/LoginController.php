@@ -98,7 +98,7 @@ class LoginController extends Controller
 
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password,'status'=>1], $request->get('remember'))) {
 
-            return redirect()->intended('/customer/dashboard');
+            return redirect()->route('home.page');
         }
         return redirect()->route('customer.login')
         ->with('message','These credentials do not match our records');

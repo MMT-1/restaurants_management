@@ -14712,7 +14712,7 @@ h3 {
   filter: Alpha(Opacity=50);
   /*IE7 fix*/
   zoom: 1;
-  *display: inline;
+  display: inline;
   /*IE7 life-saver */
 }
 
@@ -14735,7 +14735,7 @@ h3 {
 .owl-theme .owl-controls .owl-page {
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
   /*IE7 life-saver */
 }
 
@@ -16054,7 +16054,7 @@ h3 {
   font-weight: bold;
 }
 header .notification ul li .dropdown .dropdown-menu {
-  width: 300px;
+  width: 250px;
   border: 0;
   padding: 20px;
   box-shadow: 1px 0 55px rgba(0, 0, 0, 0.1);
@@ -16075,4 +16075,11 @@ header .notification ul li .dropdown .dropdown-menu   .total{
   font-weight: 700;
   text-transform: capitalize;
   color: #151a33;
+}
+
+
+
+
+.dropdown-menu1{
+  transform: translate(-172px, 88px) !important;
 }
