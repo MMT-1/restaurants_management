@@ -38,7 +38,7 @@
                                   
                                     <td class="pro-total"><a href="{{route('add.cart',$item->food->id)}}"><p><i class="flaticon-shopping-cart" style="font-size:20px;color:#000;cursor:pointer"></i></p></a></td>
                                     <td class="pro-delete">
-                                    <a href="{{route('item.delete',$item->id)}}">
+                                    <a href="{{route('itemwhish.delete',$item->id)}}">
                                             <i class="flaticon-delete"></i>
                                         </a>
                                       

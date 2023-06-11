@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\customer\FoodCart;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
     use HasFactory, LogsActivity,Notifiable;
 
-
+    public function foodCart(): HasOne
+    {
+        return $this->hasOne(FoodCart::class);
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

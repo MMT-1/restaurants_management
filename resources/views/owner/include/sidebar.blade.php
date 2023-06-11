@@ -29,13 +29,7 @@
                             class="hide-menu">Reservations</span></a></li>
 
                 
-                <li class="sidebar-item p-3">
-                    <a href="{{route('logout')}}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();" class="w-100 btn btn-cyan d-flex align-items-center text-white"><i class="fa fa-power-off me-1 ms-1"></i>Logout</a>
-                </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                  </form>
+                
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

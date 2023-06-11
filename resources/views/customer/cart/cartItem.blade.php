@@ -37,7 +37,7 @@
                                         </a>
                                     </th>
                                     <td class="pro-name">
-                                        <a href="shop-4-column-sidebar.html">{{$carts->food->food_name}}</a>
+                                        <a href="">{{$carts->food->food_name}}</a>
                                         @if(isset($carts->attributeType))
                                         <p>{{$carts->attributeType->attribute_type}}: {{$carts->attributeValue->attribute}}</p>
                                         @endif 
@@ -104,6 +104,10 @@
         </div>
     </div>
 </section>
+
+
+
+
 @endsection
 
 

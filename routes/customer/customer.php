@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\customer\CartController;
+use App\Http\Controllers\customer\OrderController;
 use App\Http\Controllers\customer\WishlistController;
 
 
@@ -34,8 +35,12 @@ Route::get('cart/add/{id}',[CartController::class,'addCart'])->name('add.cart');
 //wishlist route end
 
 //wishlist route start
-Route::get('wishlist/item/delete/{id}',[WishlistController::class,'destroy'])->name('item.delete');
+Route::get('wishlist/item/delete/{id}',[WishlistController::class,'destroy'])->name('itemwhish.delete');
 
 Route::resource('wishlist',WishlistController::class);
 Route::get('add/wishlist/{id}',[WishlistController::class,'addWishlist'])->name('add.wishlist');
 //wishlist route end
+
+
+
+Route::post('/orders/place', [OrderController::class,'placeOrder'])->name('orders.place');

@@ -54,3 +54,7 @@ Route::post('/restaurants/nearby',[FrontController::class, 'getNearbyRestaurants
 
 
 // Route::post('/restaurants/nearby',[FrontController::class, 'getNearby'] )->name('restaurants.nearby');
+
+
+
+

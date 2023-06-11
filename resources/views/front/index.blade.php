@@ -183,7 +183,6 @@
                                     </div>
                                 </div>
                                 <div class="bottom-area">
-                                    <a href="{{route('food.single',array('id'=>$featureds->id,'slug'=>$featureds->food_slug))}}">
                                         <h5>{{$featureds->food_name}}</h5>
                                     </a>
                                     <p><span>$110</span> - $78</p>
