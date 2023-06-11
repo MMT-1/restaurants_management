@@ -51,7 +51,7 @@ class FoodController extends Controller
 
                   //for action column
                   ->addColumn('action', function($row){
-                     $btn = '<a class="btn btn-primary btn-sm" title="Edit food" href="'.route('foods.edit',$row->id).'"> <i class="fa fa-edit"></i></a>';
+                     $btn = '<a class="btn btn-primary btn-sm" title="Edit food" href="'.route('foods.edit',$row->id).'"> <i class="fa fa-edit"></i></a> <a class="btn btn-secondary btn-sm" title="delete food" href="'.route('foods.delete',$row->id).'"> <i class="fa fa-trash"></i></a>';
                      return $btn;
                    })
 
@@ -72,12 +72,7 @@ class FoodController extends Controller
         return view('admin.food.create',compact('attributeType','restaurant','brand','category'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(FoodValidate $request)
     {
          //check if file is upload
@@ -148,25 +143,13 @@ class FoodController extends Controller
 
         return redirect()->route('foods.index')->with('success','food has been successfully store');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
+ 
      
     public function edit($id)
     {
@@ -179,13 +162,29 @@ class FoodController extends Controller
         return view('admin.food.edit', compact('food', 'attributeType', 'restaurant', 'brand', 'category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+    public function delete($id)
+{
+    // Find the food item by ID
+    $food = Food::find($id);
+
+    if ($food) {
+        // Perform the deletion
+        $food->delete();
+
+        // Redirect back or to any desired page
+        return redirect()->back()->with('success', 'Food item deleted successfully');
+    } else {
+        // Food item not found
+        return redirect()->back()->with('error', 'Food item not found');
+    }
+}
+
+
+
+ 
     public function update(Request $request, $id)
     {
         // Find the food to be updated
@@ -247,23 +246,7 @@ class FoodController extends Controller
     }
     
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-      /**
-     * attribute value ajax request.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function attributeValue($id){
       $data = AttributeValue::where('type_id',$id)->where('status',1)->get();
       return response()->json($data);

@@ -45,7 +45,7 @@ class CustomerController extends Controller
 
                   //for action column
                   ->addColumn('action', function($row){
-                     $btn = '<a class="btn btn-primary btn-sm" title="Edit customer" href="'.route('customer.edit',$row->id).'"> <i class="fa fa-edit"></i>Edit Profile</a>';
+                     $btn = '<a class="btn btn-primary btn-sm marginaction" title="Edit customer" href="'.route('customer.edit',$row->id).'"> <i class="fa fa-edit"></i>Edit Profile</a><a class="btn btn-secondary ms-2 btn-sm" title="delete customer" href="'.route('customer.delete',$row->id).'"> <i class="fa fa-trash"></i>Edit Profile</a>';
                      return $btn;
                    })
                    ->rawColumns(['image','status','action'])
@@ -138,7 +138,14 @@ class CustomerController extends Controller
 
 
 
+public function delete(Request $request, User $customer)
+{
+    // Perform the deletion
+    $customer->delete();
 
+    // Redirect back or to any desired page
+    return redirect()->back()->with('success', 'Customer deleted successfully');
+}
 
 
      public function update(Request $request,User $customer)

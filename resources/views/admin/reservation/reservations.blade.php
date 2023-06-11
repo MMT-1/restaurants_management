@@ -1,13 +1,9 @@
 @extends('admin.layout.master')
 
-@section('title') Customer List @endsection
+@section('title') Reservations List @endsection
 
 @section('content')
- <style>
-    .marginaction{
-        margin-right: 12px;
-    }
- </style>
+ 
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-12">
@@ -15,7 +11,7 @@
                 <h1 class="main-title float-left">Dashboard</h1>
                 <ol class="breadcrumb float-right">
                     <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item active">Customer List</li>
+                    <li class="breadcrumb-item active">Reservations List</li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
@@ -31,12 +27,13 @@
                             <thead>
                                 <tr>
                                     <th>Sl</th>
-                                    <th>Customer Name</th>
-                                    <th>Image</th>
-                                    <th>Phone</th>
-                                    <th>Zip code</th>
-                                    <th>Email</th>
-                                    <th>Status</th> 
+
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Guests</th> 
+                                    <th>Email</th> 
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -52,15 +49,15 @@
       var table = $('.datatable').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('customers.index') }}",
+          ajax: "{{ route('admin.reservations') }}",
           columns: [
               {data: 'DT_RowIndex', name: 'DT_RowIndex'},
               {data: 'first_name', name: 'first_name'},
-              {data: 'image', name: 'image'},
-              {data: 'mobile', name: 'mobile'},
-              {data: 'zip_code', name: 'zip_code'},
+              {data: 'last_name', name: 'last_name'},
+              {data: 'date', name: 'date'},
+              {data: 'time', name: 'time'},
+              {data: 'guests', name: 'guests'},
               {data: 'email', name: 'email'},
-              {data: 'status', name: 'status'},
               {
                   data: 'action', 
                   name: 'action', 
@@ -68,6 +65,7 @@
                   searchable: true,
                   responsive: true
               },
+              
           ]
       });
     });

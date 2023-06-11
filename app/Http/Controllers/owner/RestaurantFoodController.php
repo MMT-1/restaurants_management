@@ -46,7 +46,7 @@ class RestaurantFoodController extends Controller
                 return $status;
             })
             ->addColumn('action', function ($row) {
-                $btn = '<a class="btn btn-primary btn-sm" title="Edit food" href="' . route('restaurant.foods.edit', $row->id) . '"> <i class="fa fa-edit"></i></a>';
+                $btn = '<a class="btn btn-primary btn-sm" title="Edit food" href="' . route('restaurant.foods.edit', $row->id) . '"> <i class="fa fa-edit"></i></a> <a class="btn btn-secondary btn-sm" title="Delete food" href="' . route('restaurant.foods.delete', $row->id) . '"> <i class="fa fa-trash"></i></a>';
                 return $btn;
             })
             ->rawColumns(['image', 'status', 'action'])
@@ -137,6 +137,17 @@ public function edit($id)
     $category = $this->allParentCategory();
 
     return view('owner.food.edit', compact('food', 'attributeType', 'restaurant', 'brand', 'category'));
+}
+
+
+
+public function delete($id)
+{
+  $ownerId = auth()->user()->id;
+  $food = Food::where('owner_id', $ownerId)->findOrFail($id);    
+  $food->delete();
+
+    return redirect()->back()->with('success', 'Food deleted successfully');
 }
 
 

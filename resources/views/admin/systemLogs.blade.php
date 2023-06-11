@@ -20,13 +20,20 @@
         </div>
     </div>
     <div class="row">
+        
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card mb-3">
+                
                 <div class="card-body">
                        @include('admin.include.message')
                        <div class="table-responsive">
                         <table class="datatable table table-bordered table-hover display">
+                            
                             <thead>
+                                <form action="{{ route('activity.clear') }}" method="POST" >
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger m-1">Clear</button>
+                                </form>
                                 <tr>
                                     <th>Sl</th>
                                     <th>Log Name</th>

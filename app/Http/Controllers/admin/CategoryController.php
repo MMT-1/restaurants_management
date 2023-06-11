@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
                   //for action column
                   ->addColumn('action', function($row){
-                     $btn = '<a class="btn btn-primary btn-sm" title="Edit Category" href="'.route('categories.edit',$row->id).'"> <i class="fa fa-edit"></i></a>';
+                     $btn = '<a class="btn btn-primary btn-sm" title="Edit Category" href="'.route('categories.edit',$row->id).'"> <i class="fa fa-edit"></i></a> <a class="btn btn-secondary btn-sm" title="Delete Category" href="'.route('categories.delete',$row->id).'"> <i class="fa fa-trash"></i></a>';
                      return $btn;
                    })
 
@@ -116,6 +116,22 @@ class CategoryController extends Controller
         $categorys = $this->activeCategory();
         return view('admin.category.edit',compact('categorys','category'));
     }
+
+
+
+
+    public function delete(Category $category)
+    {
+        // Find the food item by ID
+        $category->delete();
+    
+        
+        return redirect()->back()->with('success', 'Food item deleted successfully');
+        
+    }
+
+
+
     
     /**
      * Update the specified resource in storage.

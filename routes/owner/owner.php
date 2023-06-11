@@ -26,7 +26,9 @@ use App\Http\Controllers\Owner\ReservationsController;
   Route::post('owner/ownerProfile/update', [ProfileController::class,'update'])->name('owner.ownerProfile.update');
 
   // Route::post('/reservation', [ReservationController::class, 'reservation']);
-  Route::get('owner/reservations', [ReservationsController::class, 'reservations']);;
+  Route::get('owner/reservations', [ReservationsController::class, 'reservations'])->name('reservations');
+  Route::get('/reservation/delete/{id}', [ReservationsController::class, 'delete'])->name('reservation.delete');
+
 
 
   // Route::get('owner/updateprofile', [ProfileController::class,'update'])->name('owner.updateprofile');
@@ -36,6 +38,7 @@ use App\Http\Controllers\Owner\ReservationsController;
 
 
 Route::get('restaurant/foods',[RestaurantFoodController::class,'index'])->name('restaurant.foods');
+Route::get('restaurant/delete/{id}',[RestaurantFoodController::class,'delete'])->name('restaurant.foods.delete');
 Route::post('restaurant/foods',[RestaurantFoodController::class,'store'])->name('restaurant.foods');
 Route::get('restaurant/foods/create',[RestaurantFoodController::class,'create'])->name('restaurant.foods.create');
 // Route::get('att/value/{id}',[foodController::class,'attributeValue'])->name('att.values');

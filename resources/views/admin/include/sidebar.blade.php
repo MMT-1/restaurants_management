@@ -80,15 +80,16 @@
                     </ul>
                 </li>
 
+               
                 <li class="submenu">
                     <a id="tables" href="#">
                         <i class="fas fa-money-bill-alt"></i>
-                        <span>Customer Payment</span>
+                        <span>Reservation</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="tables-basic.html">List</a>
+                            <a href="{{route('admin.reservations')}}">List</a>
                         </li>
                     </ul>
                 </li>
@@ -109,37 +110,9 @@
                     </ul>
                 </li>
 
-                <li class="submenu">
-                    <a id="tables" class="@if($url==='brands.index' || $url==='brands.create' || $url==='brands.edit') active @endif" href="#">
-                        <i class="fab fa-bandcamp"></i>
-                        <span>Brand</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="list-unstyled">
-                        <li class="@if($url==='brands.index') active @endif">
-                            <a href="{{route('brands.index')}}">List</a>
-                        </li>
-                        <li class="@if($url==='brands.create') active @endif">
-                            <a href="{{route('brands.create')}}">Add New</a>
-                        </li>
-                    </ul>
-                </li>
+                
 
-                <li class="submenu">
-                    <a id="tables" class="@if($url==='attributes.index' || $url==='attributes.create' || $url==='attributes.edit') active @endif" href="#">
-                        <i class="fab fa-vaadin"></i>
-                        <span>Attribute</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="list-unstyled">
-                        <li class="@if($url==='attributes.index') active @endif">
-                            <a href="{{route('attributes.index')}}">List</a>
-                        </li>
-                        <li class="@if($url==='attributes.create') active @endif">
-                            <a href="{{route('attributes.create')}}">Add New</a>
-                        </li>
-                    </ul>
-                </li>
+                
 
                 
 

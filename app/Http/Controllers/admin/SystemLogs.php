@@ -39,6 +39,13 @@ class SystemLogs extends Controller
      
            
    
+    public function clear(Request $request)
+    {
+        // Clear all activity logs
+        Activity::truncate();
 
+        // Redirect back or to any desired page
+        return redirect()->back()->with('success', 'Activity logs cleared successfully');
+    }
 
     }

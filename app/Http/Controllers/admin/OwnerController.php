@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\admin;
    
 use DataTables;
-use App\Models\owner\Restaurant;
+use App\Models\owner\Owner;
 use App\Traits\CommonTrait;
 use Illuminate\Support\Str;
-use App\Models\owner\Owner;
 use Illuminate\Http\Request;
+use App\Models\owner\Restaurant;
+use App\Models\owner\Reservation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\admin\OwnerValidate;
@@ -48,7 +49,7 @@ class OwnerController extends Controller
 
                   //for action column
                   ->addColumn('action', function($row){
-                     $btn = '<a class="btn btn-primary btn-sm" title="Edit owner" href="'.route('owners.edit',$row->id).'"> <i class="fa fa-edit"></i>Edit Profile</a>';
+                     $btn = '<a class="btn btn-primary btn-sm" title="Edit owner" href="'.route('owners.edit',$row->id).'"> <i class="fa fa-edit"></i>Edit Profile</a> <a class="btn btn-secondary btn-sm" title="Delete owner" href="'.route('owners.deleteOwner',$row->id).'"> <i class="fa fa-trash"></i>Delete Profile</a>';
                      return $btn;
                    })
                    ->rawColumns(['image','status','action'])
@@ -158,12 +159,7 @@ class OwnerController extends Controller
             ->with('success','owner created successfully.');
     }
      
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Food  $food
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Owner $owner)
     {
        $country = $this->activeCountry();
@@ -171,13 +167,20 @@ class OwnerController extends Controller
        return view('admin.owner.edit',compact('owner','country'));
     }
     
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Food  $food
-     * @return \Illuminate\Http\Response
-     */
+
+    public function deleteOwner(Request $request, Owner $owner)
+{
+    // Perform the deletion
+    $owner->delete();
+
+    // Redirect back or to any desired page
+    return redirect()->back()->with('success', 'Owner deleted successfully');
+}
+
+
+
+
+
     public function update(OwnerUpdateValidation $request,Owner $owner)
     {
 
@@ -263,6 +266,49 @@ class OwnerController extends Controller
               ->with('success','owner updated successfully.');
 
     }
+
+
+
+
+
+
+    public function reservations(Request $request)
+
+   {     
+
+
+
+   
+
+       $list = Reservation::get();
+       if ($request->ajax()) {
+           return Datatables::of($list)
+               ->addIndexColumn()
+               ->addColumn('action', function($row){
+                $btn = '<a class="btn btn-secondary btn-sm" title="delete owner" href="'.route('admin.reservation.delete',$row->id).'"> <i class="fa fa-trash"></i>delete</a>';
+                return $btn;
+              })
+               
+                  ->rawColumns(['action'])
+                  ->make(true);
+             }
+           return view('admin.reservation.reservations');
+    }
+
+    public function delete($id)
+{
+    // Find the reservation by ID
+    $reservation = Reservation::find($id);
+
+    // Perform the deletion
+    if ($reservation) {
+        $reservation->delete();
+    }
+
+    return redirect()->route('admin.reservations');
+}
+
+
 
 
 }

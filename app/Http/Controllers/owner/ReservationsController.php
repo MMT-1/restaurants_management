@@ -7,22 +7,55 @@ use Illuminate\Http\Request;
 use App\Models\owner\Reservation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use DataTables;
 
 class ReservationsController extends Controller
 {
     //
    // ReservationController.php
   
-
-
    public function reservations(Request $request)
-   {
-    $owner_id = Auth::guard('owner')->user()->id;
 
-    $reservation = Reservation::where('restaurant_id', $owner_id)->get();
+   {     
+    $owner = Auth::guard('owner')->user();
 
-    return view('owner.ownerProfile.reservation', compact('reservation'));
-   }
+    $restaurant=Restaurant::where('owner_id',$owner->id)->first();
+// dd($restaurant->id);
+
+
+   
+
+       $list = Reservation::where("restaurant_id", $restaurant->id)->orderBy('id','DESC')->get();
+       if ($request->ajax()) {
+           return Datatables::of($list)
+               ->addIndexColumn()
+               ->addColumn('action', function($row){
+                $btn = '<a class="btn btn-primary btn-sm" title="delete owner" href="'.route('reservation.delete',$row->id).'"> <i class="fa fa-trash"></i>delete</a>';
+                return $btn;
+              })
+               
+                  ->rawColumns(['action'])
+                  ->make(true);
+             }
+           return view('owner.ownerProfile.reservation');
+    }
+
+
+
+    public function delete($id)
+{
+    // Find the reservation by ID
+    $reservation = Reservation::find($id);
+
+    // Perform the deletion
+    if ($reservation) {
+        $reservation->delete();
+    }
+
+    return redirect()->route('reservations');
+}
+
+
    
 
 

@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\DashboardController;
 
 //category route start
   Route::resource('categories',CategoryController::class);
+  Route::get('categories/delete/{category}',[CategoryController::class,'delete'])->name('categories.delete');
 //category route end
 
 //brand route start
@@ -40,16 +41,24 @@ use App\Http\Controllers\admin\DashboardController;
 
 //Owner route start
   Route::resource('owners',OwnerController::class);
+  Route::get('owners/delete/{owner}',[OwnerController::class,'deleteOwner'])->name('owners.deleteOwner');
+
+
+
+
+
   Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
 Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create');
 Route::post('customers', [CustomerController::class, 'store'])->name('customers.store');
 Route::get('customer/{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::get('customer/{customer}/delete', [CustomerController::class, 'delete'])->name('customer.delete');
 Route::put('customer/{customer}', [CustomerController::class, 'update'])->name('customers.update');
 
 //Owner route end
 
 //Food route start
   Route::resource('owner/foods',FoodController::class);
+  Route::get('owner/foods/delete/{id}',[FoodController::class,'delete'])->name('foods.delete');
   Route::get('att/value/{id}',[FoodController::class,'attributeValue'])->name('att.values');
 //Food route end
 
@@ -57,3 +66,10 @@ Route::put('customer/{customer}', [CustomerController::class, 'update'])->name('
 
 
 Route::get('/activity-logs', [SystemLogs::class,'index'])->name('activity.logs');
+Route::post('/activity/clear', [SystemLogs::class, 'clear'])->name('activity.clear');
+
+
+
+
+Route::get('getreservations', [OwnerController::class, 'reservations'])->name('admin.reservations');
+  Route::get('/getreservations/delete/{id}', [OwnerController::class, 'delete'])->name('admin.reservation.delete');
