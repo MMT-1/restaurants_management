@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Http\Request;
+use Spatie\Activitylog\LogOptions;
+use App\Http\Controllers\Controller;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
 class LoginController extends Controller
@@ -22,7 +24,11 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers,LogsActivity;
+
+
+
+   
 
     /**
      * Where to redirect users after login.
@@ -44,7 +50,30 @@ class LoginController extends Controller
             $this->middleware('guest:owner')->except('logout');
     }
 
-     public function showAdminLoginForm()
+
+    public function logout(Request $request)
+    {
+        $user = Auth::user(); // Get the currently authenticated user
+
+        if ($user) {
+            $logOptions = $this->getActivitylogOptions(); // Get the activity log options
+
+            activity()
+                ->useLog($logOptions->logName)
+                ->performedOn($user)
+                ->log('logged out: ' . $user->email);
+        }
+
+        Auth::logout(); // Perform the actual logout
+
+        $request->session()->invalidate(); // Invalidate the session
+
+        $request->session()->regenerateToken(); // Regenerate the CSRF token
+        return redirect('/'); // Redirect to the desired page after logout
+    }
+
+    
+    public function showAdminLoginForm()
     {
         return view('admin.auth.login', ['url' => 'admin']);
     }
@@ -57,7 +86,15 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            $userType = 'admin';
+            $logOptions = $this->getActivitylogOptions($userType);
 
+            activity()
+                ->useLog($logOptions->logName)
+                ->log('Admin logged in: ' . $request->email);
+    
+            // Set the subject type and ID
+       
             return redirect()->intended('/admin/dashboard');
         }
         return redirect()->route('admin.login')
@@ -77,7 +114,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('owner')->attempt(['email' => $request->email, 'password' => $request->password,'status'=>1], $request->get('remember'))) {
+            $userType = 'owner';
+            $logOptions = $this->getActivitylogOptions($userType);
 
+            activity()
+                ->useLog($logOptions->logName)
+                ->log('Owner logged in: ' . $request->email);
+    
+        
             return redirect()->intended('/owner/dashboard');
         }
         return redirect()->route('owner.login')
@@ -90,6 +134,7 @@ class LoginController extends Controller
     }
 
     public function customerLogin(Request $request)
+    
     {
         $this->validate($request, [
             'email'   => 'required|email',
@@ -97,10 +142,32 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password,'status'=>1], $request->get('remember'))) {
+            $userType = 'customer';
+            $logOptions = $this->getActivitylogOptions($userType);
+
+            activity()
+                ->useLog($logOptions->logName)
+                ->log('Customer logged in: ' . $request->email);
+    
+            // Set the subject type and ID
+    
+            // Set the batch ID
+    
 
             return redirect()->route('home.page');
         }
         return redirect()->route('customer.login')
         ->with('message','These credentials do not match our records');
+    }
+
+
+
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['email'])
+            ->useLogName('Authentication')
+            ->logFillable();
     }
 }

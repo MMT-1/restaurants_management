@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\SystemLogs;
 use App\Http\Controllers\admin\FoodController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\admin\BrandController;
@@ -51,3 +52,8 @@ Route::put('customer/{customer}', [CustomerController::class, 'update'])->name('
   Route::resource('owner/foods',FoodController::class);
   Route::get('att/value/{id}',[FoodController::class,'attributeValue'])->name('att.values');
 //Food route end
+
+
+
+
+Route::get('/activity-logs', [SystemLogs::class,'index'])->name('activity.logs');

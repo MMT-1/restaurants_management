@@ -22,12 +22,7 @@ class OwnerController extends Controller
 
     //import trait
     use CommonTrait;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function index(Request $request)
     {
         $list = Owner::orderBy('id','DESC')->get();

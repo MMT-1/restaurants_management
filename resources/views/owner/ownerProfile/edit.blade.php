@@ -197,18 +197,13 @@
 
                                             
                                             <input type="hidden" name="restaurant_status" value="{{optional($owner->restaurants)->status}}">
-                                            <div class="col-lg-12">
-                                                <div class="form-group">
-                                                    <label>Address</label>
-                                                    <textarea class="form-control" name="restaurant_address" placeholder="Enter restaurant Address">{{optional($owner->restaurants)->restaurant_address}}</textarea>
-                                                </div>
-                                            </div>
+                                             
 
                                             <div class="col-lg-12">
                                                 
     
-                                                <input type="text" id="latitude" name="latitude" value="{{optional($owner->restaurants)->latitude}}">
-                                                    <input type="text" id="longitude" name="longitude" value="{{optional($owner->restaurants)->longitude}}">
+                                                <input type="hidden" id="latitude" name="latitude" value="{{optional($owner->restaurants)->latitude}}">
+                                                    <input type="hidden" id="longitude" name="longitude" value="{{optional($owner->restaurants)->longitude}}">
                                                     <div class="form-group">
                                                   
                                                     <input type="text" class="form-control" style="position:relative" name="location" id="location" value="{{optional($owner->restaurants)->restaurant_address}}"/>

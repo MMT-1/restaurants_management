@@ -118,102 +118,42 @@
 
                     <li>
                         @if (Auth::guard('owner')->check())
-                            <span class="nav-item dropdown position-relative">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
-                                    href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="true">
-                                    <img class="user-avatar -medium"
-                                        src="{{ asset('owner/profile/' . Auth::guard('owner')->user()->image) }}">
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user me-1 ms-1"></i>
-                                        My Profile</a>
+                        <span class="nav-item dropdown position-relative py-3">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
+                                href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="true">
+                                <img class="user-avatar -medium"
+                                    src="{{ asset('owner/profile/' . Auth::guard('owner')->user()->image) }}">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item dropdown-item1" href="javascript:void(0)"><i
-                                            class="ti-settings me-1 ms-1"></i> Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="http://127.0.0.1:8000/logout"
-                                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"><i
-                                            class="fa fa-power-off me-1 ms-1"></i> Logout</a>
-                                    <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST"
-                                        style="display: none;">
-                                        <input type="hidden" name="_token"
-                                            value="T4NZTnDtLnNHfBJVjMFAeLxqDJSCHU0KKj43CgGF">
-                                    </form>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="ps-4 p-10"><a href="javascript:void(0)"
-                                            class="btn btn-sm btn-success btn-rounded text-white">View Profile</a>
+
+                                <a class="dropdown-item my-2" href="{{ route('owner.dashboard') }}">
+                                    <div class="">
+
+                                        <i class="fa fa-user  " style="font-size:1.46rem;padding:0"></i>
+                                        <span class="ms-2">Dashboard</span>
                                     </div>
-                                </ul>
-                            </span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"><i
+                                        class="fa fa-power-off 1" style="font-size: 1.46rem;padding:0"></i>
+                                    Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+
+                                </form>
+                                <div class="dropdown-divider"></div>
+
+                            </ul>
+                        </span>
+
+
+                           
                         @elseif(Auth::guard('web')->check())
-                            {{--                           
-                        <li>
-                            <div class="containerIconX">
-                                <a href="{{ route('wishlist.index') }}" class="drop">
-                                    <i class="flaticon-heart" style="font-size: 24px;color: #606060;"></i>
-                                    <span class=" quantityY">{{ $wishlistCount }}</span>
-                                </a>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="dropdown dropdownX mx-4">
-
-                                <button class="dropdown-toggle " type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="flaticon-shopping-cart" style="font-size: 26px;color: #606060;"></i>
-                                    <span class="quantity quantityX">{{ $cartCount }}</span>
-                                </button>
-                                <div class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
-                                    <div class="heading d-flex justify-content-between">
-                                        <div class="cartView-icon">
-                                            <i class="flaticon-shopping-cart"></i>
-                                            <span class="quantity">{{ $cartCount }}</span>
-                                        </div>
-                                        <a href="{{ route('cart.index') }}">view cart</a>
-                                    </div>
-                                    <ul style="max-height: 200px; overflow-y: scroll;">
-                                        @foreach ($cartItem as $item)
-                                            <li class="mt-2">
-                                                <div class="d-flex position-relative cart-product-img">
-                                                    @if (isset($item->attributeType))
-                                                        <img src="{{ asset('owner/food/attribute/' . $item->image) }}"
-                                                            alt="food Image" />
-                                                    @else
-                                                        <img src="{{ asset('owner/food/' . $item->image) }}"
-                                                            alt="food Image" />
-                                                    @endif
-                                                    <div class="text ms-3">
-                                                        <a href="shop-detail-left.html">
-                                                            <h5>{{ $item->food->food_name }}dfaaaaaaaaaaaaaaa</h5>
-                                                        </a>
-                                                        @if (isset($item->attributeType))
-                                                            <p>{{ $item->attributeType->attribute_type }}:
-                                                                {{ $item->attributeValue->attribute }}</p>
-                                                        @endif
-                                                        <p>{{ $item->quantity }} X {{ number_format($item->price) }}
-                                                        </p>
-                                                        <a href="#!" class="icon">
-                                                            <i class="far fa-times-circle"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="total d-flex justify-content-between">
-                                        <p>total</p>
-                                        <p>{{ number_format($subTotal) }}</p>
-                                    </div>
-
-                                    <button href="checkout.html" class="button-style1">checkout</button>
-
-                                </div>
-                            </div>
-                        </li> --}}
-
                             <span class="nav-item dropdown position-relative py-3">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
                                     href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -224,29 +164,29 @@
                                 <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
 
 
-                                    <a class="dropdown-item my-2" href="{{route('customerProfile')}}">
+                                    <a class="dropdown-item my-2" href="{{ route('customerProfile') }}">
                                         <div class="">
 
-                                        <i class="fa fa-user  " style="font-size:1.46rem;padding:0"></i>
-                                        <span class="ms-2">My Profile</span>
+                                            <i class="fa fa-user  " style="font-size:1.46rem;padding:0"></i>
+                                            <span class="ms-2">My Profile</span>
                                         </div>
                                     </a>
 
                                     <div class="dropdown-divider"></div>
 
                                     <a class="dropdown-item my-2" href="{{ route('cart.index') }}">
-                                            <div class="">
-                                                <i class="fa fa-shopping-cart" style="padding:0;font-size: 1.46rem;"></i>
-                                                <span class="ms-2">Cart</span>
-                                            </div>
-                                            
+                                        <div class="">
+                                            <i class="fa fa-shopping-cart" style="padding:0;font-size: 1.46rem;"></i>
+                                            <span class="ms-2">Cart</span>
+                                        </div>
+
                                     </a>
                                     <div class="dropdown-divider"></div>
 
                                     <a class="dropdown-item my-2" href="{{ route('wishlist.index') }}">
                                         <div class="">
-                                                <i class="fa fa-grin-hearts" style="font-size: 1.46rem;padding:0"></i>
-                                                <span class="ms-2">wishlist</span>
+                                            <i class="fa fa-grin-hearts" style="font-size: 1.46rem;padding:0"></i>
+                                            <span class="ms-2">wishlist</span>
                                         </div>
                                     </a>
 
@@ -254,10 +194,11 @@
 
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{route('logout')}}"
-                                    onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();"><i
-                                            class="fa fa-power-off 1" style="font-size: 1.46rem;padding:0"></i> Logout</a>
+                                            class="fa fa-power-off 1" style="font-size: 1.46rem;padding:0"></i>
+                                        Logout</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         style="display: none;">
                                         @csrf
@@ -270,42 +211,63 @@
 
 
                                     <div class="dropdown-divider"></div>
-                                   
+
                                 </ul>
                             </span>
                         @elseif(Auth::guard('web')->check())
                             <div class="user-avatar -medium"
                                 style="background-image: url({{ asset('customer/profile/' . Auth::guard('web')->user()->image) }})">
                             </div>
+
+
+
+
+
+
                         @elseif(Auth::guard('admin')->check())
-                            <span class="nav-item dropdown position-relative">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
-                                    href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="true">
-                                    <img class="user-avatar -medium"
-                                        src="{{ asset('customer/profile/' . Auth::guard('web')->user()->image) }}">
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:void(0)"><i
-                                            class="ti-user me-1 ms-1"></i>
-                                        My Profile</a>
+                        <span class="nav-item dropdown position-relative py-3">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic show"
+                                href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="true">
+                                <img class="user-avatar -medium"
+                                    src="{{ asset('customer/profile/1686217550.jpg') }}">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item dropdown-item1" href="javascript:void(0)"><i
-                                            class="ti-settings me-1 ms-1"></i> Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="http://127.0.0.1:8000/logout"
-                                       ><i
-                                            class="fa fa-power-off me-1 ms-1"></i> Logout</a>
-                                    <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST"
-                                        style="display: none;">
 
-                                    </form>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="ps-4 p-10"><a href="javascript:void(0)"
-                                            class="btn btn-sm btn-success btn-rounded text-white">View Profile</a>
+                                <a class="dropdown-item my-2" href="{{ route('admin.dashboard') }}">
+                                    <div class="">
+
+                                        <i class="fa fa-user  " style="font-size:1.46rem;padding:0"></i>
+                                        <span class="ms-2">Dashboard</span>
                                     </div>
-                                </ul>
-                            </span>
+                                </a>
+
+                                 
+
+
+
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"><i
+                                        class="fa fa-power-off 1" style="font-size: 1.46rem;padding:0"></i>
+                                    Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+
+                                </form>
+
+
+
+
+
+
+                                <div class="dropdown-divider"></div>
+
+                            </ul>
+                        </span>
                         @else
                             <div class="css-u4ozf6 elkhwc30">
                                 <a class="css-zt4hrj edbh2gs2" href="{{ route('customer.login') }}"><svg
