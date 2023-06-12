@@ -67,9 +67,8 @@ class FoodController extends Controller
     {
         $attributeType=$this->activeType();
         $restaurant=$this->allActiveRestaurant();
-        $brand=$this->activeBrand();
         $category=$this->allParentCategory();
-        return view('admin.food.create',compact('attributeType','restaurant','brand','category'));
+        return view('admin.food.create',compact('attributeType','restaurant','category'));
     }
 
  
@@ -97,8 +96,7 @@ class FoodController extends Controller
         $store->image=$image_name;
         $store->is_featured=$request->is_featured;
         $store->stock_status=$request->stock_status;
-        $store->brand_id=$request->brand_id;
-        $store->owner_id=$owner->owner_id;
+         $store->owner_id=$owner->owner_id;
         $store->restaurant_id=$request->restaurant_id;
         $store->short_description=$request->short_description;
         $store->long_description=$request->long_description;
@@ -156,10 +154,9 @@ class FoodController extends Controller
         $food = Food::find($id);
         $attributeType = $this->activeType();
         $restaurant = $this->allActiveRestaurant();
-        $brand = $this->activeBrand();
-        $category = $this->allParentCategory();
+         $category = $this->allParentCategory();
     
-        return view('admin.food.edit', compact('food', 'attributeType', 'restaurant', 'brand', 'category'));
+        return view('admin.food.edit', compact('food', 'attributeType', 'restaurant', 'category'));
     }
 
 
@@ -200,7 +197,6 @@ class FoodController extends Controller
         $food->cost_price = $request->input('cost_price');
         $food->is_featured = $request->input('is_featured');
         $food->stock_status = $request->input('stock_status');
-        $food->brand_id = $request->input('brand_id');
         $food->restaurant_id = $request->input('restaurant_id');
         $food->short_description = $request->input('short_description');
         $food->long_description = $request->input('long_description');

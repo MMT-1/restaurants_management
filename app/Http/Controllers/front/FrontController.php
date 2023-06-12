@@ -23,7 +23,6 @@ class FrontController extends Controller
     //home page method
     public function index(){
         $restaurant=$this->activeRestaurant();
-        $brand=$this->activeBrand();
         $slider=Slider::where('status',1)->orderBy('id','DESC')->get();
         $featured=Food::where(['status'=>1,'is_featured'=>1])->orderBy('id','DESC')->get();
         $blog=Blog::where('status',1)->orderBy('id','DESC')->limit(3)->get();
@@ -43,7 +42,7 @@ class FrontController extends Controller
         $restaurant = $this->activeRestaurant();
 
 
-        return view('front.index',compact('restaurantData','restaurant','brand','slider','featured','blog'));
+        return view('front.index',compact('restaurantData','restaurant','slider','featured','blog'));
     } 
 
     //contact method view
@@ -99,17 +98,8 @@ class FrontController extends Controller
       return view('front.restaurant.allRestaurant',compact('allSRestaurant'));
     }
 
-    //all active Restaurant
-     public function allBrand(){
-        $allbrand=$this->allActiveBrand();
-        return view('front.brand.allBrand',compact('allbrand'));
-     }
-
-    //brand food method
-    public function brandFood($id){
-      $brand=Food::where(['brand_id'=>$id,'status'=>1])->get();
-      return view('front.food.brandFood',compact('brand'));
-    }
+ 
+      
     public function reservation(Request $request)
 {
   if (!auth()->check()) {

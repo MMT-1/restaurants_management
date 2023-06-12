@@ -75,9 +75,8 @@ public function create()
 {
     $attributeType = $this->activeType();
     $restaurants = $this->ActiveRestaurant();
-    $brand = $this->activeBrand();
     $category = $this->allParentCategory();
-    return view('owner.food.create', compact('attributeType', 'restaurants', 'brand', 'category'));
+    return view('owner.food.create', compact('attributeType', 'restaurants', 'category'));
 }
 
 
@@ -107,7 +106,6 @@ public function store(FoodValidate $request)
     $food->image = $image_name;
     $food->is_featured = $request->is_featured;
     $food->stock_status = $request->stock_status;
-    $food->brand_id = $request->brand_id;
     $food->owner_id = $owner->id;
     $food->restaurant_id = $request->restaurant_id;
     $food->short_description = $request->short_description;
@@ -133,10 +131,9 @@ public function edit($id)
   $food = Food::where('owner_id', $ownerId)->findOrFail($id);    
   $attributeType = $this->activeType();
   $restaurant = $this->allActiveRestaurantByOwner(auth()->user()->id); // Get Restaurants belonging to the authenticated Owner
-  $brand = $this->activeBrand();
-    $category = $this->allParentCategory();
+  $category = $this->allParentCategory();
 
-    return view('owner.food.edit', compact('food', 'attributeType', 'restaurant', 'brand', 'category'));
+    return view('owner.food.edit', compact('food', 'attributeType', 'restaurant', 'category'));
 }
 
 
@@ -167,7 +164,6 @@ public function update(Request $request, $id)
     $food->cost_price = $request->input('cost_price');
     $food->is_featured = $request->input('is_featured');
     $food->stock_status = $request->input('stock_status');
-    $food->brand_id = $request->input('brand_id');
     $food->restaurant_id = $request->input('restaurant_id');
     $food->short_description = $request->input('short_description');
     $food->long_description = $request->input('long_description');

@@ -43,4 +43,4 @@ Route::get('add/wishlist/{id}',[WishlistController::class,'addWishlist'])->name(
 
 
 
-Route::post('/orders/place', [OrderController::class,'placeOrder'])->name('orders.place');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');

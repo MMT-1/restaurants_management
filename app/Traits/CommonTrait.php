@@ -1,7 +1,6 @@
 <?php 
 
 namespace App\Traits;
-use App\Models\admin\Brand;
 use App\Models\owner\Owner;
 use App\Models\admin\Country;
 use App\Models\admin\Category;
@@ -40,18 +39,7 @@ trait CommonTrait {
           return $data;
      }
 
-   //limited active brand list
-     public function activeBrand() {
-          $data = Brand::where('status',1)->orderBy('id','DESC')->limit(20)->get();
-          return $data;
-     }
-
-      //all active brand list
-      public function allActiveBrand() {
-          $data = Brand::where('status',1)->orderBy('id','DESC')->get();
-          return $data;
-     }
-
+    
    //all active attribute type list
     public function activeType() {
           $data = Attribute::where('status',1)->orderBy('id','DESC')->get();

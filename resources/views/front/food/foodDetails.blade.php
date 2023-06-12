@@ -110,7 +110,6 @@
                     <h5>owner : <a href="#!">{{$food->owner->first_name}} {{$food->owner->last_name}}</a></h5>
                     <h5>restaurant : <a href="#!">{{$food->restaurant->restaurant_name}}</a> </h5>
                     <h5>Category : @foreach($food->category as $categorys)<a href="#!">{{$categorys->categoryName->category_name}},</a> @endforeach </h5>
-                    <h5>Brand : <a href="#!">{{$food->brand->brand_name}}</a></h5>
                     <h5>Tags :  {{$food->tag}}</h5>
                     <div class="share d-flex align-items-center">
                         <h5>share : </h5>

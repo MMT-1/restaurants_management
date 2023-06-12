@@ -93,48 +93,7 @@
      <!-- end restaurant area -->
 
      <!-- start category area -->
-        <!-- <section class="home1 category">
-          <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h3>food brands</h3>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-5">
-                            <div class="single-category cat-height item-animation">
-                                <img src="{{asset('front/assets/images/home1/category/image1.jpg')}}" alt="Category Image"/>
-                                <div class="content">
-                                    <h5>latest brand</h5>
-                                    <a href="{{route('brand.all')}}">view all</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-7">
-                            <div class="row">
-                                @forelse ($brand as $brands)
-                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                                    <div class="single-category item-animation">
-                                        <img src="{{asset('admin/brand/'.$brands->image)}}" alt="Category Image"/>
-                                        <div class="content">
-                                            <h5>{{$brands->brand_name}}</h5>
-                                            <p>4 foods</p>
-                                            <a href="{{route('brand.food',array('id'=>$brands->id,'slug'=>$brands->slug))}}">view more</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                 @empty
-                                 <p>No Brand Found</p>
-                                @endforelse
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </section> -->
+        
      <!-- end category area -->
 
 

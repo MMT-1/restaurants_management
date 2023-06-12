@@ -217,24 +217,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h3><i class="fab fa-bandcamp"></i> Select Brand <span class="text-danger">*</span></h3>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <select class="form-control" name="brand_id">
-                                                    @foreach($brand as $brands)
-                                                        <option value="{{$brands->id}}" {{ $brands->id == $food->brand_id ? 'selected' : '' }}>
-                                                            {{$brands->brand_name}}
-                                                        </option>
-                                                    @endforeach 
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 
 
                               <div class="card mb-3">

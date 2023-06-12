@@ -28,7 +28,6 @@ class FoodValidate extends FormRequest
             'short_description'=>'required',
             'long_description'=>'required',
             'image'=>'required',
-            'brand_id'=>'required',
             'restaurant_id'=>'required',
             'category_id'=>'required',
             
@@ -42,7 +41,6 @@ class FoodValidate extends FormRequest
             'short_description.required'=>'Please Enter short description',
             'long_description.required'=>'Please Enter long description',
             'image.required'=>'Please select image',
-            'brand_id.required'=>'Please select Brand',
             'restaurant_id.required'=>'Please select Restaurant',
             'category_id.required'=>'Please select Category',
         ];
