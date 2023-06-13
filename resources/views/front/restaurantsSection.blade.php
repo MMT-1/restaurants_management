@@ -3,7 +3,11 @@
 
 
 
-
+<style>
+    .owl-controls{
+        display: none !important;
+    }
+</style>
 
 
                          <section class="styles_restaurantShelf__pWKxZ container">

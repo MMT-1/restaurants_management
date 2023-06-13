@@ -64,6 +64,7 @@ $total = $cartItems->sum(function ($cartItem) {
       $order->save();
 
     // Your logic here, such as sending email notifications, redirecting to a success page, or displaying a confirmation message
+    FoodCart::where('user_id', auth()->user()->id)->delete();
 
     // Redirect to the cart page with the order ID
     return redirect()->route('home.page')->with('success', 'Order has been placed successfully.');

@@ -91,8 +91,8 @@
                                     <td><form action="{{ route('order.destroy', $order->id) }}" class="pro-delete" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"><i class="flaticon-delete"></i>
-                                        </button>
+                                        <a type="submit" class="btn btn-secondary btn-sm" ><i class="fa fa-trash text-center mx-auto"></i>
+                                        </a>
                                     </form></td>
                                 </tr>
                             @endforeach

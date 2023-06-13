@@ -49,9 +49,11 @@
         <div class="css-1qth4hc elkhwc30">
             <span aria-controls="register-my-restaurant" role="link" style="cursor:pointer"
                 class="css-1unvnzj e1xxesyf0">
+                <a href="{{route('owner.registration')}}">
                 <span class="css-h4wygj ektx8jp0">
                     <span>Register my restaurant</span>
                 </span>
+            </a>
             </span>
             <div class="css-ycqgn3 e19b0pyl0"></div>
             <span aria-controls="help-link" role="link" style="cursor:pointer" class="css-1unvnzj e1xxesyf0">
