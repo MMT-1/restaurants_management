@@ -18,7 +18,12 @@
                     <!-- item-->
                     <div class="dropdown-item noti-title">
                         <h5 class="text-overflow">
-                            <small>Hello, {{auth()->user()->first_name}} {{auth()->user()->last_name}}</small>
+                            <small>Hello, @if(empty(auth()->user()))
+                                Admin
+                            @else
+                                {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                            @endif
+                            </small>
                         </h5>
                     </div>
                     <!-- item-->

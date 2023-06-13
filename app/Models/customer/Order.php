@@ -2,8 +2,10 @@
 
 namespace App\Models\customer;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\owner\Food;
+use App\Models\owner\Restaurant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {

@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\OwnerController;
 use App\Http\Controllers\admin\CountryController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CustomerController;
+use App\Http\Controllers\customer\OrderController;
 use App\Http\Controllers\admin\AttributeController;
 use App\Http\Controllers\admin\DashboardController;
 
@@ -73,3 +74,8 @@ Route::post('/activity/clear', [SystemLogs::class, 'clear'])->name('activity.cle
 
 Route::get('getreservations', [OwnerController::class, 'reservations'])->name('admin.reservations');
   Route::get('/getreservations/delete/{id}', [OwnerController::class, 'delete'])->name('admin.reservation.delete');
+
+
+
+
+  Route::get('/orders', [OrderController::class, 'show'])->name('orders.show');

@@ -55,27 +55,19 @@
                         <li class="@if($url==='foods.create') active @endif">
                             <a href="{{route('foods.create')}}">Add New</a>
                         </li>
-                        <li>
-                            <a href="tables-datatable.html">Stock</a>
-                        </li>
-                        <li>
-                            <a href="tables-datatable.html">Food Review</a>
-                        </li>
-                        <li>
-                            <a href="tables-datatable.html">Food Wishlist</a>
-                        </li>
+                        
                     </ul>
                 </li>
 
                 <li class="submenu">
-                    <a id="tables" href="#">
+                    <a id="tables" href="#" class="@if($url==='orders.show') active @endif" href="#">
                         <i class="fab fa-first-order-alt"></i>
                         <span>Order</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="tables-basic.html">List</a>
+                            <a href="{{route('orders.show')}}">List</a>
                         </li>
                     </ul>
                 </li>

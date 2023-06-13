@@ -141,8 +141,17 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cartItem = FoodCart::findOrFail($id);
+    
+        
+        // Update the quantity and recalculate the sub_total
+        $cartItem->quantity = $request->quantity;
+        $cartItem->sub_total = $cartItem->price * $cartItem->quantity;
+        $cartItem->save();
+    
+        return back()->with('success', 'Food quantity has been updated in cart');
     }
+    
    
     /**
      * Remove the specified resource from storage.
