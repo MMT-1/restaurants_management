@@ -48,7 +48,7 @@ class AccountController extends Controller
             
             Auth::login($customer);
 
-            return redirect()->intended('/customer/dashboard');
+            return redirect()->route('customer.login') ->with('success','Registration has completed successfully');
     }
 
     //owner registration
