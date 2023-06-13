@@ -67,29 +67,35 @@
                                     <th>Full Name</th>
                                     <th>Total</th>
                                     <th>Food</th>
+                                    <th>Action</th>
                             
                                  </tr>
                             </thead>
                             <tbody>
-                                @foreach ($orders as $order)
+                                @foreach ($orders as $index => $order)
                                 <tr>
-                                        <td>{{ $order->id }}</td>
-                                        <td>{{ $order->restaurant->restaurant_name }}</td>
-                                        <td>{{ $order->email }}</td>
-                                        <td>{{ $order->mobile }}</td>
-                                        <td>{{ $order->address }}</td>
-                                        <td>{{ $order->full_name }}</td>
-                                        <td>{{ $order->total }}</td>
-                        
-                                        <h4>
-                                        <td>
-                                            @foreach ($order->foods as $food)
-                                                <li>{{ $food->food_name }} (Quantity: {{ $food->pivot->quantity }})</li>
-                                            @endforeach
-                                        </ul>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $order->restaurant->restaurant_name }}</td>
+                                    <td>{{ $order->email }}</td>
+                                    <td>{{ $order->mobile }}</td>
+                                    <td>{{ $order->address }}</td>
+                                    <td>{{ $order->full_name }}</td>
+                                    <td>{{ $order->total }}</td>
+                                    <td>
+                                            <ul>
+                                                @foreach ($order->foods as $food)
+                                                    <li>{{ $food->food_name }} (Quantity: {{ $food->pivot->quantity }})</li>
+                                                @endforeach
+                                            </ul>
                                     </td>
-                                 </tr>
-                                 @endforeach
+                                    <td><form action="{{ route('order.destroy', $order->id) }}" class="pro-delete" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"><i class="flaticon-delete"></i>
+                                        </button>
+                                    </form></td>
+                                </tr>
+                            @endforeach
 
                             </tbody>
                         </table>

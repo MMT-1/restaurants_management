@@ -79,3 +79,4 @@ Route::get('getreservations', [OwnerController::class, 'reservations'])->name('a
 
 
   Route::get('/orders', [OrderController::class, 'show'])->name('orders.show');
+  Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('order.destroy');

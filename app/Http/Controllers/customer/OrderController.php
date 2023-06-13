@@ -71,24 +71,24 @@ $total = $cartItems->sum(function ($cartItem) {
 
 public function show(Request $request)
 {
-    // Retrieve orders data from the database
-    $orders = Order::all();
-
-    // Pass the orders data to the view
-    return view('admin.order.orders', compact('orders'));
+     $orders = Order::all();
+     return view('admin.order.orders', compact('orders'));
 
 
 
 
-    // $list = Order::all();
+ 
+}
 
-    // if ($request->ajax()) {
-    //     return Datatables::of($list)
-             
-    //          ->make(true);
-    // }
 
-    // return view('admin.order.orders');
+public function destroy(Request $request, $id)
+{
+    $order = Order::findOrFail($id);
+    $order->delete();
+    
+    // Perform any additional actions or display a success message
+    
+    return redirect()->route('orders.show')->with('success', 'Order deleted successfully');
 }
 
 
