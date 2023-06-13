@@ -154,7 +154,7 @@ class LoginController extends Controller
             // Set the batch ID
     
 
-            return redirect()->intended('customer.login');
+            return redirect()->intended('customer/login');
         }
         return redirect()->route('customer.login')
         ->with('message','These credentials do not match our records');

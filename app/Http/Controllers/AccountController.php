@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Auth;
+use App\Models\User;
+use App\Models\owner\Owner;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\owner\Restaurant;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\admin\OwnerValidate;
 use App\Http\Requests\customer\CustomerValidate;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use App\Models\owner\Owner;
-use App\Models\owner\Restaurant;
-use App\Models\User;
-use Auth;
 
 
 class AccountController extends Controller
@@ -46,10 +47,9 @@ class AccountController extends Controller
         
             $customer->save();
             
-            Auth::login($customer);
-
-            return redirect()->route('customer.login') ->with('success','Registration has completed successfully');
-    }
+ 
+            return Redirect::route('customer.login')->with('success', 'Registration has been completed successfully. Please log in.');
+          }
 
     //owner registration
     public function ownerRegister(){

@@ -113,11 +113,7 @@
 
             <input type="submit" value="Sign Up" class="btn btn-block btn-primary w-100 btn-color">
 
-            <!-- <div class="d-flex mt-3 align-items-center">
-            <span>Don't Have an Account?</span>
-
-              <span class="ms-auto"><a href="{{route('customer.registration')}}">Sign up now</a></span> 
-            </div> -->
+             
 <div class="text-center mt-3">
 <span >Have an Account? <a href="{{route('customer.login')}}">Login</a> </span>
 
